@@ -1,0 +1,44 @@
+<view class='header'>
+  <view class='head-title'>暖冬游泳体验卡</view>
+  <view class='head-detail'>冬日游玩的好去处，宝宝早教+健身</view>
+  <view class='head-price'><view>¥59.9</view><view>¥159.9</view></view>
+  <view class='head-label'>3.5折</view>
+</view>
+
+
+<view class='detail'>
+  <view class='detail-title'>购买须知</view>
+
+  <view class='detail-content'>
+    <view class='detail-item'>
+      <view class='item-label'>有效期：</view>
+      <view class='item-content'>2016-10-13至2018-04-11</view>
+    </view>
+    <view class='detail-item'>
+      <view class='item-label'>使用时间：</view>
+      <view class='item-content'>09:30-17:30</view>
+    </view>
+    <view class='detail-item'>
+      <view class='item-label'>预约信息：</view>
+      <view class='item-content'>请您提前1天预约</view>
+    </view>
+    <view class='detail-item'>
+      <view class='item-label'>使用限制</view>
+      <view class='item-content'>每张体验卡最多1人使用</view>
+    </view>
+    <view class='detail-item'>
+      <view class='item-label'>适用人群：</view>
+      <view class='item-content'>年龄群体：0-6 只适用于初次到店会员</view>
+    </view>
+    <view class='detail-item'>
+      <view class='item-label'>规则提醒：</view>
+      <view class='item-content'>不再与其他优惠同享</view>
+    </view>
+  </view>
+</view>
+
+
+<view class='footer'>
+  <view class='btn-info'>免费预约，给宝宝最好的服务</view>
+  <view class='footer-btn' hover-class='active'>去预约时间</view>
+</view>

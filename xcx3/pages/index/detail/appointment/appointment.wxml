@@ -1,0 +1,51 @@
+<scroll-view scroll-y class='appointment'>
+  <view class='header'>
+    <view>
+      <text>1</text>
+      <text>打赏次数</text>
+    </view>
+    <view>
+      <text>254</text>
+      <text>打赏金额(元)</text>
+    </view>
+    <view>
+      <text>254</text>
+      <text>打赏金额(元)</text>
+    </view>
+  </view>
+
+
+  <appointment></appointment>
+
+  <view class='select-teacher'>
+    <view class='select-head'>
+      <view class='select-title'>水育老师</view>
+      <view class='select-desc'>您可以为宝宝选择喜欢的水育老师</view>
+    </view>
+
+    <view class='teacher-content'>
+      <radio-group bindchange="radioChange">
+        <label class="{{selectTeachId == '1' ? 'active' : ''}}">
+          <radio value="1" style='display: none'/>
+          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
+          <view class='teacher-name'>黄大仙</view>
+        </label>
+        <label class="{{selectTeachId == '2' ? 'active' : ''}}">
+          <radio value="2" style='display: none'/>
+          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
+          <view class='teacher-name'>黄大仙</view>
+        </label>
+        <label class="{{selectTeachId == '3' ? 'active' : ''}}">
+          <radio value="3" style='display: none'/>
+          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
+          <view class='teacher-name'>黄大仙</view>
+        </label>
+        <label class="{{selectTeachId == '4' ? 'active' : ''}}">
+          <radio value="4" style='display: none'/>
+          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
+          <view class='teacher-name'>黄大仙</view>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,182 @@
+page{
+  background: #F0F0F0;
+}
+
+/* ------------------- header ------------------- */
+.header{
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.head-cover{
+  background: #999;
+  height: 330rpx;
+}
+.head-box{
+  padding: 0 30rpx;
+}
+.head-name{
+  padding: 33rpx 0 25rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+.head-name view{
+  float: right;
+  height: 32rpx;
+  padding: 0 8rpx;
+  color: #FF839A;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  transition: all .2s;
+  border-radius: 4rpx;
+}
+.head-name view.active{
+  color: #fff;
+  background: #FF839A;
+}
+.head-address{
+  padding-bottom: 30rpx;
+  color: rgb(163, 163, 163);
+  font-size: 26rpx;
+  overflow: hidden;
+}
+.head-address text{
+  display: block;
+  width: 560rpx;
+  float: left;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.head-address view{
+  float: right;
+  color: #000;
+}
+
+
+
+/* -------------------- 活动 -------------------- */
+.activity{
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 0 30rpx;
+}
+.activity-title{
+  padding: 40rpx 0 32rpx;
+  color: #333;
+  font-size: 32rpx;
+  border-bottom: solid 1px rgb(232, 232, 232);
+}
+.activity-item{
+  position: relative;
+  padding: 10rpx 0;
+}
+.activity-content .activity-item:not(:first-child){
+  border-top: dashed 1px rgb(232, 232, 232);
+}
+.activity-item navigator{
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+.activity-item navigator.active{
+  background: #f6f6f6;
+}
+.item-name{
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+  color: #333;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.item-detail{
+  width: 500rpx;
+  padding-bottom: 10rpx;
+  color: #999;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.item-price{
+  padding-right: 26rpx;
+  color: #333;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAnCAYAAAAVW4iAAAAC4klEQVRIS72Xz0sUYRjHv8+bG0G/1AJjhejUrfBQd+lWlzBoBPOQpDtuq7YQllLhXAryIB7W2BncloKgfyAE6VCHoC5R1KUOBVGrRERICjs7O994ZVaW1NVtZ3qPMzzfz7zz/JZsNtsrIrcBfAdgtrS0vDUMo4yQjti2/RVAu9Yj+QlAenFxcc6yLC8MhjiO84TkGS0mIgTwjeQl0zTnQwHkcrm453kPAXQC2BGIrpDsaW1tnTMMw20EJNrYcZyjACZJnq0S+wHgRrFYfDAyMlL8V8gqQJ9MJnMgFotNA+itEvslIuOJRCLbMEAL2La9n+S0iFwAEAtEtV+uLy0t3RsdHV2uF7R2g4phPp8/5LruTZJJEVGB85dJTnmeN5lKpX7XA1kH0MYzMzN7YrFYmuQEgKaK40UkVygU0pZl+duFbAjQxvl8flexWBxXSl0lubsiqCFKqWv9/f0/twPZFKCNc7nc3nK5fJnkLQAViA7bR77vjyWTSZ39NU9NgLa0LGtnPB7vJpkBsC9QK4nI0+bmZsMwjJo+2RIQQJra2tr6lFJ3ABysfDLJZ57nXUylUl+CKrDuNtsCBCEcI9mtlLpLMh4olUVk3nXd9NDQ0MeN/tW2AcFNVHt7e6fv+3kAhwNBHVHvXNftGh4e/vw3pC6ANiYps7Ozp33fnwFwpOp3fRCRnoWFhTfVYVw3IBCUbDZ7Sik1RfJ4Vca/9n3/SjKZfLEW1luFWa33tm0f09EM4GSQ8SRZ0KUmkUg8X33WCEDbOo7TQVL7pKNKawFAl2marxoGBBF2nuTjSu0CUCI5Njg4ONUwYLMbKKXODQwMvGwIoH1A8r6InAjbB9FFUaR5YFnWukwWkTLJ9w1nsm3b0dUiy7Ka4vF4H8nwq2mk/SDSjqZ7cqlUGgcQfk+uTBW+70+ISLhTRaRzUa3JTo9Lpmmu1Ft9/89sGul0Hfl+EPmGE/mOFmyZkwB0Hx0Ie8v8AwgT9DfYYGcBAAAAAElFTkSuQmCC) no-repeat right center;
+  background-size: 16rpx 26rpx;
+  position: absolute;
+  top: 48rpx;
+  right: 10rpx;
+}
+
+
+/* -------------------- 详情 -------------------- */
+.storeinfo{
+  background: #fff;
+  padding:0 30rpx 110rpx;
+}
+.storeinfo-title{
+  padding: 40rpx 0 32rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  border-bottom:solid 1px rgb(232, 232, 232);
+}
+.info-item{
+  color: #ccc;
+  font-size: 26rpx;
+  position: relative;
+  padding: 16rpx 0;
+}
+.info-item:not(:last-child){
+  border-bottom:solid 1px rgb(232, 232, 232);
+}
+.info-item.function{
+  line-height: 60rpx;
+}
+.info-item.function .item-icon{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  position: relative;
+  top: auto;
+  left: auto;
+}
+.info-item.function .info-cell{
+  height: 60rpx;
+  display: inline-block;
+  margin-right: 30rpx;
+  padding-left: 10rpx;
+}
+.item-icon{
+  width: 28rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.item-icon image{
+  width: 100%;
+  vertical-align: middle;
+}
+.info-cell{
+  line-height: 60rpx;
+  padding-left: 36rpx;
+}
+
+/* ------------------- footer ------------------- */
+.footer{
+  width: 100%;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background: #FF839A;
+  position: fixed;
+  bottom: 0;
+  z-index: 9;
+  transition: all .25s;
+}
+.footer.active{
+  background: #fba0b1;
+}

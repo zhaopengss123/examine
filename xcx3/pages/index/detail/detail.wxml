@@ -1,0 +1,92 @@
+<view class='store-container'>
+
+  <!-- header -->
+  <view class='header'>
+
+    <view class='head-cover'></view>
+
+    <view class='head-box'>
+
+      <view class='head-name'>
+        <text>奥体中心店</text>
+        <view hover-class='active'>导航</view>
+      </view>
+
+      <view class='head-address'>
+        <text>朝阳区 奥体中心购物中心地下1层</text>
+        <view>1.23km</view>
+      </view>
+
+    </view>
+
+  </view>
+
+
+  <!-- 活动 -->
+  <view class='activity'>
+    <view class='activity-title'>门店活动</view>
+    <view class='activity-content'>
+      <view class='activity-item'>
+        <navigator url="" hover-class="active">
+          <view class='item-name'>暖冬游泳体验卡</view>
+          <view class='item-detail'>冬日游玩的好去处，宝宝早教+健身</view>
+          <view class='item-price'>￥29.9</view>
+        </navigator>
+      </view>
+      <view class='activity-item'>
+        <navigator url="" hover-class="active">
+          <view class='item-name'>暖冬游泳体验卡</view>
+          <view class='item-detail'>冬日游玩的好去处，宝宝早教+健身</view>
+          <view class='item-price'>￥29.9</view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 详情 -->
+  <view class='storeinfo'>
+    <view class='storeinfo-title'>门店信息</view>
+    <view class='storeinfo-content'>
+      <view class='info-item function'>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-rest.png'></image></view>
+        <view class='info-cell'>家长休息区</view>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-time.png'></image></view>
+        <view class='info-cell'>寄存区</view>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-parking.png'></image></view>
+        <view class='info-cell'>停车场</view>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-wifi.png'></image></view>
+        <view class='info-cell'>免费WIFI</view>
+      </view>
+      <view class='info-item'>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-time.png'></image></view>
+        <view class='info-cell'>10:00:00-21:00:00 周一至周五</view>
+      </view>
+      <view class='info-item'>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-marker.png'></image></view>
+        <view class='info-cell'>北京市朝阳区朝阳路79号甘露园物美</view>
+      </view>
+      <view class='info-item'>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-map.png'></image></view>
+        <view class='info-cell'>
+          <view>地铁：6号线 北京市朝阳区朝阳路79号甘露园物美</view>
+          <view>公交：648路，605路，419路北京市朝阳区朝阳路79号甘露园物美</view>
+        </view>
+      </view>
+      <view class='info-item'>
+        <view class='item-icon'><image mode='widthFix' src='/assets/images/icon-space.png'></image></view>
+        <view class='info-cell'>
+          <view>名称：芳清园停车场</view>
+          <view>参考价格：1元/0.5小时(07:00-21:00)</view>
+          <view>地址：北京市海淀区黑泉路与龙岗路交叉口东南150米</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- footer -->
+  <view class='footer' hover-class='active'>预约游泳</view>
+
+</view>

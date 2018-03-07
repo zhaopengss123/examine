@@ -1,0 +1,69 @@
+page{
+  background: #F0F0F0;
+}
+
+.item{
+  margin-top: 20rpx;
+  padding: 30rpx;
+  background: #fff;
+  position: relative;
+}
+.head{
+  float: left;
+  width: 95rpx;
+  height: 95rpx;
+  overflow: hidden;
+}
+.head image{
+  width: 100%;
+  border-radius: 50%;
+}
+.score{
+  height: 26rpx;
+  position: absolute;
+  top: 40rpx;
+  right: 30rpx;
+}
+.score > view{
+  float: left;
+  width: 26rpx;
+  height: 26rpx;
+  background: url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/score-select.png) no-repeat;
+  background-size: 26rpx;
+}
+.score > view.active{
+  background: url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/score-select-active.png) no-repeat;
+  background-size: 26rpx;
+}
+.score > view:not(:last-child){
+  margin-right: 5rpx;
+}
+.cell{
+  padding-left: 130rpx;
+}
+
+.name{
+  padding: 8rpx 0 18rpx;
+  color: #333;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+.store{
+  padding-bottom: 28rpx;
+  color: #666;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+.label{
+  overflow: hidden;
+}
+.label > view{
+  float: left;
+  height: 53rpx;
+  padding: 0 28rpx;
+  margin-right: 28rpx;
+  font-size: 24rpx;
+  line-height: 53rpx;
+  border: solid 1px #C2C2C2;
+  border-radius: 1px;
+}

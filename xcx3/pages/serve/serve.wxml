@@ -1,0 +1,116 @@
+<view class='container'>
+
+<view class="swiper-tab">  
+  <view class="swiper-list {{ currentTab == 0 ? 'active' : '' }}" data-current="0" bindtap="swichNav">全部</view>
+  <view class="swiper-list {{ currentTab == 1 ? 'active' : '' }}" data-current="1" bindtap="swichNav">待服务</view>
+  <view class="swiper-list {{ currentTab == 2 ? 'active' : '' }}" data-current="2" bindtap="swichNav">待评价</view>
+  <view class="swiper-list {{ currentTab == 3 ? 'active' : '' }}" data-current="3" bindtap="swichNav">已完成</view>
+  <view class="swiper-list {{ currentTab == 4 ? 'active' : '' }}" data-current="4" bindtap="swichNav">已退款</view>
+</view>
+
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="swichChange">  
+
+    <swiper-item>
+      <view class='serve-list'>
+        <view class='serve-item' bindtap='toDetails'>
+          <view class='item-title'>
+            <text>北京物美甘露园店</text>
+            <text class='item-status'>等待中</text>
+          </view>
+          <view class='item-detail'>
+            <navigator hover-class='active'>
+              <view class='item-detail-image'><image mode="widthFix"></image></view>
+              <view class='item-detail-title'>卡类型：暖冬游泳体验卡</view>
+              <view>时间：2018-01-26 12:00</view>
+              <view>类型：婴幼儿游泳</view>
+              <view>老师：到店安排</view>
+            </navigator>
+          </view>
+          <view class='item-type'>
+            <view>
+              <text>扣卡0次</text>
+              <text>支付：￥59.9</text>
+            </view>
+          </view>
+          <view class='item-footer'>
+            <view class='item-btns'>
+              <view class='item-btn' hover-class="active">取消预约</view>
+              <view class='item-btn-active' hover-class="active" catchtap="updateTime">修改时间</view>
+            </view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>  
+     
+    <swiper-item>
+      <view class='serve-list'>
+        <view class='serve-item' bindtap='toDetails'>
+          <view class='item-title'>
+            <text>北京物美甘露园店</text>
+            <text class='item-status'>等待中</text>
+          </view>
+          <view class='item-detail'>
+            <view>时间：2018-01-26 12:00</view>
+            <view>类型：婴幼儿游泳</view>
+            <view>老师：到店安排</view>
+          </view>
+          <view class='item-type'>
+            <view>卡类型：暖冬游泳体验卡</view>
+            <view>
+              <text>支付：￥59.9</text>
+              <text>扣卡0次</text>
+            </view>
+          </view>
+          <view class='item-footer'>
+            <view class='item-btns'>
+              <view class='item-btn' hover-class="active">取消预约</view>
+              <view class='item-btn-active' hover-class="active" catchtap="updateTime">修改时间</view>
+            </view>
+          </view>
+        </view>
+      </view>  
+    </swiper-item>  
+    
+    <swiper-item>
+      <view class='serve-list'>
+        <view class='serve-item' bindtap='toDetails'>
+          <view class='item-title'>
+            <text>北京物美甘露园店</text>
+            <text class='item-status'>等待中</text>
+          </view>
+          <view class='item-detail'>
+            <view>时间：2018-01-26 12:00</view>
+            <view>类型：婴幼儿游泳</view>
+            <view>老师：到店安排</view>
+          </view>
+          <view class='item-type'>
+            <view>卡类型：暖冬游泳体验卡</view>
+            <view>
+              <text>支付：￥59.9</text>
+              <text>扣卡0次</text>
+            </view>
+          </view>
+          <view class='item-footer'>
+            <view class='item-head'>
+              <image src='/assets/images/logo.png' mode='widthFix'></image>
+              <text>黄半仙</text>
+            </view>
+            <view class='item-btns'>
+              <view class='item-btn-active' hover-class="active" catchtap="updateTime">去评价</view>
+              <view class='item-btn-active' hover-class="active" catchtap="updateTime">去打赏</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>  
+
+    <swiper-item>  
+      <view>已完成--内容</view>  
+    </swiper-item>  
+
+    <swiper-item>  
+      <view>已退款--内容</view>  
+    </swiper-item>  
+</swiper>
+
+</view>
