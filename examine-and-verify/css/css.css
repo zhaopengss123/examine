@@ -1,0 +1,180 @@
+*{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+html{ background: #ecf0f5;}
+
+.list-content{
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+	background: #fff;
+	color: #666;
+	position: relative;
+	min-height: 100%;
+}
+
+.list-title-close{
+	width: 20px;
+	height: 20px;
+	color: #000;
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 20px;
+	overflow: hidden;
+	font-weight: bold;	
+}
+.list-fg{
+	width: 95%;
+	height: 3px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background: #00c0ef;
+}
+.listmain{
+	width: 95%;
+	overflow:hidden;
+	margin: 0 auto;
+}
+.listlist{
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	font-size: 14px;
+}
+.listlist  ul li{ 
+	float: left;
+	text-align: center;
+	border-right: solid 1px #f5f5f5 ;
+}
+.list-tit{
+	height: 40px;
+	line-height: 40px;
+	background: #eaeaea;
+	font-weight: bold;
+	
+}
+.listlist ul li:nth-child(1){
+	width: 18%;
+}
+.listlist ul li:nth-child(2){
+	width: 10%;
+}
+.listlist ul li:nth-child(3){
+	width: 10%;
+}
+.listlist ul li:nth-child(4){
+	width: 10%;
+}
+.listlist ul li:nth-child(5){
+	width: 10%;
+}
+.listlist ul li:nth-child(6){
+	width: 10%;
+}
+.listlist ul li:nth-child(7){
+	width: 10%;
+}
+.listlist ul li:nth-child(8){
+	width: 10%;
+}
+.listlist ul li:nth-child(9){
+	width: 10%;
+	border:none;
+}
+.shenh{
+ color: #0000ff;
+}
+.listlist:nth-child(even){
+		background:#f9f9f9 ;
+	
+}
+.list-foot{
+	width: 95%;
+	margin: 0 auto;
+	overflow:hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.list-sm{
+	width: auto;
+    float: left;
+}
+.list-btn{
+	width: auto;
+    float: right;
+}
+.list-btn{
+	width: auto;
+	min-width:100px;
+}
+.list-btn ul li{
+	float: left;
+	width: 50px;
+	height: 30px;
+	text-align: center;
+	border: solid 1px #ccc;
+	border-left: none;
+	line-height: 30px;
+}
+.list-btn ul:nth-child(1) li:nth-child(1){
+	border-left: solid 1px #ccc;
+	}
+.list-btn ul{ 
+ float: left;
+}	
+.list-btn ul li.cli{
+	background: #327ab7;
+	color:#fff;
+	}	
+.list-de{
+	width:900px;
+	min-height: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -500px;
+	margin-top: -250px;
+	background: #fff;
+	border: solid 1px #ccc;
+}	
+.list-de-tab{
+	color: #000;
+	width: 800px;
+	padding: 50px ;
+	overflow:hidden;
+}
+.de-tab{
+	width: 800px;
+	overflow: hidden;
+	padding: 10px 0;
+}
+.list-de-left{
+	width: 200px;
+	text-align: right;
+	float: left;
+}
+.list-de-left span{
+	color: #f00;
+	}
+.list-de-right{
+	width: 500px;
+	float: left;
+	padding-left: 30px;
+}
+.zz{
+	height: 100px;
+	line-height: 100px;
+}
+.yyzz{
+	height: 100px;
+	line-height: 100px;
+}
+.yyzz img{ 
+	width: 100px;
+	height: 100px;
+	margin-left: 15px;
+}
