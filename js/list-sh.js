@@ -89,7 +89,8 @@ function map(){
 				}, "北京市");
 };
 
-$('.shenh').click(function(){
+$('.shenhe').click(function(){
+	
 	$('.list-dede').show();
 });
 if(linum>5){
@@ -112,5 +113,20 @@ $('.refuse-close').click(function(){
 $('.refuse').click(function(){
 	$('.refuse-tc').show();
 });
+
+$.ajax({
+	type:'GET',
+	url:'js/list.json',
+	data:{
+		
+	},success:function(data){
+		$.each(data.list,function(index){
+			$('.listcontent').append('<div class="listlist"><ul><li>'+data.list[index].shopName+'</li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li class="shenhe">立即审核</li></ul></div>');
+			
+		});
+		
+		console.log(data);
+	}
+})
 
 })

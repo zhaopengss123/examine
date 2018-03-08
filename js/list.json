@@ -1,0 +1,47 @@
+{
+    "list": [
+        {
+            "id": 8,
+            "shopCode": "beijing040",
+            "shopName": "VBUI和"
+        },
+        {
+            "id": 9,
+            "shopCode": "beijing011",
+            "shopName": "花大爷"
+        },
+        {
+            "id": 10,
+            "shopCode": "beijing073",
+            "shopName": "活动发都告诉对方"
+        },
+        {
+            "id": 11,
+            "shopCode": "beijing013",
+            "shopName": "出hi你"
+        },
+        {
+            "id": 12,
+            "shopCode": "beijing021",
+            "shopName": "哈师大哈师大奇偶我爱神的箭按时间掉王建"
+        },
+        {
+            "id": 13,
+            "shopCode": "beijing044",
+            "shopName": "shadage"
+        },
+        {
+            "id": 14,
+            "shopCode": "beijing015",
+            "shopName": "45654645"
+        },
+        {
+            "id": 15,
+            "shopCode": "beijing024",
+            "shopName": "北京旧宫物美店"
+        }
+    ],
+    "pageNo": 1,
+    "pageSize": 10,
+    "total": 8
+}
