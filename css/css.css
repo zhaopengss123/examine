@@ -70,33 +70,16 @@ html{ background: #ecf0f5;	font-size: 14px;}
 	
 }
 .listlist ul li:nth-child(1){
-	width: 18%;
+	width: 30%;
 }
 .listlist ul li:nth-child(2){
-	width: 10%;
+	width: 40%;
 }
 .listlist ul li:nth-child(3){
-	width: 10%;
-}
-.listlist ul li:nth-child(4){
-	width: 10%;
-}
-.listlist ul li:nth-child(5){
-	width: 10%;
-}
-.listlist ul li:nth-child(6){
-	width: 10%;
-}
-.listlist ul li:nth-child(7){
-	width: 10%;
-}
-.listlist ul li:nth-child(8){
-	width: 10%;
-}
-.listlist ul li:nth-child(9){
-	width: 10%;
+	width: 28%;
 	border:none;
 }
+
 .shenh{
  color: #0000ff;
  cursor: pointer;
@@ -386,6 +369,6 @@ html{ background: #ecf0f5;	font-size: 14px;}
 	
 }
 .xinx ul{ padding-top: 40px;}
-.lsitid { display: none;}
+.listid { display: none;}
 
 
