@@ -1,0 +1,47 @@
+<!-- 门店列表 -->
+
+<view class='list-box'>
+
+  <view class='city'>
+    <picker mode="region" bindchange="bindRegionChange" value="{{address}}">
+      <text class="picker">{{address[0]}}  {{address[2]}}</text>
+      <view class='icon-slide'></view>
+    </picker>
+  </view>
+
+ <!--****顶部轮播**** 
+ <view class='swiper'>
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300" circular="true">
+      <block wx:for="{{swiperArray}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>?shopId={{storeitems[0]}}
+  -->
+
+  <view class='header'>
+    <view class='head-title'>附近门店</view>
+    <view class='head-desc'>为您精选的附近门店</view>
+  </view>
+
+  <view class='item-container'>
+    <view class='no-data' hidden="{{storeItems.length || requestLoading}}">您的附近没有合适的门店</view>
+    <view class='item' wx:for="{{storeItems}}" wx:key="id">
+      <navigator url="/pages/index/detail/detail?shopId={{item.id}}" hover-class="navigator-hover">
+        <view class='item-image'><image src='{{item.shopImg}}' mode='widthFix'></image></view>
+        <view class='item-card' wx:if = '{{item.countryCardStatus}}' >全国通卡店</view>
+        <view class='item-title'>
+          <view>{{item.shopName}}<view class='item-icon' wx:if="{{item.visitStatus}}">最近使用</view></view>
+        </view>
+        <view class='item-address'>
+          <view>{{item.address}}</view>
+          <text>{{item.distance}}米</text>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+
+</view>
