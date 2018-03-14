@@ -100,25 +100,25 @@ Page({
       this.setData({
         selectTime: selectTime,
         xhours: hours,
-        xminutes: minutes
-
+        xminutes: minutes,
+        selectTeachId: ""
       });
       this.Teachers();
+  
  
     },
 
 
     //选择老师
     teachertap(e) {
-      console.log(1111);
+      let tid = e.currentTarget.dataset.tid;
+      let selectTeachId = e.currentTarget.dataset.selectteachid;
+      console.log(selectTeachId);
       this.setData({
-        selectTeachId:1
-      });
-   
-   
-
+        selectTeachId: selectTeachId
+      })
     }, 
-
+    //选择老师结束
 
     //获取门店的日期配置
     getweeks(shopId){
@@ -362,7 +362,12 @@ Page({
       }, _ => {
         wx.hideLoading();
       });
+    },
+    //预约 // 会员预约 //非会员预约
+    yabout (){
+      
     }
+
 
 
 

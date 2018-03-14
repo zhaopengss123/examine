@@ -48,9 +48,9 @@
 
 <view class='footer'>
   <view class='select-input'>
-    <input class='input' disabled="true" value='您已经选择: {{rq}} {{timess}}' placeholder-style="color:rgb(210,210,210)" placeholder="请选择" />
+    <input class='input' disabled="true" value='您已经选择: {{rq}} {{xhours}}:{{xminutes}}' placeholder-style="color:rgb(210,210,210)" placeholder="请选择" />
   </view>
-  <view class='enter-button disabled' hover-class='active'>确定预约</view>
+  <view class='enter-button disabled' bindtap='yabout' hover-class='active'>确定预约</view>
 </view>
   
 
@@ -72,8 +72,8 @@
     </view> -->
     
       <view class='teacher-content'>
-      <view bindtap='teachertap'>
-        <view class="labers {{selectTeachId == '1' ? 'active' : ''}}" wx:for="{{teachers}}" wx:key="key">
+      <view >
+        <view bindtap='teachertap' class="labers {{selectTeachId == index+1 ? 'active' : ''}}" wx:for="{{teachers}}" wx:key="key" data-tid='{{item.id}}'  data-selectTeachId='{{index+1}}'>
           <view class='teacher-head'><image src='{{item.img}}' mode='widthFix'></image></view>
           <view class='teacher-name'>{{item.name}}</view>
         </view>

@@ -62,7 +62,7 @@ page{
   border-radius: 10rpx;
   box-sizing: border-box;
 }
-.teacher-content label.active{
+.teacher-content .active{
   border-color: #FF839A;
 }
 .teacher-head{
