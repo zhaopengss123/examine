@@ -6,7 +6,7 @@ var address = cityAddress.postList;
 var provinces = [];
 var citys = [];
 var districts = [];
-
+//把省市区放到数组里
 for (var i = 0; i < address.length; i++) {
   var prov = [address[i].label];
   prov.push(address[i].value);
@@ -22,6 +22,7 @@ for (var i = 0; i < address.length; i++) {
     }
   }
 }
+//把省市区放到数组里结束
 Page({
   data: {
     swiperArray: [
@@ -35,7 +36,7 @@ Page({
     address: ['', '定位中', '']
   },
   onLoad: function () {
-
+    var that = this;
     User.getAddress(address => {
 
       this.setData({
@@ -50,9 +51,10 @@ Page({
       
     });
 
-
-
     
+
+
+    //获取用户地址信息
       User.getAddress(function (c) {
         let province = c.address_component.province;
         let city = c.address_component.city;
@@ -61,20 +63,27 @@ Page({
         let lng = c.location.lng;
         
               });
-
-
-    User.getOpenid().then(res => {
-      console.log(res)
-    })
-    //get openid
-
-
-
-    User.getAddress(function (data) {
-        
-    });
-
-        
+      //获取用户地址信息结束
+    
+      wx.getStorage({
+        key: 'memberId',
+        success: function (res) {
+            
+        },
+        fail: function () {
+          that.getcode();
+        }
+      })
+     
+      wx.getStorage({
+        key: 'openid',
+        success: function (res) {
+          console.log(res);
+        },
+        fail: function () {
+          that.getcode();
+        }
+      }) 
 
   },
   /**
@@ -83,7 +92,6 @@ Page({
   onReachBottom: function () {
     this.getStoreItems();
   },
-
   bindRegionChange: function (e) {
     this.setData({
       address: e.detail.value
@@ -111,8 +119,9 @@ Page({
         districtcode = districts[i][1];
       }
     };
-   //获取城市列表结束 
-   //console.log(provincecode, citycode, districtcode  );
+   //获取城市代码结束 
+
+
     this.setData({
       province : provincecode,
       city : citycode,
@@ -123,12 +132,10 @@ Page({
     this.getStoreItems();
   },
   getStoreItems(param) {
-    
-    
     wx.showLoading({
       title: '加载中...',
     })
-    Http.post('http://192.168.1.205:8899/shop/listShop', {
+    Http.post('http://192.168.1.205:8800/shop/listShop', {
       paramJson: JSON.stringify({
         province: this.data.province,
         city:this.data.city,
@@ -140,22 +147,74 @@ Page({
       })
     }).then(res => {
       wx.hideLoading();
-      
       if (res.code == 1000) {
         let storeItem = res.result.shopList;
-       
+ 
         if (storeItem){
         this.setData({
           storeItems: this.data.storeItems.concat(storeItem),
           pageNo: this.data.pageNo + 1
         })
+  
           }
-        //console.log(storeItem);
+      
       } else {
 
       }
     }, _ => {
       wx.hideLoading();
     });
+  },
+
+  getcode() {
+ 
+    let that = this;
+    //获取用户的code
+    wx.login({
+      success(res) {
+        that.getuserstatus(res.code, Http);
+      }
+    });
+  },
+
+  getuserstatus(code) {
+    console.log(222);
+    Http.post('http://192.168.1.205:8800/user/judgeUserStatus', {
+      //code: code
+    }).then(res => {
+      if (res.code == 1000) {
+        let openid = res.result.openid;
+        if (res.result) {
+          //console.log(res);
+          if (status == 1) {
+            wx.setStorage({
+              key: 'memberId',
+              data: res.result.memberId,
+            })
+            wx.setStorage({
+              key: 'openid',
+              data: openid,
+            })
+          } else {
+            wx.setStorage({
+              key: 'memberId',
+              data: '0',
+            })
+
+            wx.setStorage({
+              key: 'openid',
+              data: openid,
+            })
+          }
+        }
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
   }
+
+
+
+
+
 })

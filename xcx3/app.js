@@ -25,5 +25,6 @@ App({
     userOpenid: null,
     userLocation: null,
     userAddress: null
-  }
+   }
+
 })

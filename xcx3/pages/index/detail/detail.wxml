@@ -3,18 +3,33 @@
   <!-- header -->
   <view class='header'>
 
-    <view class='head-cover'></view>
+    <view class='head-cover'>
+      
+      
+      <view class='head-card' wx:if="{{countryCardStatus}}">全国通卡店</view>
+  
+  <view class='swiper' wx:if="{{swiperArray}}">
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300" circular="true">
+      <block wx:for="{{swiperArray}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>  
+    </view>
+    <image src='{{shopImg}}' wx:else></image>
+    </view>
 
     <view class='head-box'>
 
       <view class='head-name'>
-        <text>奥体中心店</text>
-        <view hover-class='active'>导航</view>
+        <text>{{shopName}}</text>
+        <view hover-class='active' bindtap='mapclick'>导航</view>
       </view>
 
       <view class='head-address'>
-        <text>朝阳区 奥体中心购物中心地下1层</text>
-        <view>1.23km</view>
+        <text>{{address}}</text>
+        <view>{{distance}}km</view>
       </view>
 
     </view>
@@ -49,37 +64,41 @@
   <view class='storeinfo'>
     <view class='storeinfo-title'>门店信息</view>
     <view class='storeinfo-content'>
-      <view class='info-item function'>
-        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-rest.png'></image></view>
-        <view class='info-cell'>家长休息区</view>
-        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-time.png'></image></view>
-        <view class='info-cell'>寄存区</view>
-        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-parking.png'></image></view>
-        <view class='info-cell'>停车场</view>
-        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-wifi.png'></image></view>
-        <view class='info-cell'>免费WIFI</view>
+      <view class='info-item function' wx:if="{{facilitie}}">
+        <view class='item-icon' wx:if="{{facilitie1}}"><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-rest.png'></image></view>
+        <view class='info-cell' wx:if="{{facilitie1}}">家长休息区</view>
+        <view class='item-icon' wx:if="{{facilitie2}}"><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-time.png'></image></view>
+        <view class='info-cell' wx:if="{{facilitie2}}">寄存区</view>
+        <view class='item-icon' wx:if="{{facilitie3}}"><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-parking.png'></image></view>
+        <view class='info-cell' wx:if="{{facilitie3}}">停车场</view>
+        <view class='item-icon' wx:if="{{facilitie4}}"><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-wifi.png'></image></view>
+        <view class='info-cell' wx:if="{{facilitie4}}">免费WIFI</view>
       </view>
-      <view class='info-item'>
+      <view class='info-item'  wx:if="{{businessTime}}">
         <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-time.png'></image></view>
-        <view class='info-cell'>10:00:00-21:00:00 周一至周五</view>
+        <view class='info-cell'>{{businessTime}}</view>
       </view>
-      <view class='info-item'>
+      <view class='info-item' wx:if="{{address}}">
         <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-marker.png'></image></view>
-        <view class='info-cell'>北京市朝阳区朝阳路79号甘露园物美</view>
+        <view class='info-cell'>{{address}}</view>
       </view>
-      <view class='info-item'>
+      <view class='info-item' wx:if="{{shopTel}}">
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-marker.png'></image></view>
+        <view class='info-cell' bindtap='cellme'>{{shopTel}}</view>
+      </view>
+      <view class='info-item' wx:if="{{trafficInformation}}">
         <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-map.png'></image></view>
-        <view class='info-cell'>
-          <view>地铁：6号线 北京市朝阳区朝阳路79号甘露园物美</view>
-          <view>公交：648路，605路，419路北京市朝阳区朝阳路79号甘露园物美</view>
+        <view class='info-cell' >
+          <!-- <view>地铁：6号线 北京市朝阳区朝阳路79号甘露园物美</view>-->
+          <view>公交：{{trafficInformation}}</view>
         </view>
       </view>
-      <view class='info-item'>
+      <view class='info-item' wx:if="{{parkingInformation}}">
         <view class='item-icon'><image mode='widthFix' src='/assets/images/icon-space.png'></image></view>
         <view class='info-cell'>
-          <view>名称：芳清园停车场</view>
-          <view>参考价格：1元/0.5小时(07:00-21:00)</view>
-          <view>地址：北京市海淀区黑泉路与龙岗路交叉口东南150米</view>
+          <view>名称：{{parkingInformation}}</view>
+          <!-- <view>参考价格：1元/0.5小时(07:00-21:00)</view>
+          <!--<view>地址：{{address}}</view>-->
         </view>
       </view>
     </view>
@@ -87,6 +106,6 @@
 
 
   <!-- footer -->
-  <view class='footer' hover-class='active'>预约游泳</view>
+  <view class='footer' hover-class='active' bindtap='booking'>预约游泳</view>
 
 </view>

@@ -7,10 +7,10 @@
   <input placeholder="请输入您的手机号" type='number' maxlength="11" bindinput="phoneInput" placeholder-style="color:#b0b0b0" class='ipt-phone' auto-focus/>
   <view class='ipt-code'>
     <input placeholder="请输入短信验证码" type='number' maxlength="6" bindinput="codeInput" placeholder-style="color:#b0b0b0"/>
-    <view class='btn-code' hover-class='active'>重新发送</view>
+    <view class='btn-code' hover-class='active' bindtap='getCode'>{{sendFont}}</view>
   </view>
 </view>
 
-<view class='ipt-submit' hover-class='active' bindtap='getCode'>发送验证码</view>
+<view class='ipt-submit' hover-class='active' bindtap='' bindtap='getphonesuccess'>发送验证码</view>
 
 <view class='tip'>*若您输入的手机号未注册，将会进入注册流程</view>

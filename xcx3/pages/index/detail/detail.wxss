@@ -9,8 +9,29 @@ page{
 }
 .head-cover{
   background: #999;
-  height: 330rpx;
+  height: 520.3125rpx;
+  overflow: hidden;
+
 }
+.head-cover image{
+  width: 750rpx;
+  height: 520.3125rpx;
+  
+}
+.slide-image{
+   width: 750rpx;
+  height: 520.3125rpx;
+
+}
+.swiper,swiper{
+   width: 750rpx;
+  height: 520.3125rpx;
+}
+.swiper img{
+   width: 750rpx;
+  height: 520.3125rpx;
+}
+
 .head-box{
   padding: 0 30rpx;
 }
@@ -39,6 +60,21 @@ page{
   font-size: 26rpx;
   overflow: hidden;
 }
+.head-card{
+  width:132rpx;
+  height:40rpx;
+  color: #fff;
+  font-size: 21rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background: rgba(254,183,31,1);
+  border-radius: 4rpx;
+  position: absolute;
+  top: 26rpx;
+  right: 15rpx;
+}
+
+
 .head-address text{
   display: block;
   width: 560rpx;
@@ -112,8 +148,13 @@ page{
 
 /* -------------------- 详情 -------------------- */
 .storeinfo{
-  background: #fff;
-  padding:0 30rpx 110rpx;
+ background: #fff;
+  padding:0 30rpx 40rpx;
+  padding-bottom:130rpx;
+}
+.storeinfo-content{
+ 
+
 }
 .storeinfo-title{
   padding: 40rpx 0 32rpx;
@@ -122,7 +163,7 @@ page{
   border-bottom:solid 1px rgb(232, 232, 232);
 }
 .info-item{
-  color: #ccc;
+  color: #63686e;
   font-size: 26rpx;
   position: relative;
   padding: 16rpx 0;

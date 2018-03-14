@@ -29,7 +29,8 @@
   <view class='item-container'>
     <view class='no-data' hidden="{{storeItems.length || requestLoading}}">您的附近没有合适的门店</view>
     <view class='item' wx:for="{{storeItems}}" wx:key="id">
-      <navigator url="/pages/index/detail/detail?shopId={{item.id}}" hover-class="navigator-hover">
+      <navigator url="/pages/index/detail/detail?shopId={{item.id}}&lat={{lat}}&lon={{lon}}&distance={{item.distance}}" hover-class="navigator-hover">
+    
         <view class='item-image'><image src='{{item.shopImg}}' mode='widthFix'></image></view>
         <view class='item-card' wx:if = '{{item.countryCardStatus}}' >全国通卡店</view>
         <view class='item-title'>
@@ -37,7 +38,7 @@
         </view>
         <view class='item-address'>
           <view>{{item.address}}</view>
-          <text>{{item.distance}}米</text>
+          <text>{{item.distance/1000}}km</text>
         </view>
       </navigator>
     </view>

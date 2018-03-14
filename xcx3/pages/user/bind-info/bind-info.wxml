@@ -5,7 +5,7 @@
 
 <view class='mform'>
   <view class='item'>
-    <input placeholder='宝宝昵称' placeholder-style="color:#b0b0b0" />
+    <input placeholder='宝宝昵称' bindinput="babyname" placeholder-style="color:#b0b0b0" />
   </view>
   <view class='item'>
     <picker mode="date" value="{{ birthday }}" start="2000-01-01" end="2020-01-01" maxlength="20" bindchange="birthdayChange">
@@ -23,4 +23,4 @@
 
 
 
-<view class='ipt-submit' hover-class='active' bindtap=''>确定</view>
+<view class='ipt-submit' hover-class='active' bindtap='setuser'>确定</view>

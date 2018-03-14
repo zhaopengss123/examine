@@ -14,38 +14,73 @@
     </view>
   </view>
 
+  <view class='appointment'>
+  <view class='title'>
+    <view class='title-h2'>服务时间</view>
+    <view class='title-h6'>选择服务时间，以便我们为您更好的服务</view>
+  </view>
+  <view class='tab-head'>
+    <view class='tab-left' hover-class='active' bindtap='tapleft'></view>
+    <view class='tab-head-box' >
+      <view class='tab-content'  >
+            <view class="tab-item {{weeks == item.sid+1 ? 'active' : ''}}" data-rq="{{item.date}}"  wx:for="{{weekss}}" wx:key="key" catchtap='getlisthouse' data-value="{{item.sid+1}}" data-listHours="{{weekItems[item.sid].date}}">
+                  <view class='item-h2'>{{item.date}}</view>
+                  <view class='item-h6'>{{item.week}}</view>
+            </view>
+      </view>
+    </view>
+    <view class='tab-right' hover-class='active' bindtap='tapright' ></view>
+  </view>
 
-  <appointment></appointment>
+  <view class='tab-body'>
+    <view class='body-content'>
+      <radio-group bindchange="radioChanges">
+        <label class="body-item  {{!item.flag?'disabled':''}} {{selectTime == index+1 ? 'active' : ''}}"   wx:for="{{listhours}}" wx:key ="key">
+          <radio value="{{index+1}}{{item.hour}}{{item.minute}}" name="{{item.hour}}" disabled="{{ !item.flag }}" style='display: none'  />{{item.hour}}:{{item.minute}} 
+        </label>
+    
+      </radio-group>
+    </view>
+  </view>
+</view>
 
-  <view class='select-teacher'>
+<slot></slot>
+
+<view class='footer'>
+  <view class='select-input'>
+    <input class='input' disabled="true" value='您已经选择: {{rq}} {{timess}}' placeholder-style="color:rgb(210,210,210)" placeholder="请选择" />
+  </view>
+  <view class='enter-button disabled' hover-class='active'>确定预约</view>
+</view>
+  
+
+  <view class='select-teacher' wx:if="{{teachers}}">
     <view class='select-head'>
       <view class='select-title'>水育老师</view>
       <view class='select-desc'>您可以为宝宝选择喜欢的水育老师</view>
     </view>
 
-    <view class='teacher-content'>
-      <radio-group bindchange="radioChange">
-        <label class="{{selectTeachId == '1' ? 'active' : ''}}">
-          <radio value="1" style='display: none'/>
-          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
-          <view class='teacher-name'>黄大仙</view>
-        </label>
-        <label class="{{selectTeachId == '2' ? 'active' : ''}}">
-          <radio value="2" style='display: none'/>
-          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
-          <view class='teacher-name'>黄大仙</view>
-        </label>
-        <label class="{{selectTeachId == '3' ? 'active' : ''}}">
-          <radio value="3" style='display: none'/>
-          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
-          <view class='teacher-name'>黄大仙</view>
-        </label>
-        <label class="{{selectTeachId == '4' ? 'active' : ''}}">
-          <radio value="4" style='display: none'/>
-          <view class='teacher-head'><image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/default-teacher.png' mode='widthFix'></image></view>
-          <view class='teacher-name'>黄大仙</view>
+    <!-- <view class='teacher-content'>
+      <radio-group bindchange="teacherChange">
+        <label class="{{selectTeachId == '1' ? 'active' : ''}}" bindtap='Teachers' wx:for="{{teachers}}" wx:key="key">
+          <radio value="1" style='display: none'  />
+          <view class='teacher-head'><image src='{{item.img}}' mode='widthFix'></image></view>
+          <view class='teacher-name'>{{item.name}}</view>
         </label>
       </radio-group>
-    </view>
+
+    </view> -->
+    
+      <view class='teacher-content'>
+      <view bindtap='teachertap'>
+        <view class="labers {{selectTeachId == '1' ? 'active' : ''}}" wx:for="{{teachers}}" wx:key="key">
+          <view class='teacher-head'><image src='{{item.img}}' mode='widthFix'></image></view>
+          <view class='teacher-name'>{{item.name}}</view>
+        </view>
+      </view>
+    </view>  
+
+
+
   </view>
 </scroll-view>
