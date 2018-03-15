@@ -13,7 +13,9 @@ Page({
     weekItemm:[],
     weeknum : 0,
     rq:"--",
-    timess:''
+    timess:'',
+    xhours:'--',
+    xminutes:'--'
 
   },
 
@@ -21,12 +23,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  
+   
     var that = this;
-    var shopid = options.shopid;
-    this.getweeks(shopid);
+    //设置shopId
+    var shopId = options.shopId;
+    this.getweeks(shopId);
     that.setData({
-        shopid:shopid
+      shopId: shopId
     });
+    console.log(that.data.shopId);
+    //设置shopId结束
+    //判断是否是通卡会员
+    wx.getStorage({
+      key: 'tongMember',
+      success: function (res) {
+          if(res.data==0){
+              that.setData({
+                tongMember:""           
+              })
+
+          }else{
+            that.setData({
+              tongMember: 1
+            })            
+          }
+      },
+      fail: function () {
+        that.getcode()
+      }
+    });
+      ////判断是否是通卡会员 结束
+
+       
 
     wx.getStorage({
       key: 'openid',
@@ -38,7 +67,21 @@ Page({
       fail: function () {
         that.getcode()
       }
+    });
+
+    //判读是不是会员
+    wx.getStorage({
+      key: 'memberId',
+      success: function (res) {
+        that.setData({
+          memberId: res.data
+        })
+      },
+      fail: function () {
+        that.getcode()
+      }
     }) 
+
 
   },
 
@@ -104,7 +147,7 @@ Page({
         selectTeachId: ""
       });
       this.Teachers();
-  
+      this.aboutbtn();
  
     },
 
@@ -117,11 +160,14 @@ Page({
       this.setData({
         selectTeachId: selectTeachId
       })
+      this.aboutbtn();
+
     }, 
     //选择老师结束
 
     //获取门店的日期配置
     getweeks(shopId){
+      
       var that = this;
       wx.showLoading({
         title: '加载中...',
@@ -157,8 +203,11 @@ Page({
             weekItem: weekItem,
             weekItemm: weekItemm,
             weekss: weekss,
-            rq: weekss[0].date
+            rq: weekss[0].date,
+            selectTeachId:'',
+
           });
+          
         } else {
 
         }
@@ -170,18 +219,20 @@ Page({
     //获取门店日期的时段
     getlisthouse(e){
       var that = this;
-      this.setData({
-        weeks: e.currentTarget.dataset.value
-      })
       var hours = e.currentTarget.dataset.listhours;
+      this.setData({
+        weeks: e.currentTarget.dataset.value,
+        hours:hours
+      })
+      
       var rq = e.currentTarget.dataset.rq;
-      var onlyId = "o8Zv20PNRRJFb0t2vu38k_v6ABiI";      //未注册的openid不能用
+      var onlyId = that.data.openid;      //未注册的openid不能用
       wx.showLoading({
         title: '加载中...',
       })
       Http.post('http://192.168.1.205:8800/reserve/listHours', {
         paramJson: JSON.stringify({
-          storeId: that.data.shopid,
+          storeId: that.data.shopId,
           onlyId: onlyId,
           date: hours
         })
@@ -193,12 +244,16 @@ Page({
         var listhours =  res.result.list; 
             that.setData({
               listhours: listhours,
-              selectTime:null,  
+              selectTime:null,
+              xhours: '--',
+              xminutes: '--',  
               rq:rq,
-              dates: hours
+              dates: hours,
+              selectTeachId:'',
+              teachers:''
             })
         
-          
+            this.aboutbtn();
         
         } else {
           console.log(res);
@@ -212,14 +267,17 @@ Page({
   getlisthouseinit(hours){
     var that = this;
       var hours = hours;
-    
-    var onlyId = "o8Zv20PNRRJFb0t2vu38k_v6ABiI";      //未注册的openid不能用
+      that.setData({
+          hours:hours,
+          dates:hours
+      });
+      var onlyId = that.data.openid;      //未注册的openid不能用
     wx.showLoading({
       title: '加载中...',
     })
       Http.post('http://192.168.1.205:8800/reserve/listHours', {
       paramJson: JSON.stringify({
-        storeId: that.data.shopid,
+        storeId: that.data.shopId,
         onlyId: onlyId,
         date: hours
       })
@@ -251,7 +309,7 @@ Page({
 
       Http.post('http://192.168.1.205:8800/reserve/listTeachers', {
         paramJson: JSON.stringify({
-          storeId: that.data.shopid,
+          storeId: that.data.shopId,
           hour: that.data.xhours,
           date: that.data.dates,
           minute: that.data.xminutes,
@@ -315,58 +373,114 @@ Page({
       }
     },
 
-
-  //获取code和openid
-    getcode() {
-
-      let that = this;
-      //获取用户的code
-      wx.login({
-        success(res) {
-          that.getuserstatus(res.code, Http);
-        }
-      });
-    },
-
-    getuserstatus(code) {
-
-      Http.post('http://192.168.1.205:8800/user/judgeUserStatus', {
-        //code: code
-      }).then(res => {
-        if (res.code == 1000) {
-          let openid = res.result.openid;
-          if (res.result) {
-            //console.log(res);
-            if (status == 1) {
-              wx.setStorage({
-                key: 'memberId',
-                data: res.result.memberId,
-              })
-              wx.setStorage({
-                key: 'openid',
-                data: openid,
-              })
-            } else {
-              wx.setStorage({
-                key: 'memberId',
-                data: '0',
-              })
-
-              wx.setStorage({
-                key: 'openid',
-                data: openid,
-              })
+    //会员预约判断是否
+    aboutbtn(){
+      //判断非会员预约条件
+    
+        //判断会员预约条件
+      if(this.data.rq!='--'){
+       
+        if(this.data.xhours!='--'){
+           if (this.data.xminutes!='--'){
+             if (this.data.selectTeachId){
+               this.setData({
+                 aboutbtn: 1
+               })
+             }else{
+               this.setData({
+                 aboutbtn: 0,
+                 abouttit: '请选择老师'
+               })
+             }
             }
+           
+        }else{
+          this.setData({
+            aboutbtn: 0,
+            abouttit:'请选择时间'
+          })
+        }
+      }
+     
+    },
+    //会员预约
+    yabout (){
+      var that = this;
+      var yyurl = "";
+      var showwar = "";
+      if (that.data.aboutbtn==0){
+        wx.showToast({
+          icon: "none",
+          title: that.data.abouttit,
+        })
+      }else{
+        
+        if (that.data.memberId==0){ //非会员预约
+          yyurl = "http://192.168.1.205:8800/reserve/doReserveFei";
+        }else{            //会员预约
+          yyurl = "http://192.168.1.205:8800/reserve/doReserve";
+        }
+        wx.showLoading({
+          title: '加载中...',
+        })
+        Http.post(yyurl, {
+          paramJson: JSON.stringify({
+            date: that.data.hours,
+            hour: that.data.xhours,
+            minute: that.data.xminutes,
+            onlyId: that.data.openid,
+            storeId: that.data.shopId,
+            teacher: that.data.selectTeachId
+          })
+        }).then(res => {
+          wx.hideLoading();
+          if (res.code == 1000) {
+            showwar = "预约成功"
+          } else {
+            showwar = "有未完成订单";
           }
+            wx.showToast({
+              title: showwar,
+            })
+           setTimeout(function(){
+             wx.switchTab({
+               url: '../../../serve/serve',
+             })
+           },1000)
+            
+       
+        }, _ => {
+          wx.hideLoading();
+        });
+        
+
+      }
+    },
+    //获取会员卡信息
+    getCardDetail (){
+      var that = this;
+      wx.showLoading({
+        title: '加载中...',
+      })
+      Http.post('http://192.168.1.205:8800/reserve/getCardDetail', {
+        memberId: that.data.memberId
+      }).then(res => {
+        wx.hideLoading();
+        if (res.code == 1000) {
+            that.setData({
+              totalTimes: res.result.totalTimes,
+              remainTimes: res.result.remainTimes,
+              remainTong: res.result.remainTong
+            })
+        } else {
+          console.log(res);
         }
       }, _ => {
         wx.hideLoading();
       });
-    },
-    //预约 // 会员预约 //非会员预约
-    yabout (){
-      
     }
+
+
 
 
 

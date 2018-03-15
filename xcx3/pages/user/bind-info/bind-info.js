@@ -2,9 +2,6 @@ const User = require('./../../../utils/userInfo.js');
 const Http = require('./../../../utils/request.js');
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     userHeadImg: null,
     relationshipIndex: null,
@@ -17,12 +14,18 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    wx.login({
-      success(res) {
-        //console.log(res, res.code.length)
-      }
-    })
-    //console.log(options)
+
+    if (options.shopId) {
+      this.setData({
+        shopId: options.shopId,
+        page: options.page       //获取进入方式,1为店铺进入,2为我的进入
+      })
+    } else {
+      this.setData({
+        page: options.page       //获取进入方式,1为店铺进入,2为我的进入
+      })
+    }
+
     User.getUserInfo( res => {
       if (res.rawData) {
         let info = JSON.parse(res.rawData);
@@ -40,10 +43,11 @@ Page({
         that.setData({
           openid:res.data
         })
-       //console.log(that.data.openid);
       },
       fail: function () {
-        that.getcode()
+        that.getcode();
+        console.log('getcode');
+
       }
     }) 
 
@@ -112,6 +116,7 @@ Page({
   },
   //录入用户信息
   setuser(){
+    var that = this;
     if (this.data.babyname == "") {
       wx.showToast({
         icon: "none",
@@ -141,9 +146,9 @@ Page({
     var relationship = this.data.relationshipArray[this.data.relationshipIndex];
     var birthday = this.data.birthday;
 
-    Http.post('http://192.168.1.205:8800/user/saveBindingUser', { 
+    Http.post('http://192.168.1.205:8800/user/saveUserBaseInfo', { 
       paramJson: JSON.stringify({
-        userId: this.data.openid,
+        onlyId: this.data.openid,
         nickName: this.data.babyname,
         relationship: relationship,
         birthday: birthday
@@ -151,9 +156,23 @@ Page({
        }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-        wx.redirectTo({
-          url: '../../index/detail/appointment/appointment',
-        })
+        wx.setStorage({
+          key: 'baseInfo',
+          data: 1,
+        });
+      
+        if (that.data.shopId && that.data.page=="1"){
+          wx.redirectTo({
+            url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId+'&page'+that.data.page,
+          })
+        } else if (that.data.page == "2"){
+                    //跳转到服务
+        } else if (that.data.page == "3"){
+                  //跳转到我的
+        }
+
+       
+
        } else {
 
        }

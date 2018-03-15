@@ -15,18 +15,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     var ids = options.shopId;
     var lon = options.lon;
     var lat = options.lat;
     var distance = options.distance/1000;
-    //设置缓存
+
+    //获取会员id
     wx.getStorage({
       key: 'memberId',
       success: function (res) {
-        console.log(res.data)
+        that.setData({
+          memberId: res.data
+        });
       }
     })
-    //设置缓存结束
+    //获取会员id结束
+    //获取会员的归属店id
+    wx.getStorage({
+      key: 'storeId',
+      success: function (res) {
+        that.setData({
+          storeId: res.data
+        });
+      }
+    })
+    //获取会员的归属店id结束
+
+    //获取是不是通卡会员
+    wx.getStorage({
+      key: 'tongMember',
+      success: function (res) {
+        that.setData({
+          tongMember: res.data
+        });
+      }
+    })
+    //获取会员的归属店id结束
+
+    
+
     this.setData({
       lon: lat,
       lat: lon,
@@ -34,6 +62,9 @@ Page({
     });
 
     this.getStoreItems(ids);
+    
+    //设置
+
   },
 
   //获取店铺详细信息
@@ -116,7 +147,7 @@ Page({
             })
 
           }
-          console.log(res);
+         
           this.setData({
             shopImg: shopImg,
             shopName: storeItem.shopName, //店铺名称
@@ -168,18 +199,114 @@ Page({
     })
   },
   //导航结束
+
+  booking (){
+
+    var that = this;
+    if (that.data.tongMember==0){       //判断用户是不是通卡会员
+    if (that.data.memberId != 0) {     //判断用户是不是会员
+      if (that.data.shopId != that.data.storeId){ //判断用户的门店id是不是和当前的门店id相同
+        //弹出当前门店
+        wx.showModal({
+          title: '提示',
+          content: '当前门店和不是您的会员店',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+
+      }else{
+        that.bookings();
+      }
+    }else{          
+    //如果用户不是通卡会员也不是会员
+      that.bookings();
+    }
+    }else{ //如果是通卡会员
+      if (that.data.countryCardStatus){
+        that.bookings();
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '当前门店不是通卡店',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+
+
+    }
+
+  },
+
+
   //点击预约
-  booking :function(){
+  bookings :function(){
+  
     let shopId = this.data.shopId;
+    let that = this;
+
+    wx.setStorage({
+      key: 'countryCardStatus',
+      data: that.data.countryCardStatus,
+    });
     wx.getStorage({
-      key: 'memberId',
+      key: 'countryCardStatus',
       success: function (res) {
-        if(res.data==0){    //memberId为空
-          
-            wx.navigateTo({
-              url: '../../user/bind-phone/bind-phone?shopId='+shopId+'&page=1', 
-            })
-        } else {     //memberId不为空
+        that.setData({
+          countryCardStatus: res.data,
+        });
+      
+      }
+    })
+    wx.getStorage({
+      key: 'isMember',
+      success: function (res) {
+        if(res.data==0){    //监测用户是否是会员 //用户不是会员
+          wx.getStorage({  //判断用户是否绑定手机
+            key: 'status',
+            success: function (res) {
+                if(res.data==0){ //用户没有绑定手机
+                
+                  wx.navigateTo({
+                    url: '../../user/bind-phone/bind-phone?shopId=' + shopId + '&page=1', //跳转到绑定手机页面
+                  })     
+                }else{  //用户绑定手机
+
+                  wx.getStorage({             
+                    key: 'baseInfo',
+                    success: function (res) {
+                      if (res.data == 0) { //是否填写过信息
+                          wx.navigateTo({
+                            url: '../../user/bind-info/bind-info?shopId=' + shopId + '&page=1',//跳转到绑定信息页面
+                          })
+                        }else{
+                          wx.redirectTo({
+                            url: './appointment/appointment?shopId=' + shopId + '&page=1',//跳转预约页面
+                          })
+                        }
+                    },
+                    fail: function () {
+                      that.getcode();
+                      console.log('getcode');
+                    }
+                  })
+
+                
+               }
+           
+            }
+          })
+        } else {     //用户是会员直接跳转到预约老师页面
               wx.navigateTo({
                 url: './appointment/appointment?shopId=' + shopId + '&page=1',
               })
