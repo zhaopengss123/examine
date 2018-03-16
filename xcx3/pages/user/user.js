@@ -14,13 +14,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    App.getUserInfo().then( res => {
-      if (res) {
-        this.setData({
-          userHeadImage: res.avatarUrl
-        })
-      }
-    })
+    var that = this;
+    App.getUserInfo(function (userInfo) {
+      //更新数据  
+      that.setData({
+        userInfo: userInfo
+      })
+    })  
   },
 
   /**
@@ -74,6 +74,11 @@ Page({
   makePhone(e) {
     wx.makePhoneCall({
       phoneNumber: e.target.dataset.num
+    })
+  },
+  myserve (){
+    wx.switchTab({
+      url: '../serve/serve',
     })
   }
 })

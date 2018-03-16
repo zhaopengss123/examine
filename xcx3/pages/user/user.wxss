@@ -4,7 +4,7 @@ page{
 
 .head{
   width: 100%;
-  padding: 25rpx;
+  padding: 50rpx;
   background: #fff;
   box-sizing: border-box;
 }

@@ -84,6 +84,8 @@ page{
   width: 100%;
   position: fixed;
   bottom: 0;
+  height: 100rpx;
+  border-top: solid 1px #ccc;
 }
 .delete-btn{
   width: 200rpx;
@@ -94,7 +96,7 @@ page{
   background: #fff;
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 9;
 }
 .delete-btn.active{

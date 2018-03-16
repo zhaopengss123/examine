@@ -33,6 +33,7 @@ page{
 }
 
 
+
 .swiper-box{
   padding-top: 82rpx;
   height: 100%;
@@ -40,7 +41,7 @@ page{
 }
 
 .serve-list{
-  height: 100%;
+  height: auto;
   overflow-y: auto;
   -webkit-overflow-scrolling : touch;
 }
@@ -73,7 +74,7 @@ page{
   color: rgb(161,161,161);
   font-size: 26rpx;
   line-height: 48rpx;
-  padding-left: 227rpx;
+  padding-left: 20rpx;
 }
 .item-detail .item-detail-title{
   color: #000;
@@ -86,7 +87,7 @@ page{
   width: 200rpx;
   height: 200rpx;
   padding: 0;
-  background: #ccc;
+
   border-radius: 10rpx;
   overflow: hidden;
   position: absolute;
@@ -94,7 +95,9 @@ page{
   left: 0;
 }
 .item-detail .item-detail-image image{
-  width: 100%;
+  width: 200rpx;
+  height: 200rpx;
+  padding-top: 50rpx;
 }
 .item-detail navigator{
   height: 200rpx;
@@ -172,4 +175,13 @@ page{
 .item-btn-active.active{
   color: #fff;
   background: #F38A03;
+}
+.wkong{
+  text-align: center;
+  font-size: 32rpx;
+  padding: 30rpx;
+  color: #666;
+}
+swiper-item{
+  overflow: scroll;
 }

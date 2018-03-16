@@ -166,9 +166,17 @@ Page({
             url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId+'&page'+that.data.page,
           })
         } else if (that.data.page == "2"){
-                    //跳转到服务
+            
+          wx.switchTab({
+            url: '../../serve/serve',
+          })
+                      //跳转到服务
         } else if (that.data.page == "3"){
                   //跳转到我的
+          wx.switchTab({
+            url: '../user',
+          })   
+
         }
 
        

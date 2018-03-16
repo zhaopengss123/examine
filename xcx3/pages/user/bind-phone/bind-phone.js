@@ -34,7 +34,8 @@ Page({
     })
   }else{
     this.setData({
-      page: options.page       //获取进入方式,1为店铺进入,2为我的进入
+      page: options.page,       //获取进入方式,1为店铺进入,2为我的进入
+      shopId:''
     })
   }
    //获取门店的id结束
@@ -51,7 +52,7 @@ Page({
       console.log('getcode');
     }
   });
-
+if(that.data.page==1){
   //获取门店是否是通卡店
   wx.getStorage({             //检查openid是否存在
     key: 'countryCardStatus',
@@ -66,7 +67,7 @@ Page({
       console.log('getcode');
     }
   });
-
+};
   },
 
   //获取验证码
@@ -357,15 +358,28 @@ Page({
           }     
         }
         };
-        console.log(baseInfo);
+        //console.log(baseInfo);
         if (baseInfo==0) {
           wx.navigateTo({
             url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page,
           })
         } else {
+          console.log(that.data.page);
+          if(that.data.page==1){    //跳转到填写信息
           wx.redirectTo({
-            url: '../../index/detail/appointment/appointment/?shopId=' + this.data.shopId + '&page='+this.data.page,
+            url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page='+this.data.page,
           })
+          } else if (that.data.page == 2) { //跳转到服务
+            wx.switchTab({
+              url: '../../serve/serve',
+            })
+
+          } else if (that.data.page == 3) {  //跳转到我的
+                            wx.switchTab({
+                                url: '../user',
+                              })   
+          }
+
         }
 
 
@@ -375,8 +389,122 @@ Page({
     }, _ => {
       wx.hideLoading();
     });
-  }
+  },
   
   //根据电话号码判断是否为会员结束
+  //getcode
+  getcode() {
+    let that = this;
+    wx.login({
+      success(res) {
+        that.getuserstatus(res.code);
+
+      }
+    });
+  },
+  //获取用户是不是会员,是否绑定
+  getuserstatus(code) {
+    Http.post('http://192.168.1.205:8800/user/judgeUserStatus', {
+      code: code
+    }).then(res => {
+
+      if (res.code == 1000) {
+        let openid = res.result.openid;
+        //缓存openid
+        var openid;
+        if (res.result.openid) {
+          openid = res.result.openid;
+        } else {
+          openid = 0;
+        }
+        wx.setStorage({
+          key: 'openid',
+          data: openid,
+        });
+        //缓存是否绑定
+        var status;
+        if (res.result.status) {
+          status = res.result.status;
+        } else {
+          status = 0;
+        }
+        wx.setStorage({
+          key: 'status',
+          data: status,
+        });
+        //缓存是否是潜在会员  
+        var potentialMember;
+        if (res.result.potentialMember) {
+          potentialMember = res.result.potentialMember;
+        } else {
+          potentialMember = 0;
+        }
+        wx.setStorage({
+          key: 'potentialMember',
+          data: potentialMember,
+        });
+        //isMember缓存是否是会员
+        var isMember;
+        if (res.result.isMember) {
+          isMember = res.result.isMember;
+        } else {
+          isMember = 0;
+        }
+        wx.setStorage({
+          key: 'isMember',
+          data: isMember,
+        });
+
+        //缓存是否是通卡会员
+        var tongMember;
+        if (res.result.tongMember) {
+          tongMember = res.result.tongMember;
+        } else {
+          tongMember = 0;
+        }
+        wx.setStorage({
+          key: 'tongMember',
+          data: tongMember,
+        });
+        //memberId缓存会员id
+        var memberId;
+        if (res.result.memberId) {
+          memberId = res.result.memberId;
+        } else {
+          memberId = 0;
+        }
+        wx.setStorage({
+          key: 'memberId',
+          data: memberId,
+        });
+        //baseInfo缓存是否填写过信息
+        var baseInfo;
+        if (res.result.baseInfo) {
+          baseInfo = baseInfo;
+        } else {
+          baseInfo = 0;
+        }
+        wx.setStorage({
+          key: 'baseInfo',
+          data: baseInfo,
+        });
+
+        //storeId 缓存会员归属哪个门店
+        var storeId;
+        if (res.result.storeId) {
+          storeId = res.result.storeId;
+        } else {
+          storeId = 0;
+        }
+        wx.setStorage({
+          key: 'storeId',
+          data: storeId,
+        });
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+  }
+
 
 })

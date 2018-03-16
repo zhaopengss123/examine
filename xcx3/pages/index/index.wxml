@@ -38,7 +38,7 @@
         </view>
         <view class='item-address'>
           <view>{{item.address}}</view>
-          <text>{{item.distance/1000}}km</text> 
+          <text>{{item.distance/1000}}km</text>
         </view>
       </navigator>
     </view>

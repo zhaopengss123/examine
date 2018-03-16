@@ -1,20 +1,26 @@
 <view class='head'>
-  <navigator url="/pages/user/bind-info/bind-info" hover-class='active'>
-    <view class='head-image'>
-      <image mode='widthFix' src='{{ userHeadImage }}'></image>
-    </view>
 
-    <view class='head-name'>黄半仙</view>
-    <view class='head-phone'>170*****000</view>
-  </navigator>
+  <view class='head-image'>
+    <image mode='widthFix' src='{{userInfo.avatarUrl}}'></image>
+  </view>
+
+  <view class='head-name'>{{userInfo.nickName}}</view>
+  <view class='head-phone'>170*****000</view>
+
 </view>
 
-<view class='container'>
+<!-- <view class='container'>
   <view class='item' hover-class='active'>
     <navigator url="/pages/user/evaluate/evaluate" hover-class='active'>我的评价</navigator>
   </view>
   <view class='item' hover-class='active'>我的打赏</view>
   <view class='item' hover-class='active'>我的优惠券</view>
+</view> -->
+
+<view class='container'>
+  <view class='item' hover-class='active' bindtap='myserve'>
+   我的预约
+  </view>
 </view>
 
 <view class='footer'>
