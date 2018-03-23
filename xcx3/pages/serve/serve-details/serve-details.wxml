@@ -3,7 +3,7 @@
   <view class='apply-info'>
     <view class='apply-title'>
       <view>预约时间</view>
-      <view>{{lists.reserveTime}}</view>
+      <view>{{lists.reserveDate}}</view>
     </view>
 
     <view class='apply-cell'>
@@ -11,9 +11,9 @@
         <text>类型: </text>
         <text>{{lists.babyType}}</text>
       </view>
-      <view class='apply-cell-desc'>
+      <view class='apply-cell-desc' wx:if="{{lists.businessTime}}">
         <text>营业时间: </text>
-        <text>{{lists.bussinessTime}}</text>
+        <text>{{lists.businessTime}}</text>
       </view>
       <view class='apply-cell-desc'>
         <text>预约老师: </text>
@@ -31,20 +31,20 @@
     <view class='store-info-content'>
       <view class='store-item' wx:if='{{lists.shopName}}'>· {{lists.shopName}}</view>
       <view class='store-item' wx:if='{{lists.shopAddress}}'>· {{lists.shopAddress}}</view>
-      <view class='store-item' wx:if='{{lists.bussinessTime}}'>· {{lists.bussinessTime}}</view>
+      <view class='store-item' wx:if='{{lists.businessTime}}'>· {{lists.businessTime}}</view>
     </view>
   </view>
 
 
-  <view class='footer'>
-    <view class='footer-phone' bindtap='makePhone' data-num='17087005000'>客服电话：400-12345678</view>
-    <view class='footer-time'>上班时间：09:00:00-18:00:00</view>
-  </view>
+<view class='footer'>
+  <view class='footer-phone' bindtap='makePhone' data-num='400-6321531'>客服电话：400-6321531</view>
+  <view class='footer-time'>客服时间：09:00 - 18:00 周一至周日</view>
+</view>
 
 
-  <view class='fixed-btns'>
-    <view class='delete-btn' hover-class='active' wx:if='{{status==0}}'>取消预约</view>
-    
-  </view>
-
+  <!-- <view class='fixed-btns' wx:if='{{status==0}}'>
+    <view class='delete-btn' hover-class='active' bindtap='cancel' >取消预约</view>
+    <view class='reset-btn' hover-class='active' bindtap='mapclick'>导航前往</view>
+  </view> -->
+  
 </scroll-view>

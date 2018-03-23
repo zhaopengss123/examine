@@ -10,7 +10,7 @@
   
   <view class='swiper' wx:if="{{swiperArray}}">
     <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300" circular="true">
-      <block wx:for="{{swiperArray}}">
+      <block wx:for="{{swiperArray}}" wx:key="key">
         <swiper-item>
           <image src="{{item}}" class="slide-image" width="355" height="150"/>
         </swiper-item>
@@ -24,41 +24,17 @@
 
       <view class='head-name'>
         <text>{{shopName}}</text>
-        <view hover-class='active' bindtap='mapclick'>导航</view>
+        <view>{{distance}}</view>
       </view>
 
       <view class='head-address'>
         <text>{{address}}</text>
-        <view>{{distance}}km</view>
+        <view hover-class='active' bindtap='mapclick'>导航</view>
       </view>
 
     </view>
 
   </view>
-
-
-  <!-- 活动 
-  <view class='activity'>
-    <view class='activity-title'>门店活动</view>
-    <view class='activity-content'>
-      <view class='activity-item'>
-        <navigator url="" hover-class="active">
-          <view class='item-name'>暖冬游泳体验卡</view>
-          <view class='item-detail'>冬日游玩的好去处，宝宝早教+健身</view>
-          <view class='item-price'>￥29.9</view>
-        </navigator>
-      </view>
-      <view class='activity-item'>
-        <navigator url="" hover-class="active">
-          <view class='item-name'>暖冬游泳体验卡</view>
-          <view class='item-detail'>冬日游玩的好去处，宝宝早教+健身</view>
-          <view class='item-price'>￥29.9</view>
-        </navigator>
-      </view>
-    </view>
-  </view>
--->
-
 
   <!-- 详情 -->
   <view class='storeinfo'>
@@ -80,11 +56,11 @@
       </view>
       <view class='info-item' wx:if="{{address}}">
         <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-marker.png'></image></view>
-        <view class='info-cell'>{{address}}</view>
+        <view class='info-cell shoptel' bindtap='mapclick'>{{address}}</view>
       </view>
-      <view class='info-item' wx:if="{{shopTel}}">
-        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-marker.png'></image></view>
-        <view class='info-cell' bindtap='cellme'>{{shopTel}}</view>
+      <view class='info-item' wx:if="{{shopTel}}" >
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/userphone.png'></image></view>
+        <view class='info-cell shoptel' bindtap='cellme' >{{shopTel}}</view>
       </view>
       <view class='info-item' wx:if="{{trafficInformation}}">
         <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-map.png'></image></view>
@@ -94,18 +70,24 @@
         </view>
       </view>
       <view class='info-item' wx:if="{{parkingInformation}}">
-        <view class='item-icon'><image mode='widthFix' src='/assets/images/icon-space.png'></image></view>
+        <view class='item-icon'><image mode='widthFix' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-parking.png'></image></view>
         <view class='info-cell'>
           <view>名称：{{parkingInformation}}</view>
           <!-- <view>参考价格：1元/0.5小时(07:00-21:00)</view>
-          <!--<view>地址：{{address}}</view>-->
+          <!--<view>地址：{{add ress}}</view>-->
         </view>
       </view>
     </view>
+
+  </view>
+      <view class='foots'>
+      <view class='footer-phone' bindtap='makePhone' data-num='400-6321531'>客服电话：400-6321531</view>
+  <view class='footer-time'>客服时间：09:00 - 18:00 周一至周日</view>
   </view>
 
 
+
   <!-- footer -->
-  <view class='footer' hover-class='active' bindtap='booking'>预约游泳</view>
+  <view class='footer' hover-class='active' bindtap='booking'>去预约游泳课</view>
 
 </view>

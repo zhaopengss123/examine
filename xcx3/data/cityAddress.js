@@ -4447,7 +4447,7 @@ const cityAddressItems = [
       }
     ],
     "value": "230000",
-    "label": "黑龙江"
+    "label": "黑龙江省"
   },
   {
     "children": [
@@ -4545,7 +4545,7 @@ const cityAddressItems = [
           }
         ],
         "value": "310100",
-        "label": "市辖区"
+        "label": "上海市"
       },
       {
         "children": [

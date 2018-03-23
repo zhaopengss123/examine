@@ -26,7 +26,7 @@ page{
   padding-bottom: 16rpx;
 }
 .apply-cell-desc{
-  color: #bbb;
+  color: #63686e;
   font-size: 26rpx;
   line-height: 26rpx;
   padding-bottom: 24rpx;
@@ -37,12 +37,11 @@ page{
 }
 .title-button{
   width: 80rpx;
-  color: #F38A03;
+  color: #FF839A;
   font-size: 22rpx;
   line-height: 33rpx;
   text-align: center;
-  border: solid 1px #F38A03;
-  border-radius: 35rpx;
+
   position: absolute;
   top: 50%;
   right: 0;
@@ -56,28 +55,29 @@ page{
 }
 .store-item{
   padding-bottom: 8rpx;
-  color: #999;
+  color: #63686e;
   font-size: 26rpx;
   line-height: 40rpx;
 }
 
 
-
 .footer{
-  padding: 40rpx 0;
   width: 100%;
   text-align: center;
+  position: fixed;
+  bottom: 50rpx;
 }
 .footer-phone{
-  color: #FF839A;
+   color: rgb(150, 150, 150);
   font-size: 26rpx;
-  line-height: 26rpx;
+  line-height: 36rpx;
+
 }
 .footer-time{
   color: rgb(150, 150, 150);
   font-size: 23rpx;
   line-height: 23rpx;
-  padding-top: 20rpx;
+  padding-top: 15rpx;
 }
 
 .fixed-btns{
@@ -85,18 +85,18 @@ page{
   position: fixed;
   bottom: 0;
   height: 100rpx;
-  border-top: solid 1px #ccc;
+
 }
 .delete-btn{
   width: 200rpx;
-  color: #999;
+  color: #63686e;
   font-size: 26rpx;
   line-height: 100rpx;
   text-align: center;
   background: #fff;
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   z-index: 9;
 }
 .delete-btn.active{

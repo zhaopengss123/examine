@@ -26,7 +26,7 @@
 .tab-left{
   width: 75rpx;
   height: 130rpx;
-  background: rgb(241, 241, 241) url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-left.png) no-repeat center center;
+  background: rgb(241, 241, 241) url(../../../../assets/images/icon-left.png) no-repeat center center;
   background-size: 19rpx 34rpx;
   position: absolute;
   top: 0;
@@ -34,17 +34,17 @@
   z-index: 9;
 }
 .tab-left.active{
-  background: rgb(200, 200, 200) url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-left.png) no-repeat center center;
+  background: rgb(200, 200, 200) url(../../../../assets/images/icon-left.png) no-repeat center center;
   background-size: 19rpx 34rpx;
 }
 .tab-right.active{
-  background: rgb(200, 200, 200) url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-right.png) no-repeat center center;
+  background: rgb(200, 200, 200) url(../../../../assets/images/icon-right.png) no-repeat center center;
   background-size: 19rpx 34rpx;
 }
 .tab-right{
   width: 75rpx;
   height: 130rpx;
-  background: rgb(241, 241, 241) url(http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-right.png) no-repeat center center;
+  background: rgb(241, 241, 241) url(../../../../assets/images/icon-right.png) no-repeat center center;
   background-size: 19rpx 34rpx;
   position: absolute;
   top: 0;

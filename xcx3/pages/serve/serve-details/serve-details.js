@@ -3,16 +3,10 @@ const User = require('../../../utils/userInfo.js');
 const Http = require('../../../utils/request.js');
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
       lists:[],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var that = this;
     var severid = options.severid;
@@ -24,51 +18,32 @@ Page({
     that.severmain();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
   
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
   
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+
   onPullDownRefresh: function () {
   
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+
   onShareAppMessage: function () {
   
   },
@@ -77,27 +52,36 @@ Page({
             wx.showLoading({
               title: '加载中...',
             })
-            Http.post('http://192.168.1.205:8800/reserve/recordDetail', {
+            Http.post('/reserve/recordDetail', {
+             
                 recordId: that.data.severid,
             }).then(res => {
               wx.hideLoading();
-              console.log(res);
+              
               if (res.code == 1000) {
+                let lists = res.result;
+                let listtime = lists.rHour + ':' + lists.rMinute;
+                lists.reserveDate = lists.reserveDate.replace('00:00:00', listtime);
+
                 that.setData({
-                  lists: res.result
+                  lists: lists
                 })
 
               } else {
 
               }
             }, _ => {
-              wx.hideLoading();
             });
+  },
+  makePhone(e) {
+    wx.makePhoneCall({
+      phoneNumber: e.target.dataset.num
+    })
   },
   mapclick() {
     const _this = this.data;
     wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      type: 'gcj02',
       success: function (res) {
 
         var latitude = res.latitude
@@ -112,5 +96,106 @@ Page({
 
       }
     })
-  }
+  },
+  //非会员取消预约
+  reserveCancelFei(reserveId) {
+    var that = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    Http.post('/reserve/reserveCancelFei', {
+      reserveId: reserveId,
+    }).then(res => {
+      wx.hideLoading();
+      console.log(res);
+      if (res.code == 1000) {
+        wx.showToast({
+          title: '操作成功',
+          icon: 'none'
+        })
+        wx.switchTab({
+          url: '../serve'
+        })
+      } else {
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none'
+        })
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+
+  },
+
+
+  //会员取消预约
+  reserveCancel(reserveId, memberId) {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    Http.post('/reserve/reserveCancel', {
+      paramJson: JSON.stringify({
+        reserveId: reserveId,
+        memberId: memberId
+      })
+    }).then(res => {
+      wx.hideLoading();
+      //console.log(res);
+      if (res.code == 1000) {
+        wx.showToast({
+          title: '操作成功',
+          icon: 'none'
+        })
+        wx.switchTab({
+          url: '../serve'
+        })
+      } else {
+
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none'
+        })
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+
+  },
+
+  cancel(e) {
+    let that = this;
+    let reserveId = that.data.severid;
+    if (that.data.isMember) {    //判断是不是会员,
+
+      wx.showModal({
+        title: '尊敬的会员',
+        content: '您确定要取消预约吗?',
+        success: function (res) {
+          if (res.confirm) {//用户点击确定
+            that.reserveCancel(reserveId, that.data.isMember);
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+
+    } else {
+
+
+      wx.showModal({
+        title: '提示',
+        content: '您确定要取消预约吗?',
+        success: function (res) {
+          if (res.confirm) {//用户点击确定
+            that.reserveCancelFei(reserveId);
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+
+    }
+  },
+
 })

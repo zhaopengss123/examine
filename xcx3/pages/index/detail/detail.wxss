@@ -1,5 +1,5 @@
 page{
-  background: #F0F0F0;
+  background: #f5f6f8;
 }
 
 /* ------------------- header ------------------- */
@@ -34,21 +34,21 @@ page{
 
 .head-box{
   padding: 0 30rpx;
+  border-bottom:  solid 0.5px #e4e4e4;
 }
 .head-name{
   padding: 33rpx 0 25rpx;
-  font-size: 32rpx;
-  line-height: 32rpx;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  font-weight: bold;
 }
 .head-name view{
   float: right;
-  height: 32rpx;
-  padding: 0 8rpx;
-  color: #FF839A;
-  font-size: 24rpx;
-  line-height: 32rpx;
-  transition: all .2s;
-  border-radius: 4rpx;
+  color: #000;
+  font-size: 26rpx;
+  font-weight:normal;
+  color:rgb(163, 163, 163);
+  
 }
 .head-name view.active{
   color: #fff;
@@ -67,11 +67,12 @@ page{
   font-size: 21rpx;
   line-height: 40rpx;
   text-align: center;
-  background: rgba(254,183,31,1);
+  background: #ff839a;
   border-radius: 4rpx;
   position: absolute;
   top: 26rpx;
   right: 15rpx;
+  z-index: 100;
 }
 
 
@@ -79,13 +80,19 @@ page{
   display: block;
   width: 560rpx;
   float: left;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+
 }
 .head-address view{
-  float: right;
-  color: #000;
+
+
+    float: right;
+  height: 32rpx;
+  padding: 0 8rpx;
+  color: #FF839A;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  transition: all .2s;
+  border-radius: 4rpx;
 }
 
 
@@ -149,8 +156,9 @@ page{
 /* -------------------- 详情 -------------------- */
 .storeinfo{
  background: #fff;
-  padding:0 30rpx 40rpx;
-  padding-bottom:130rpx;
+  padding:0 30rpx;
+ 
+  border-top:solid 0.5px #e4e4e4;
 }
 .storeinfo-content{
  
@@ -160,7 +168,7 @@ page{
   padding: 40rpx 0 32rpx;
   font-size: 32rpx;
   line-height: 32rpx;
-  border-bottom:solid 1px rgb(232, 232, 232);
+  border-bottom:solid 0.5px #e4e4e4;
 }
 .info-item{
   color: #63686e;
@@ -169,7 +177,7 @@ page{
   padding: 16rpx 0;
 }
 .info-item:not(:last-child){
-  border-bottom:solid 1px rgb(232, 232, 232);
+  border-bottom:solid 0.5px #e4e4e4;
 }
 .info-item.function{
   line-height: 60rpx;
@@ -220,4 +228,33 @@ page{
 }
 .footer.active{
   background: #fba0b1;
+}
+.footer-phone{
+   color: rgb(150, 150, 150);
+  font-size: 26rpx;
+  line-height: 36rpx;
+  text-align: center;
+
+}
+.footer-time{
+  color: rgb(150, 150, 150);
+  font-size: 23rpx;
+  line-height: 23rpx;
+  padding-top: 15rpx;
+   text-align: center;
+}
+.foots{
+  width: 100%; 
+  overflow: hidden;
+  padding: 80rpx 0;
+  background:#f5f6f8; 
+   padding-bottom:180rpx;
+   border-top:solid 0.5px #e4e4e4;
+
+}
+.shoptel{
+    background: url(https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/icon-right-o.png) no-repeat right center;
+    background-size: 15.2rpx 27.2rpx;
+    width: 80%;
+    padding-right: 12%;
 }

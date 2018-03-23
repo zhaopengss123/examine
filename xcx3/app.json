@@ -1,8 +1,7 @@
 {
   "pages": [
-     
-    "pages/index/index",
     "pages/demo/demo",
+    "pages/index/index",
     "pages/index/detail/detail",
     "pages/index/detail/activity/activity",
     "pages/user/user",
@@ -31,12 +30,13 @@
     "selectedColor": "#FF839A",
     "borderStyle": "white",
     "backgroundColor": "#fff",
+    "borderStyle": "black",
     "list": [
       {
         "selectedIconPath": "assets/images/tabbar-fish-active.png",
         "iconPath": "assets/images/tabbar-fish.png",
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "门店"
       },
       {
         "selectedIconPath": "assets/images/tabbar-serve-active.png",

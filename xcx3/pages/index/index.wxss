@@ -31,7 +31,9 @@ swiper{
   margin-bottom: 45rpx;
 }
 swiper image{
-  width: 100%;
+   width: 691rpx;
+   height: 350rpx;
+
 }
 
 
@@ -59,13 +61,13 @@ swiper image{
 }
 .item navigator{
   padding-bottom: 40rpx;
-  border-bottom: solid 1px #eee;
+  border-bottom: solid 0.5px #e4e4e4;
 }
 .item-image{
-  height: 350rpx;
+  height: 420rpx;
   overflow: hidden;
   position: relative;
-  border-radius: 8rpx;
+  border-radius: 10rpx;
 }
 .item-image image{
   min-width: 100%;
@@ -74,8 +76,9 @@ swiper image{
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -87.5px;
+  margin-top: -107.5px;
   margin-left: -50%;
+    border-radius: 10rpx;
 }
 .item-title{
   padding: 38rpx 0 36rpx;
@@ -95,8 +98,8 @@ swiper image{
 }
 .item-address > view{
   padding-right: 65px;
-  font-size: 26rpx;
-  line-height: 26rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
   box-sizing: border-box;
   color: rgba(0, 0, 0, .5);
   overflow:hidden;
@@ -105,10 +108,10 @@ swiper image{
 }
 .item-address > text{
   display: block;
-  opacity: .8;
+  opacity: .5;
   padding: 0 8px;
-  font-size: 12px;
-  line-height: 13px;
+  font-size: 24rpx;
+  line-height: 24rpx;
   position: absolute;
   top: 0;
   right: 0;
@@ -120,15 +123,12 @@ swiper image{
   font-size: 21rpx;
   line-height: 40rpx;
   text-align: center;
-  background: rgba(254,183,31,1);
+  background: #ff839a;
   border-radius: 4rpx;
   position: absolute;
   top: 26rpx;
   right: 15rpx;
 }
-
-
-
 .no-data{
   padding-top: 100px;
   color: #ccc;
@@ -141,6 +141,8 @@ swiper image{
   left: 0;
   z-index: 999;
   width: 750rpx;
- 
   background: #fff;
+}
+.picker{
+    color: #63686e;
 }

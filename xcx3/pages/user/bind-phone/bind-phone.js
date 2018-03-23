@@ -1,84 +1,99 @@
 const Http = require('./../../../utils/request.js');
-
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     phone: null,
-    sendFont:'发送验证码'
+    sendFont: '发送验证码',
+    focus: false
   },
-  //设置手机号
   phoneInput(e) {
     this.setData({
       phone: e.detail.value
     });
   },
-  //设置验证码
   codeInput(e) {
     this.setData({
       codeInput: e.detail.value
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var that = this;
-    //获取门店的id
-  if(options.shopId){
-    this.setData({
-      shopId:options.shopId,
-      page:options.page       //获取进入方式,1为店铺进入,2为我的进入
-    })
-  }else{
-    this.setData({
-      page: options.page,       //获取进入方式,1为店铺进入,2为我的进入
-      shopId:''
-    })
-  }
-   //获取门店的id结束
-  wx.getStorage({             //检查openid是否存在
-    key: 'openid',
-    success: function (res) {
-      that.setData({
-        openid:res.data,
-      });
-      //console.log(that.data.openid);
-    },
-    fail: function () {
-      that.getcode();
-      console.log('getcode');
+
+    if (options.shopId) {
+      this.setData({
+        shopId: options.shopId,
+        page: options.page
+      })
+    } else {
+      this.setData({
+        page: options.page,
+        shopId: ''
+      })
     }
-  });
-if(that.data.page==1){
-  //获取门店是否是通卡店
-  wx.getStorage({             //检查openid是否存在
-    key: 'countryCardStatus',
-    success: function (res) {
-      that.setData({
-        countryCardStatus: res.data,
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        that.setData({
+          openid: res.data,
+        });
+      
+
+      },
+      fail: function () {
+        wx.showToast({
+          icon: "none",
+          title: '登陆超时',
+          duration: 2000
+        })
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../../index/index',
+          })
+        }, 2000);
+      }
+    });
+    if (that.data.page == 1) {
+
+      wx.getStorage({
+        key: 'countryCardStatus',
+        success: function (res) {
+          that.setData({
+            countryCardStatus: res.data,
+          });
+
+        },
+        fail: function () {
+          wx.showToast({
+            icon: "none",
+            title: '登陆超时',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.switchTab({
+              url: '../../index/index',
+            })
+          }, 2000);
+        }
       });
-      //console.log(that.data.openid);
-    },
-    fail: function () {
-      that.getcode();
-      console.log('getcode');
-    }
-  });
-};
+    };
   },
 
-  //获取验证码
-  getCode() {
+  getCode1() {
+    if (this.data.cdown == 0) {
+      wx.showToast({
+        icon: "none",
+        title: '倒计时完毕后重新获取',
+        duration: 2000
+      })
+      return false;
+    }
+
     let isMobile = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
     if (isMobile.test(this.data.phone) && this.data.phone.length == 11) {
       wx.showLoading({
         title: '正在获取验证码',
         mask: true
       });
-      Http.post('http://192.168.1.205:8800/user/sendVerificationCode', { //接口地址http://192.168.1.205:8800/user/sendVerificationCode
+      Http.post('/user/sendVerificationCode', {
         phoneNum: this.data.phone
       }).then(res => {
         wx.hideLoading();
@@ -89,9 +104,10 @@ if(that.data.page==1){
           this.setData({
             verificationCode: verificationCode,
             token: token,
-            
+            manphone: this.data.phone,
+            focus: true
           })
-         
+
         } else {
           wx.hideLoading();
           wx.showToast({
@@ -113,134 +129,130 @@ if(that.data.page==1){
       })
     }
   },
-  //获取验证码结束
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
- 
+
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-  
+    setTimeout(function () {
+      wx.showModal({
+        title: '温馨提示',
+        content: '如果您是会员请绑定会员手机号',
+        success: function (res) {
+          if (res.confirm) {
+
+          } else if (res.cancel) {
+
+          }
+        }
+      });
+    }, 1000)
+
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
-  
+
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function () {
-  
+
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-  
+
   },
 
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
-  
+
   },
-  //设置获取时间
-  Countdown (){
+
+  Countdown() {
     let that = this;
     let count = 60;
-    let set = setInterval(function(){
+    let set = setInterval(function () {
       count--;
       that.setData({
-        sendFont:count+'s后重新获取'
+        sendFont: count + 's后重新获取',
+        cdown: 0,
       })
-      if(count==0){
+      if (count == 0) {
         that.setData({
-          sendFont: "重新获取"
+          sendFont: "重新获取",
+          cdown: 1,
+          verificationCode: 786543289,
         })
         clearInterval(set);
       }
-    },1000);
+    }, 1000);
   },
-  //校检手机和验证码--点击发送验证码按钮
-  getphonesuccess (){
+  getphonesuccess() {
     var that = this;
-    if (that.data.codeInput){
-      
-      if (that.data.codeInput == that.data.verificationCode){
+    if (that.data.codeInput) {
+
+      if (that.data.codeInput == that.data.verificationCode) {
         that.orbind();
-      }else{
+      } else {
         wx.showToast({
           icon: "none",
           title: '验证码错误',
         })
       }
-
-    }else{
+    } else {
       wx.showToast({
         icon: "none",
         title: '请输入验证码',
       })
     }
-
   },
- //校检手机和验证码结束
- 
-
-
-
-  
-  //绑定用户
-  orbind (){
-  var that = this;
-      Http.post('http://192.168.1.205:8800/user/saveBindingUser', {               //http://192.168.1.205:8800/user/judgeUserStatus
-        paramJson: JSON.stringify({
-          onlyId: this.data.openid,
-          userPhone: this.data.phone,
-        })
+  orbind() {
+    var that = this;
+    if (that.data.manphone != that.data.phone) {
+      wx.showToast({
+        icon: "none",
+        title: '手机号不一致',
+      })
+      return false;
+    }
+    Http.post('/user/saveBindingUser', {
+      paramJson: JSON.stringify({
+        onlyId: this.data.openid,
+        userPhone: this.data.phone,
+      })
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
         wx.setStorage({
           key: 'status',
           data: 1,
-        });  
-        that.UserPhone(); 
+        });
+        that.UserPhone();
       } else {
-        console.log(res);
+        wx.showToast({
+          icon: "none",
+          title: res.info,
+        });
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../../index/index',
+          });
+        }, 1000);
       }
     }, _ => {
-         wx.hideLoading();
+      wx.hideLoading();
     });
   },
-  //根据电话号码判断是否为会员
-  UserPhone (){
-    let that= this;
-    Http.post('http://192.168.1.205:8800/user/judgeUserPhone', {
-      userPhone:that.data.phone
+  UserPhone() {
+    let that = this;
+    Http.post('/user/judgeUserPhone', {
+      userPhone: that.data.phone
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-
-        //缓存是否是潜在会员  
         var potentialMember;
         if (res.result.potentialMember) {
           potentialMember = res.result.potentialMember;
@@ -251,7 +263,6 @@ if(that.data.page==1){
           key: 'potentialMember',
           data: potentialMember,
         });
-        //isMember缓存是否是会员
         var isMember;
         if (res.result.isMember) {
           isMember = res.result.isMember;
@@ -262,8 +273,29 @@ if(that.data.page==1){
           key: 'isMember',
           data: isMember,
         });
-
-        //缓存是否是通卡会员
+        if (isMember != 0) {
+          wx.setStorage({
+            key: 'baseInfo',
+            data: 1,
+          });
+          that.setData({
+            baseInfo: 1
+          })
+        } else {
+          var baseInfo;
+          if (res.result.baseInfo) {
+            baseInfo = baseInfo;
+          } else {
+            baseInfo = 0;
+          }
+          wx.setStorage({
+            key: 'baseInfo',
+            data: baseInfo,
+          });
+          that.setData({
+            baseInfo: baseInfo
+          })
+        }
         var tongMember;
         if (res.result.tongMember) {
           tongMember = res.result.tongMember;
@@ -274,7 +306,7 @@ if(that.data.page==1){
           key: 'tongMember',
           data: tongMember,
         });
-        //memberId缓存会员id
+
         var memberId;
         if (res.result.memberId) {
           memberId = res.result.memberId;
@@ -285,19 +317,7 @@ if(that.data.page==1){
           key: 'memberId',
           data: memberId,
         });
-        //baseInfo缓存是否填写过信息
-        var baseInfo;
-        if (res.result.baseInfo) {
-          baseInfo = baseInfo;
-        } else {
-          baseInfo = 0;
-        }
-        wx.setStorage({
-          key: 'baseInfo',
-          data: baseInfo,
-        });
 
-        //storeId 缓存会员归属哪个门店
         var storeId;
         if (res.result.storeId) {
           storeId = res.result.storeId;
@@ -308,81 +328,72 @@ if(that.data.page==1){
           key: 'storeId',
           data: storeId,
         });
+        if (this.data.page == 1) {
 
+          if (tongMember != 0) {
+            if (memberId != 0) {
+              if (that.data.shopId != storeId) {
 
-        if(this.data.page==1){//判断用户从哪个页面进入
-        //判断用户是不是会员是不是通卡会员,当前门店是不是用户的会员店,是不是通卡店 
-        if (tongMember != 0) {       //判断用户是不是通卡会员
-          if (memberId != 0) {     //判断用户是不是会员
-            if (that.data.shopId != storeId) { //判断用户的门店id是不是和当前的门店id相同
-              //弹出当前门店
+                wx.showModal({
+                  title: '提示',
+                  content: '当前门店和不是您的会员店',
+                  success: function (res) {
+                    if (res.confirm) {
+                      wx.redirectTo({
+                        url: '../../index/index',
+                      })
+                    } else if (res.cancel) {
+                      wx.redirectTo({
+                        url: '../../index/index',
+                      })
+                    }
+                  }
+                })
+
+              } else {
+              }
+            } else {
+            }
+          } else {
+            if (!that.data.countryCardStatus) {
               wx.showModal({
                 title: '提示',
-                content: '当前门店和不是您的会员店',
+                content: '当前门店不是通卡店',
                 success: function (res) {
                   if (res.confirm) {
                     wx.redirectTo({
-                      url: '../../index/index',//跳转首页
+                      url: '../../index/index',
                     })
                   } else if (res.cancel) {
                     wx.redirectTo({
-                      url: '../../index/index',//跳转首页
+                      url: '../../index/index',
                     })
                   }
                 }
               })
-
-            } else {
             }
-          } else {
-            //如果用户不是通卡会员也不是会员
-          
           }
-        } else { //如果是通卡会员
-          if (!that.data.countryCardStatus) {
-            wx.showModal({
-              title: '提示',
-              content: '当前门店不是通卡店',
-              success: function (res) {
-                if (res.confirm) {
-                  wx.redirectTo({
-                    url: '../../index/index',//跳转首页
-                  })
-                } else if (res.cancel) {
-                  wx.redirectTo({
-                    url: '../../index/index',//跳转首页
-                  })
-                }
-              }
-            })
-          }     
-        }
         };
-        //console.log(baseInfo);
-        if (baseInfo==0) {
+        if (that.data.baseInfo == 0 || !that.data.baseInfo) {
           wx.navigateTo({
             url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page,
           })
         } else {
-          console.log(that.data.page);
-          if(that.data.page==1){    //跳转到填写信息
-          wx.redirectTo({
-            url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page='+this.data.page,
-          })
-          } else if (that.data.page == 2) { //跳转到服务
+          if (that.data.page == 1) {
+            wx.redirectTo({
+              url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page=' + this.data.page,
+            })
+          } else if (that.data.page == 2) {
             wx.switchTab({
               url: '../../serve/serve',
             })
 
-          } else if (that.data.page == 3) {  //跳转到我的
-                            wx.switchTab({
-                                url: '../user',
-                              })   
+          } else if (that.data.page == 3) {
+            wx.switchTab({
+              url: '../user',
+            })
           }
-
         }
-
-
       } else {
         console.log(res);
       }
@@ -390,9 +401,6 @@ if(that.data.page==1){
       wx.hideLoading();
     });
   },
-  
-  //根据电话号码判断是否为会员结束
-  //getcode
   getcode() {
     let that = this;
     wx.login({
@@ -402,15 +410,13 @@ if(that.data.page==1){
       }
     });
   },
-  //获取用户是不是会员,是否绑定
   getuserstatus(code) {
-    Http.post('http://192.168.1.205:8800/user/judgeUserStatus', {
+    Http.post('/user/judgeUserStatus', {
       code: code
     }).then(res => {
 
       if (res.code == 1000) {
         let openid = res.result.openid;
-        //缓存openid
         var openid;
         if (res.result.openid) {
           openid = res.result.openid;
@@ -421,7 +427,6 @@ if(that.data.page==1){
           key: 'openid',
           data: openid,
         });
-        //缓存是否绑定
         var status;
         if (res.result.status) {
           status = res.result.status;
@@ -432,7 +437,6 @@ if(that.data.page==1){
           key: 'status',
           data: status,
         });
-        //缓存是否是潜在会员  
         var potentialMember;
         if (res.result.potentialMember) {
           potentialMember = res.result.potentialMember;
@@ -443,7 +447,6 @@ if(that.data.page==1){
           key: 'potentialMember',
           data: potentialMember,
         });
-        //isMember缓存是否是会员
         var isMember;
         if (res.result.isMember) {
           isMember = res.result.isMember;
@@ -454,8 +457,6 @@ if(that.data.page==1){
           key: 'isMember',
           data: isMember,
         });
-
-        //缓存是否是通卡会员
         var tongMember;
         if (res.result.tongMember) {
           tongMember = res.result.tongMember;
@@ -466,7 +467,6 @@ if(that.data.page==1){
           key: 'tongMember',
           data: tongMember,
         });
-        //memberId缓存会员id
         var memberId;
         if (res.result.memberId) {
           memberId = res.result.memberId;
@@ -477,7 +477,6 @@ if(that.data.page==1){
           key: 'memberId',
           data: memberId,
         });
-        //baseInfo缓存是否填写过信息
         var baseInfo;
         if (res.result.baseInfo) {
           baseInfo = baseInfo;
@@ -488,8 +487,6 @@ if(that.data.page==1){
           key: 'baseInfo',
           data: baseInfo,
         });
-
-        //storeId 缓存会员归属哪个门店
         var storeId;
         if (res.result.storeId) {
           storeId = res.result.storeId;

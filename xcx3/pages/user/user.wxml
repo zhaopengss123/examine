@@ -5,7 +5,7 @@
   </view>
 
   <view class='head-name'>{{userInfo.nickName}}</view>
-  <view class='head-phone'>170*****000</view>
+  <view class='head-phone'>{{userphone}}</view>
 
 </view>
 
@@ -17,13 +17,29 @@
   <view class='item' hover-class='active'>我的优惠券</view>
 </view> -->
 
-<view class='container'>
+<view class='container' >
+  
+   <view class='header' wx:if='{{tongMember}}'>
+    <view>
+      <text>{{totalTimes}}</text>
+      <text>总卡次</text>
+    </view>
+    <view>
+      <text>{{remainTimes}}</text>
+      <text>剩余总数</text>
+    </view>
+    <view>
+      <text>{{remainTong}}</text>
+      <text>通卡剩余</text>
+    </view>
+  </view>
+
   <view class='item' hover-class='active' bindtap='myserve'>
    我的预约
   </view>
 </view>
 
 <view class='footer'>
-  <view class='footer-phone' bindtap='makePhone' data-num='17087005000'>客服电话：400-12345678</view>
-  <view class='footer-time'>上班时间：09:00:00-18:00:00</view>
+  <view class='footer-phone' bindtap='makePhone' data-num='400-6321531'>客服电话：400-6321531</view>
+  <view class='footer-time'>客服时间：09:00 - 18:00 周一至周日</view>
 </view>
