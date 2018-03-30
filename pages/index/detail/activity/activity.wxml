@@ -1,8 +1,11 @@
+    <view class='head-cover'>
+<image src='http://ylbb-app-mobile01.oss-cn-beijing.aliyuncs.com/23289be3-58bd-405e-8ece-6e4a271fd95e.jpg'></image>
+</view>
 <view class='header'>
-  <view class='head-title'>暖冬游泳体验卡</view>
-  <view class='head-detail'>冬日游玩的好去处，宝宝早教+健身</view>
-  <view class='head-price'><view>¥59.9</view><view>¥159.9</view></view>
-  <view class='head-label'>3.5折</view>
+  <view class='head-title'>“鱼人游”超值体验卡</view>
+  <view class='head-detail'>服务包含：游泳+洗澡+抚触</view>
+  <view class='head-price'><view>¥39.9</view><view>¥198</view></view>
+  <view class='head-label'>2折</view>
 </view>
 
 
@@ -11,28 +14,28 @@
 
   <view class='detail-content'>
     <view class='detail-item'>
-      <view class='item-label'>有效期：</view>
-      <view class='item-content'>2016-10-13至2018-04-11</view>
+      <view class='item-label'></view>
+      <view class='item-content'>• 到店体验后在门店支付费用即可</view>    
     </view>
     <view class='detail-item'>
-      <view class='item-label'>使用时间：</view>
-      <view class='item-content'>09:30-17:30</view>
+  
+      <view class='item-content'>• 本次活动适用于0-3岁的宝宝</view>
     </view>
     <view class='detail-item'>
-      <view class='item-label'>预约信息：</view>
-      <view class='item-content'>请您提前1天预约</view>
+
+      <view class='item-content'>• 每张体验卡仅限1人使用</view>
     </view>
     <view class='detail-item'>
-      <view class='item-label'>使用限制</view>
-      <view class='item-content'>每张体验卡最多1人使用</view>
+
+      <view class='item-content'>• 体验卡仅限非门店会员首次体验使用</view>
     </view>
     <view class='detail-item'>
-      <view class='item-label'>适用人群：</view>
-      <view class='item-content'>年龄群体：0-6 只适用于初次到店会员</view>
+
+      <view class='item-content'>• 体验卡不再与其他优惠同享</view>
     </view>
     <view class='detail-item'>
-      <view class='item-label'>规则提醒：</view>
-      <view class='item-content'>不再与其他优惠同享</view>
+
+      <view class='item-content'>• 使用时间：10:00 - 17:00</view>
     </view>
   </view>
 </view>

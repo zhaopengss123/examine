@@ -64,9 +64,9 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "活动",
-					"pathName": "pages/activity/activity",
+					"pathName": "pages/index/detail/activity/activity",
 					"query": ""
 				},
 				{

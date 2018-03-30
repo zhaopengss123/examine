@@ -192,16 +192,7 @@ Page({
           data: status,
         });
 
-        var potentialMember;
-        if (res.result.potentialMember) {
-          potentialMember = res.result.potentialMember;
-        } else {
-          potentialMember = 0;
-        }
-        wx.setStorage({
-          key: 'potentialMember',
-          data: potentialMember,
-        });
+
 
         var isMember;
         if (res.result.isMember) {

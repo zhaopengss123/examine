@@ -35,6 +35,20 @@
     </view>
 
   </view>
+     <view class='activity'>
+    <view class='activity-title'>门店活动</view>
+    <view class='activity-content'>
+      <view class='activity-item'>
+        <navigator url="activity/activity" hover-class="active">
+          <view class='item-name'>“鱼人游”超值体验卡</view>
+          <view class='item-detail'>服务包含：游泳+洗澡+抚触</view>
+          <view class='item-price'>￥39.9</view>
+        </navigator>
+      </view>
+ 
+    </view>
+  </view>
+
 
   <!-- 详情 -->
   <view class='storeinfo'>

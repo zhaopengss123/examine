@@ -260,7 +260,7 @@ Page({
         if (res.result.potentialMember) {
           potentialMember = res.result.potentialMember;
         } else {
-          potentialMember = 0;
+          potentialMember = 1;
         }
         wx.setStorage({
           key: 'potentialMember',

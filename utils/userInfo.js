@@ -138,7 +138,7 @@ const GetOpenid = (callback) => {
       wx.login({
         success(res) {
           wx.request({
-            url: 'http://192.168.1.205:8800/user/judgeUserStatus',
+            url: 'http://kedd.beibeiyue.com/kb/manager/register',
             method: "GET",
             data: { code: res.code },
             dataType: 'json',
