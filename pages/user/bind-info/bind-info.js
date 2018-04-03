@@ -188,9 +188,6 @@ Page({
         }, _ => {
          wx.hideLoading();
        });
-   
-         
-      that.branchpost();
     
   },
   babyname(e) {
@@ -211,7 +208,7 @@ Page({
 
 
         Http.post('/user/judgeUserPhone', {
-          userPhone: that.data.phone,
+          userPhone: userphone,
         }).then(res => {
           if (res.result.potentialMember==0){
 
@@ -242,8 +239,5 @@ Page({
       wx.hideLoading();
     });
   },
-  userphone() {
-
-  }
 
 })

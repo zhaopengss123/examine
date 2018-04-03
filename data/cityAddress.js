@@ -13011,7 +13011,7 @@ const cityAddressItems = [
           }
         ],
         "value": "500100",
-        "label": "市辖区"
+        "label": "重庆市"
       },
       {
         "children": [
@@ -13124,32 +13124,7 @@ const cityAddressItems = [
         "value": "500200",
         "label": "县"
       },
-      {
-        "children": [
-          {
-            "value": "500381",
-            "label": "江津市",
-            isLeaf: true
-          },
-          {
-            "value": "500382",
-            "label": "合川市",
-            isLeaf: true
-          },
-          {
-            "value": "500383",
-            "label": "永川市",
-            isLeaf: true
-          },
-          {
-            "value": "500384",
-            "label": "南川市",
-            isLeaf: true
-          }
-        ],
-        "value": "500300",
-        "label": "重庆市"
-      }
+
     ],
     "value": "500000",
     "label": "重庆市"
