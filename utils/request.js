@@ -12,8 +12,6 @@
  */
 
 const Domain = 'https://swx.beibeiyue.com/ylbb_weixin';
-//const Domain = 'http://192.168.1.205:8800';
-
 const Get = (url, param) => {
   return new Promise((resolve, reject) => {
     let requestPath = url.substr(0, 4) === 'http' ? url : `${Domain}${url}`;

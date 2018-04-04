@@ -194,50 +194,7 @@ Page({
     this.setData({
       babyname: e.detail.value
     })
-  },
-  branchpost() {
-    let that = this;
-    Http.post('/user/getUserInfo', {
-      onlyId: that.data.openid,
-    }).then(res => {
-      wx.hideLoading();
-      if (res.code == 1000) {
-        var userphone = res.result.userPhone;
+  }
 
-        
-
-
-        Http.post('/user/judgeUserPhone', {
-          userPhone: userphone,
-        }).then(res => {
-          if (res.result.potentialMember==0){
-
-
-          Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
-            typeStyle: 1,
-            phone: userphone,
-            spreadId: '10000002',
-            babyName: that.data.babyname,
-          }).then(res => {
-          }, _ => {
-          });
-          }
-  
-
-        }, _ => {
-        });
-
-
-
-     
-
-
-
-      } else {
-      }
-    }, _ => {
-      wx.hideLoading();
-    });
-  },
 
 })
