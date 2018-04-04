@@ -16,35 +16,60 @@ Page({
     address: ['', '定位中', '']
   },
   onLoad: function () {
-  
+
+    this.getaddress();
+    var timestamp = Date.parse(new Date());
+    wx.setStorage({
+      key: 'shoplistdata',
+      data: timestamp,
+    })
   },
   onShow: function () {
     var that = this;
-    /*******************获取当前城市************************ */
+
+    that.getcode();
+    wx.getStorage({
+      key: 'shoplistdata',
+      success: function (res) {
+        var timestamp = Date.parse(new Date());
+        /*******************设置时间戳，十分钟更新一次列表************************ */
+        if (timestamp - res.data > (1000 * 60 * 10)) {
+          wx.setStorage({
+            key: 'shoplistdata',
+            data: timestamp,
+          });
+          that.getaddress();
+        }
+      },
+    })
+
+
+
+  },
+  /*******************下拉触底事件************************ */
+  onReachBottom: function () {
+    this.getStoreItems();
+  },
+  /*******************获取当前城市************************ */
+  getaddress() {
     User.getAddress(address => {
       this.setData({
         location: address.location,
         address: [address.address_component.province, address.address_component.city],
-        lon: address.location.lat,
-        lat: address.location.lng,
+        lat: address.location.lat,
+        lon: address.location.lng,
         province: address.address_component.province,
         city: address.address_component.city,
         area: null,
         pageNo: 1,
         storeItems: [],
-        district:null,
+        district: null,
       });
       this.getStoreItems();
-    });
-    that.getcode();
+    })
+  },
 
- 
-  },
-   /*******************下拉触底事件************************ */
-  onReachBottom: function () {
-    this.getStoreItems();
-  },
-   /*******************选择城市列表************************ */
+  /*******************选择城市列表************************ */
   bindRegionChange: function (e) {
     this.setData({
       address: e.detail.value
@@ -79,7 +104,7 @@ Page({
     });
     this.getStoreItems();
   },
-    /*******************向后台发送数据获取门店列表************************ */
+  /*******************向后台发送数据获取门店列表************************ */
   getStoreItems(param) {
     var paramJson;
     if (this.data.district) {
@@ -93,7 +118,7 @@ Page({
         pageSize: this.data.pageSize
       });
     } else {
-      
+
       var province = this.data.province;
       var city = this.data.city;
       var district = this.data.district;
@@ -117,7 +142,7 @@ Page({
       }
       paramJson = JSON.stringify({
         province: provincecode,
-        city : citycode,
+        city: citycode,
         lon: this.data.location.lng,
         lat: this.data.location.lat,
         pageNo: this.data.pageNo,
@@ -153,7 +178,7 @@ Page({
       wx.hideLoading();
     });
   },
-     /*******************获取用户状态************************ */
+  /*******************获取用户状态************************ */
   getcode() {
     let that = this;
     wx.login({
@@ -192,7 +217,16 @@ Page({
           data: status,
         });
 
-
+        var potentialMember;
+        if (res.result.potentialMember) {
+          potentialMember = res.result.potentialMember;
+        } else {
+          potentialMember = 0;
+        }
+        wx.setStorage({
+          key: 'potentialMember',
+          data: potentialMember,
+        });
 
         var isMember;
         if (res.result.isMember) {

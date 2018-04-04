@@ -35,7 +35,7 @@
     </view>
 
   </view>
-     <view class='activity'>
+     <!-- <view class='activity'>
     <view class='activity-title'>门店活动</view>
     <view class='activity-content'>
       <view class='activity-item'>
@@ -47,7 +47,7 @@
       </view>
  
     </view>
-  </view>
+  </view> -->
 
 
   <!-- 详情 -->
