@@ -2,7 +2,7 @@
   "pages": [
       "pages/index/index",
     "pages/index/detail/detail",
-
+    "pages/demo/demo",
     "pages/index/detail/activity/activity",
     "pages/user/user",
     "pages/user/bind-phone/bind-phone",

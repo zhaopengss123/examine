@@ -72,17 +72,33 @@
 
 
 .ipt-submit{
+  width: 600rpx;
   margin: 0 75rpx;
   margin-top: 50rpx;
   color: #fff;
-  font-size: 34rpx;
-  line-height: 110rpx;
   text-align: center;
+  line-height: 110rpx;
+  font-size: 34rpx;
+  height: 110rpx;
+  color: #fff;
   background: -webkit-gradient(linear, 0 0, right bottom, from(#FF998E), to(#FB6180));
   border-radius: 10rpx;
 }
 .ipt-submit.active{
   background: #DFDFDf;
+}
+form{ 
+  width: auto;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+button{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
 }
 
 .tip{

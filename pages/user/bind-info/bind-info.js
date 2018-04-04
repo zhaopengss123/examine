@@ -188,6 +188,7 @@ Page({
         }, _ => {
          wx.hideLoading();
        });
+  that.branchpost();
     
   },
   babyname(e) {
@@ -203,16 +204,10 @@ Page({
       wx.hideLoading();
       if (res.code == 1000) {
         var userphone = res.result.userPhone;
-
-        
-
-
         Http.post('/user/judgeUserPhone', {
           userPhone: userphone,
         }).then(res => {
           if (res.result.potentialMember==0){
-
-
           Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
             typeStyle: 1,
             phone: userphone,
@@ -226,13 +221,6 @@ Page({
 
         }, _ => {
         });
-
-
-
-     
-
-
-
       } else {
       }
     }, _ => {

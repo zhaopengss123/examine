@@ -21,13 +21,13 @@
 }
 .head-cover{
   background: #999;
-  height: 520.3125rpx;
+  height: 366rpx;
   overflow: hidden;
 
 }
 .head-cover image{
   width: 750rpx;
-  height: 520.3125rpx;
+  height: 366rpx;
 }
 .head-price{
   padding-top: 30rpx;

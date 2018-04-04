@@ -5,7 +5,7 @@ const userInfo = require('./../../utils/userInfo.js');
 Page({
   data: {
     userHeadImage: null,
-    userphone:'加载中...'
+    userphone: '加载中...'
   },
   onLoad: function (options) {
     var that = this;
@@ -44,20 +44,22 @@ Page({
         }, 1000);
       }
     });
-    wx.getStorage({   
+    wx.getStorage({
       key: 'memberId',
       success: function (res) {
         that.setData({
           memberId: res.data
         })
+
         if (that.data.memberId != 0) {
-          that.getCardDetail(that.data.memberId);
-        }  
+          that.getCardDetail();
+        }
       },
       fail: function () {
       }
     })
-    wx.getStorage({  
+
+    wx.getStorage({
       key: 'status',
       success: function (res) {
         if (res.data == 0) {
@@ -71,7 +73,7 @@ Page({
           wx.getStorage({
             key: 'baseInfo',
             success: function (res) {
-              if (res.data == 0 || !res.data) { 
+              if (res.data == 0 || !res.data) {
                 setTimeout(function () {
                   wx.navigateTo({
                     url: '../user/bind-info/bind-info?page=2',
@@ -87,11 +89,11 @@ Page({
       },
 
     });
-    wx.getStorage({ 
+    wx.getStorage({
       key: 'userphone',
       success: function (res) {
         that.setData({
-            userphone:res.data,
+          userphone: res.data,
         })
       },
       fail: function () {
@@ -117,29 +119,29 @@ Page({
           })
         }, 1000);
       }
-    }); 
+    });
   },
   onHide: function () {
-  
+
   },
-onUnload: function () {
-  
+  onUnload: function () {
+
   },
   onPullDownRefresh: function () {
-  
+
   },
   onReachBottom: function () {
-  
+
   },
   onShareAppMessage: function () {
-  
+
   },
   makePhone(e) {
     wx.makePhoneCall({
       phoneNumber: e.target.dataset.num
     })
   },
-  myserve (){
+  myserve() {
     app.globalData.opentest = 1;
     wx.switchTab({
       url: '../serve/serve',
@@ -151,21 +153,21 @@ onUnload: function () {
       title: '加载中...',
     })
     Http.post('/user/getUserInfo', {
-        onlyId: that.data.openid,
+      onlyId: that.data.openid,
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-       
+
         var userphone = res.result.userPhone;
         var phonenum = userphone.substring(3, 7);
-        userphone = userphone.replace(phonenum,'****');
+        userphone = userphone.replace(phonenum, '****');
         that.setData({
           userphone: userphone
         });
         wx.setStorage({
           key: 'userphone',
           data: userphone,
-        });      
+        });
       } else {
       }
     }, _ => {
@@ -183,7 +185,7 @@ onUnload: function () {
       wx.hideLoading();
       if (res.code == 1000) {
         that.setData({
-          tongMember:1,
+          tongMember: 1,
           totalTimes: res.result.totalTimes,
           remainTimes: res.result.remainTimes,
           remainTong: res.result.remainTong

@@ -191,12 +191,12 @@ Page({
     }, 1000);
   },
    /*********点击发送验证码验证*************/
-  getphonesuccess() {
+  getphonesuccess(e) {
     var that = this;
+    var formId = e.detail.formId; //获取formid
     if (that.data.codeInput) {
-
       if (that.data.codeInput == that.data.verificationCode) {
-        that.orbind();
+        that.orbind(formId);
       } else {
         wx.showToast({
           icon: "none",
@@ -211,7 +211,7 @@ Page({
     }
   },
    /**********绑定手机************/
-  orbind() {
+  orbind(formId) {
     var that = this;
     if (that.data.manphone != that.data.phone) {
       wx.showToast({
@@ -398,7 +398,7 @@ Page({
           }
         }
       } else {
-        console.log(res);
+       
       }
     }, _ => {
       wx.hideLoading();

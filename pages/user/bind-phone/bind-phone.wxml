@@ -1,3 +1,4 @@
+
 <view class='logo'>
    <image src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/logo-large.png' mode='widthFix'></image> 
 </view>
@@ -11,6 +12,10 @@
   </view>
 </view>
 
-<view class='ipt-submit' hover-class='active'  bindtap='getphonesuccess'>提交</view>
+ <form bindsubmit="getphonesuccess" report-submit='true' >
+<view class='ipt-submit'>提交</view>
+  <button class='ipt-submit' hover-class='active' form-type="submit" type="default" size="mini">提交</button>
+  </form>
+
 
 <view class='tip'>*若您输入的手机号未注册，将会进入注册流程</view>
