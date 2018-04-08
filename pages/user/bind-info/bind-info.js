@@ -153,48 +153,90 @@ Page({
     })
     var relationship = this.data.relationshipArray[this.data.relationshipIndex];
     var birthday = this.data.birthday;
+    // Http.post('/user/saveUserBaseInfo', { 
+    //   paramJson: JSON.stringify({
+    //     onlyId: this.data.openid,
+    //     nickName: this.data.babyname,
+    //     relationship: relationship,
+    //     birthday: birthday
+    //    })
+    //    }).then(res => {
+    //   wx.hideLoading();
+    //   if (res.code == 1000) {
+    //     wx.setStorage({
+    //       key: 'baseInfo',
+    //       data: 1,
+    //     });
 
-    Http.post('/user/saveUserBaseInfo', { 
-      paramJson: JSON.stringify({
-        onlyId: this.data.openid,
-        nickName: this.data.babyname,
-        relationship: relationship,
-        birthday: birthday
-       })
-       }).then(res => {
-      wx.hideLoading();
-      if (res.code == 1000) {
-        wx.setStorage({
-          key: 'baseInfo',
-          data: 1,
-        });
+    //     if (that.data.shopId && that.data.page=="1"){
+    //       wx.redirectTo({
+    //         url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId+'&page'+that.data.page,
+    //       })
+    //     } else if (that.data.page == "2"){
 
-        if (that.data.shopId && that.data.page=="1"){
-          wx.redirectTo({
-            url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId+'&page'+that.data.page,
-          })
-        } else if (that.data.page == "2"){
-
-          wx.switchTab({
-            url: '../../serve/serve',
-          })
-        } else if (that.data.page == "3"){
-          wx.switchTab({
-            url: '../user',
-          })   
-        }
-       } else {
-       }
-        }, _ => {
-         wx.hideLoading();
-       });
-    
+    //       wx.switchTab({
+    //         url: '../../serve/serve',
+    //       })
+    //     } else if (that.data.page == "3"){
+    //       wx.switchTab({
+    //         url: '../user',
+    //       })   
+    //     }
+    //    } else {
+    //    }
+    //     }, _ => {
+    //      wx.hideLoading();
+    //    });
+    that.branchpost();
   },
   babyname(e) {
     this.setData({
       babyname: e.detail.value
     })
-  }
+  },
+  branchpost() {
+    let that = this;
+    Http.post('/user/getUserInfo', {
+      onlyId: that.data.openid,
+    }).then(res => {
+      wx.hideLoading();
+      if (res.code == 1000) {
+        var userphone = res.result.userPhone;
+        Http.post('/user/judgeUserPhone', {
+          userPhone: userphone,
+        }).then(res => {
+          let birthday = that.data.birthday+'';
+
+          // if (res.result.potentialMember == 0) {
+          //   Http.post('http://192.168.1.123:8090/manager/register', {
+          //     typeStyle: 1,
+          //     phone: userphone,
+          //     spreadId: '10000002',
+          //     babyName: that.data.babyname,
+          //   }).then(res => {
+          //   }, _ => {
+          //   });
+          // }
+
+               Http.post('http://192.168.1.123:8090/manager/register', {
+              typeStyle: 1,
+              phone: '15922225656',
+              spreadId: '10000002',
+              birthday: birthday,
+              babyName: that.data.babyname,
+            }).then(res => {
+            }, _ => {
+            });
+
+
+        }, _ => {
+        });
+      } else {
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+  },
 
 
 })
