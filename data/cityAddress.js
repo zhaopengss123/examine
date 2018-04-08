@@ -96,6 +96,22 @@ const cityAddressItems = [
         ],
         "value": "110100",
         "label": "北京市"
+      },
+      {
+        "children": [
+          {
+            "value": "110228",
+            "label": "密云县",
+            isLeaf: true
+          },
+          {
+            "value": "110229",
+            "label": "延庆县",
+            isLeaf: true
+          }
+        ],
+        "value": "110100",
+        "label": "县"
       }
     ],
     "value": "110000",
