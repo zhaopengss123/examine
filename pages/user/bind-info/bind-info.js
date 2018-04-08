@@ -188,7 +188,7 @@ Page({
         }, _ => {
          wx.hideLoading();
        });
-  that.branchpost();
+    that.branchpost();
     
   },
   babyname(e) {

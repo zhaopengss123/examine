@@ -194,7 +194,9 @@ Page({
   getphonesuccess(e) {
     var that = this;
     var formId = e.detail.formId; //获取formid
+  
     if (that.data.codeInput) {
+
       if (that.data.codeInput == that.data.verificationCode) {
         that.orbind(formId);
       } else {
@@ -398,7 +400,7 @@ Page({
           }
         }
       } else {
-       
+        console.log(res);
       }
     }, _ => {
       wx.hideLoading();

@@ -91,7 +91,6 @@ form{
   width: auto;
   overflow: hidden;
   position: relative;
-  display: block;
 }
 button{
   position: absolute;

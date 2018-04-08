@@ -7,7 +7,7 @@
 
 
   <view class='content'>
-    <view class='title'></view>
+    <view class='title'>“非常满意，会推荐给朋友”</view>
 
     <view class='score'>
       <image style='display: none;' src='http://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/score-active.png'></image>
@@ -27,7 +27,6 @@
         <label class="{{ scoreNum >= 5 ? 'active' : '' }}">
           <radio value="5" style='display: none;'/>
         </label>
-        
       </radio-group>
     </view>
 
@@ -41,6 +40,6 @@
   </view>
 
 
-  <view class='submit' hover-class='active'>提交评价</view>
+  <view class='submit' hover-class='active'>确认打赏{{ scoreCheck }}|{{ scoreCheck.join('++') }}</view>
 
 </scroll-view>
