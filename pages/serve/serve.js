@@ -24,7 +24,7 @@ Page({
       });
     }
     this.onopenshow();
-    wx.getStorage({  
+    wx.getStorage({
       key: 'status',
       success: function (res) {
         if (res.data == 0) {
@@ -39,7 +39,7 @@ Page({
           wx.getStorage({
             key: 'baseInfo',
             success: function (res) {
-              if (res.data == 0 || !res.data) {  
+              if (res.data == 0 || !res.data) {
                 setTimeout(function () {
                   wx.navigateTo({
                     url: '../user/bind-info/bind-info?page=2',
@@ -53,8 +53,8 @@ Page({
       },
     });
   },
-     /**********判断缓存是否失效**********/
-  onopenshow() { 
+  /**********判断缓存是否失效**********/
+  onopenshow() {
     var that = this;
     wx.getStorage({
       key: 'openid',
@@ -89,6 +89,7 @@ Page({
             }, 1500);
           }
         });
+
       },
       fail: function () {
         that.getcode();
@@ -130,6 +131,7 @@ Page({
         }, 1500);
       }
     });
+
   },
   swichNav(e) {
     let that = this;
@@ -158,10 +160,11 @@ Page({
   },
   updateTime() {
   },
-     /**********全部**********/
-  postlistallfei() { 
+  /**********全部**********/
+  postlistallfei() {
     var that = this;
-    if (!that.data.isMember) { 
+    if (!that.data.isMember) {
+
       wx.showLoading({
         title: '加载中...',
       })
@@ -173,8 +176,30 @@ Page({
         })
       }).then(res => {
         wx.hideLoading();
-        if (res.code == 1000&&res.result.list) {
+        if (res.code == 1000 && res.result.list) {
           let arrays = res.result.list;
+          let arr1 = []; //待服务
+          let arr2 = []; //已完成
+          let arr3 = []; //已取消
+          for (let i = 0; i < arrays.length; i++) {
+            if (arrays[i].reserveStatus == 0) {
+              arr1.push(arrays[i]);
+            } else if (arrays[i].reserveStatus == 1) {
+              arr2.push(arrays[i]);
+            } else {
+              arr3.push(arrays[i]);
+            }
+          }
+          arrays = [];
+          for (let i = 0; i < arr1.length; i++) {
+            arrays.push(arr1[i]);
+          }
+          for (let i = 0; i < arr2.length; i++) {
+            arrays.push(arr2[i]);
+          }
+          for (let i = 0; i < arr3.length; i++) {
+            arrays.push(arr3[i]);
+          }
           for (var i = 0; i < arrays.length; i++) {
             let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
             arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
@@ -188,7 +213,8 @@ Page({
       }, _ => {
         wx.hideLoading();
       });
-    } else {
+    } else {     /**********全部会员列表**********/
+
       wx.showLoading({
         title: '加载中...',
       })
@@ -203,9 +229,33 @@ Page({
 
         if (res.code == 1000 && res.result.list) {
           let arrays = res.result.list;
-          for (var i = 0; i < arrays.length; i++) {
-            let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
-            arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
+          let arr1 = []; //待服务
+          let arr2 = []; //已完成
+          let arr3 = []; //已取消
+          for (let i = 0; i < arrays.length; i++) {
+            if (arrays[i].reserveStatus == 0) {
+              arr1.push(arrays[i]);
+            } else if (arrays[i].reserveStatus == 1) {
+              arr2.push(arrays[i]);
+            } else {
+              arr3.push(arrays[i]);
+            }
+          }
+          arrays = [];
+          for (let i = 0; i < arr1.length; i++) {
+            arrays.push(arr1[i]);
+          }
+          for (let i = 0; i < arr2.length; i++) {
+            arrays.push(arr2[i]);
+          }
+          for (let i = 0; i < arr3.length; i++) {
+            arrays.push(arr3[i]);
+          }
+          for (let i = 0; i < arrays.length; i++) {
+            arrays[i].reserveDate = arrays[i].time;
+            if (arrays[i].reserveStatus != 0 && arrays[i].reserveStatus != 1) {
+              arrays[i].reserveStatus = 2;
+            }
           }
           that.setData({
             arrays: arrays
@@ -220,10 +270,10 @@ Page({
     }
   },
   /**********待服务**********/
-  postlistallfei1() { 
+  postlistallfei1() {
     var that = this;
 
-    if (!that.data.isMember) {  
+    if (!that.data.isMember) {
       wx.showLoading({
         title: '加载中...',
       })
@@ -238,6 +288,7 @@ Page({
         wx.hideLoading();
         if (res.code == 1000) {
           let arrays = res.result.list;
+
           for (var i = 0; i < arrays.length; i++) {
             let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
             arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
@@ -245,7 +296,7 @@ Page({
           that.setData({
             arrays1: arrays
           })
- 
+
 
         } else {
 
@@ -257,23 +308,21 @@ Page({
       wx.showLoading({
         title: '加载中...',
       })
-      Http.post('/reserve/reserveList', {
+      Http.post('/reserve/reserveListForService', {
         paramJson: JSON.stringify({
           memberId: that.data.memberId,
-          reserveStatus: 0,
-          pageNo: 1,
-          pageSize: 99
+
         })
       }).then(res => {
         wx.hideLoading();
 
         if (res.code == 1000) {
           let arrays = res.result.list;
+
           for (var i = 0; i < arrays.length; i++) {
             let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
             arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
           }
-       
           that.setData({
             arrays1: arrays
           })
@@ -304,6 +353,8 @@ Page({
         wx.hideLoading();
         if (res.code == 1000) {
           let arrays = res.result.list;
+
+
           for (var i = 0; i < arrays.length; i++) {
             let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
             arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
@@ -322,12 +373,10 @@ Page({
       wx.showLoading({
         title: '加载中...',
       })
-      Http.post('/reserve/reserveList', {
+      Http.post('/reserve/reserveListComplete', {
         paramJson: JSON.stringify({
           memberId: that.data.memberId,
-          reserveStatus: 2,
-          pageNo: 1,
-          pageSize: 99
+
         })
       }).then(res => {
         wx.hideLoading();
@@ -335,9 +384,12 @@ Page({
         if (res.code == 1000) {
 
           let arrays = res.result.list;
-          for (var i = 0; i < arrays.length; i++) {
-            let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
-            arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
+
+          for (let i = 0; i < arrays.length; i++) {
+            arrays[i].reserveDate = arrays[i].time;
+            if (arrays[i].reserveStatus != 0 && arrays[i].reserveStatus != 1) {
+              arrays[i].reserveStatus = 2;
+            }
           }
           that.setData({
             arrays2: arrays
@@ -362,32 +414,32 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-      setTimeout(function(){
-        if (that.data.currentTab == 0) {
-          that.postlistallfei();
-        } else if (that.data.currentTab == 1) {
-          that.postlistallfei1();
-        } else if (that.data.currentTab == 2) {
-          that.postlistallfei2();
-        }
-      }, 1500);
+        setTimeout(function () {
+          if (that.data.currentTab == 0) {
+            that.postlistallfei();
+          } else if (that.data.currentTab == 1) {
+            that.postlistallfei1();
+          } else if (that.data.currentTab == 2) {
+            that.postlistallfei2();
+          }
+        }, 1500);
         var info = res.info;
         wx.showToast({
           title: info,
           icon: 'none',
           duration: 2000
-          
+
         })
       } else {
         var info = res.info;
         setTimeout(function () {
-        if (that.data.currentTab == 0) {
-          that.postlistallfei();
-        } else if (that.data.currentTab == 1) {
-          that.postlistallfei1();
-        } else if (that.data.currentTab == 2) {
-          that.postlistallfei2();
-        }
+          if (that.data.currentTab == 0) {
+            that.postlistallfei();
+          } else if (that.data.currentTab == 1) {
+            that.postlistallfei1();
+          } else if (that.data.currentTab == 2) {
+            that.postlistallfei2();
+          }
         }, 1500);
         wx.showModal({
           title: '提示',
@@ -417,14 +469,14 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-        setTimeout(function(){
-        if (that.data.currentTab == 0) {
-          that.postlistallfei();
-        } else if (that.data.currentTab == 1) {
-          that.postlistallfei1();
-        } else if (that.data.currentTab == 2) {
-          that.postlistallfei2();
-        }
+        setTimeout(function () {
+          if (that.data.currentTab == 0) {
+            that.postlistallfei();
+          } else if (that.data.currentTab == 1) {
+            that.postlistallfei1();
+          } else if (that.data.currentTab == 2) {
+            that.postlistallfei2();
+          }
         }, 1500);
         var info = res.info;
         wx.showToast({
@@ -435,13 +487,13 @@ Page({
       } else {
         var info = res.info;
         setTimeout(function () {
-        if (that.data.currentTab == 0) {
-          that.postlistallfei();
-        } else if (that.data.currentTab == 1) {
-          that.postlistallfei1();
-        } else if (that.data.currentTab == 2) {
-          that.postlistallfei2();
-        }
+          if (that.data.currentTab == 0) {
+            that.postlistallfei();
+          } else if (that.data.currentTab == 1) {
+            that.postlistallfei1();
+          } else if (that.data.currentTab == 2) {
+            that.postlistallfei2();
+          }
         }, 1500);
         wx.showModal({
           title: '提示',
