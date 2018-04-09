@@ -12,6 +12,7 @@
  */
 
 const Domain = 'https://swx.beibeiyue.com/ylbb_weixin';
+
 const Get = (url, param) => {
   return new Promise((resolve, reject) => {
     let requestPath = url.substr(0, 4) === 'http' ? url : `${Domain}${url}`;
