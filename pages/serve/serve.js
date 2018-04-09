@@ -273,6 +273,7 @@ Page({
             let arrayss = arrays[i].rHour + ':' + arrays[i].rMinute;
             arrays[i].reserveDate = arrays[i].reserveDate.replace('00:00:00', arrayss);
           }
+       
           that.setData({
             arrays1: arrays
           })
