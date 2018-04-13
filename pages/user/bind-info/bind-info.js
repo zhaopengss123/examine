@@ -16,12 +16,24 @@ Page({
         userInfo: userInfo
       })
     });
-
+    let activityType = "0";
+    let discountPrice = 0;
+    let price = 0;
+    let activityId = 0;
+   
+    if (options.discountPrice) {
+      discountPrice = options.discountPrice;
+      price = options.price;
+      activityId = options.activityId;
+    }
 
     if (options.shopId) {
       this.setData({
         shopId: options.shopId,
-        page: options.page
+        page: options.page,
+        discountPrice : options.discountPrice,
+        price : options.price,
+        activityId : options.activityId,
       })
     } else {
       this.setData({
@@ -30,7 +42,7 @@ Page({
     }
     User.getUserInfo(res => {
       if (res.rawData) {
-        let info = JSON.parse(res.rawData); 
+        let info = JSON.parse(res.rawData);
         if (info.avatarUrl) {
           this.setData({
             userHeadImg: info.avatarUrl
@@ -39,10 +51,10 @@ Page({
       }
     });
     wx.getStorage({
-      key: 'openid',
+      key: 'baseInfo',
       success: function (res) {
         that.setData({
-          openid: res.data
+          baseInfo: res.data
         })
       },
       fail: function () {
@@ -58,6 +70,16 @@ Page({
         }, 1000);
       }
     });
+
+    wx.getStorage({
+      key: 'openid',
+      success: function (res) {
+        that.setData({
+          openid: res.data
+        })
+      }
+    });
+
     wx.getStorage({
       key: 'isMember',
       success: function (res) {
@@ -93,6 +115,8 @@ Page({
   },
   onReady: function () {
 
+ 
+ 
   },
 
   onShow: function () {
@@ -104,7 +128,9 @@ Page({
   },
 
   onUnload: function () {
-
+    wx.navigateBack({
+      delta: 1
+    })
   },
 
   onPullDownRefresh: function () {
@@ -151,16 +177,32 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
+    if (that.data.baseInfo!=0){
+      wx.showToast({
+        icon: "none",
+        title: '您不能重复绑定信息',
+      })
+      setTimeout(function () {
+        wx.switchTab({
+          url: '../../index/index',
+        })
+      }, 2000);
+      
+      return false;
+    }
+    
+
+
     var relationship = this.data.relationshipArray[this.data.relationshipIndex];
     var birthday = this.data.birthday;
-    Http.post('/user/saveUserBaseInfo', { 
+    Http.post('/user/saveUserBaseInfo', {
       paramJson: JSON.stringify({
         onlyId: this.data.openid,
         nickName: this.data.babyname,
         relationship: relationship,
         birthday: birthday
-       })
-       }).then(res => {
+      })
+    }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
         wx.setStorage({
@@ -168,25 +210,33 @@ Page({
           data: 1,
         });
 
-        if (that.data.shopId && that.data.page=="1"){
-          wx.redirectTo({
-            url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId+'&page'+that.data.page,
+        if (that.data.shopId && that.data.page == "1") {
+          if (that.data.discountPrice == 0) {
+            wx.navigateTo({
+            url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId + '&page' + that.data.page,
           })
-        } else if (that.data.page == "2"){
+          }else{
+            wx.navigateTo({
+              url: '../../index/detail/activity/activity?shopId=' + that.data.shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId+'&ym=1',//跳转活动详情页面
+            })
 
+
+
+          }
+        } else if (that.data.page == "2") {
           wx.switchTab({
             url: '../../serve/serve',
           })
-        } else if (that.data.page == "3"){
+        } else if (that.data.page == "3") {
           wx.switchTab({
             url: '../user',
-          })   
+          })
         }
-       } else {
-       }
-        }, _ => {
-         wx.hideLoading();
-       });
+      } else {
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
     that.branchpost();
   },
   babyname(e) {
@@ -201,27 +251,27 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-        var userphone = res.result.userPhone+'';
+        var userphone = res.result.userPhone + '';
         Http.post('/user/judgeUserPhone', {
           userPhone: userphone,
         }).then(res => {
-          let birthday = that.data.birthday+'';
+          let birthday = that.data.birthday + '';
           that.setData({
             succ: res.result.potentialMember
-              })
+          })
 
           if (res.result.potentialMember == 0) {
 
-              Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
+            Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
               typeStyle: 1,
               phone: userphone,
               spreadId: '10000002',
-                birthday: birthday,
+              birthday: birthday,
               babyName: that.data.babyname,
             }).then(res => {
 
             }, _ => {
-       
+
             });
           }
         }, _ => {

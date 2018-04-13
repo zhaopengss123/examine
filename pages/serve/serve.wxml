@@ -19,18 +19,21 @@
           <view class='item-detail'>
               <!-- <navigator hover-class='active' url='serve-details/serve-details?severid={{item.id}}&status={{item.reserveStatus}}'>   -->
               <view class='fwlist'>
-
-                <view class='item-detail-image'><image mode="widthFix" src="{{item.shopCoverImag}}"></image></view>  
+               <view class='item-detail-image'><image mode="widthFix" src="{{item.shopCoverImag}}"></image></view> 
               <view class='item-detail-title'></view>
-              <view>{{item.reserveStatus==0||item.reserveStatus==1?'预约':'消费'}}：{{item.reserveDate}}</view>
-              <view>类型：{{item.typeName}}</view>
+              <view>时间：{{item.reserveDate}}</view>
+              <view>类型：婴幼儿游泳</view>
               <view>老师：{{item.teacher}}</view>
              </view>
               <!-- </navigator>   -->
           </view>
-          <view class='item-footer' wx:if='{{item.reserveStatus==0}}'>
+            <view class='item-footer'  wx:if='{{item.reserveStatus==0}}' >  
+              <!-- wx:if='{{item.reserveStatus==0}}' -->
             <view class='item-btns'>
-              <view class='item-btn' hover-class="active"  bindtap='cancel' data-id="{{item.id}}">取消预约</view>
+              <form bindsubmit="cancel" data-id="{{item.id}}" report-submit='true' >
+              <view class='item-btn' hover-class="active">取消预约</view>
+              <button class='ipt-submit' hover-class='active'  form-type="submit" type="default" size="mini">提交</button>
+              </form>
             </view>
           </view>
         </view>
@@ -55,7 +58,7 @@
             <view class='fwlist'>
                <view class='item-detail-image'><image mode="widthFix" src="{{item.shopCoverImag}}"></image></view> 
               <view class='item-detail-title'></view>
-              <view>{{item.reserveStatus==0||item.reserveStatus==1?'预约':'消费'}}：{{item.reserveDate}}</view>
+              <view>时间：{{item.reserveDate}}</view>
               <view>类型：婴幼儿游泳</view>
               <view>老师：{{item.teacher}}</view>
              </view>
@@ -63,7 +66,10 @@
           </view>
           <view class='item-footer' wx:if='{{item.reserveStatus==0}}'>
             <view class='item-btns'>
-              <view class='item-btn' hover-class="active"  bindtap='cancel' data-id="{{item.id}}">取消预约</view>
+              <form bindsubmit="cancel" report-submit='true' >
+              <view class='item-btn' hover-class="active">取消预约</view>
+              <button class='ipt-submit' hover-class='active' data-id="{{item.id}}" form-type="submit" type="default" size="mini">提交</button>
+              </form>
             </view>
           </view>
         </view>
@@ -88,8 +94,8 @@
           <view class='fwlist'>
                <view class='item-detail-image'><image mode="widthFix" src="{{item.shopCoverImag}}"></image></view> 
               <view class='item-detail-title'></view>
-              <view>{{item.reserveStatus==0||item.reserveStatus==1?'预约':'消费'}}：{{item.reserveDate}}</view>
-              <view>类型：{{item.typeName}}</view>
+              <view>时间：{{item.reserveDate}}</view>
+              <view>类型：婴幼儿游泳</view>
               <view>老师：{{item.teacher}}</view>
              </view>
             <!-- </navigator> -->

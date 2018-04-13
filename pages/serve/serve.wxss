@@ -193,7 +193,7 @@ page{
   padding-top: 18rpx;
   height: 66rpx;
 }
-.item-btns > view{
+.item-btns  view{
   display: inline-block;
   vertical-align: top;
   padding: 0 15rpx;
@@ -205,6 +205,12 @@ page{
   border-width: 1px;
   border-radius: 8rpx;
   transition: all .15s;
+}
+form{
+  width: auto;
+  overflow: hidden;
+  position: relative;
+  display: block;
 }
 .item-btn{
   color: rgb(161,161,161);
@@ -222,6 +228,17 @@ page{
   font-size: 28rpx;
   border-color: #F38A03;
 }
+.ipt-submit{
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  opacity: 0;
+}
+
 .item-btn-active.active{
   color: #fff;
   background: #F38A03;

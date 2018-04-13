@@ -1,4 +1,5 @@
 const Http = require('./../../../utils/request.js');
+let set ;
 Page({
   data: {
     phone: null,
@@ -27,7 +28,27 @@ Page({
         page: options.page,
         shopId: ''
       })
+    };
+
+
+
+
+    let activityType = "0";
+    let discountPrice = 0;
+    let price = 0;
+    let activityId = 0;
+    if (options.discountPrice) {
+      discountPrice = options.discountPrice;
+      price = options.price;
+      activityId = options.activityId;
     }
+    that.setData({
+      discountPrice: options.discountPrice,
+      price: options.price,
+      activityId: options.activityId,
+    })
+   
+
     wx.getStorage({
       key: 'openid',
       success: function (res) {
@@ -48,6 +69,16 @@ Page({
         }, 2000);
       }
     });
+    wx.getStorage({
+      key: 'status',
+      success: function (res) {
+        that.setData({
+          status: res.data,
+        });
+      }
+    });
+
+
     if (that.data.page == 1) {
       wx.getStorage({
         key: 'countryCardStatus',
@@ -130,8 +161,8 @@ Page({
   },
 
   onShow: function () {
-    let that = this;0
-    setTimeout(function () {
+    let that = this;
+     set = setTimeout(function () {
       that.setData({
         disabled:true
       });
@@ -156,8 +187,8 @@ Page({
   },
 
   onUnload: function () {
-
-  },
+    clearTimeout(set);
+  },  
 
   onPullDownRefresh: function () {
 
@@ -191,12 +222,25 @@ Page({
     }, 1000);
   },
    /*********点击发送验证码验证*************/
-  getphonesuccess() {
+  getphonesuccess(e) {
     var that = this;
+    var formId = e.detail.formId; //获取formid
     if (that.data.codeInput) {
-
       if (that.data.codeInput == that.data.verificationCode) {
-        that.orbind();
+
+        if(that.data.status==1){
+          wx.showToast({
+            icon: "none",
+            title: '您不能重复绑定手机',
+          })
+          setTimeout(function () {
+            wx.switchTab({
+              url: '../../index/index',
+            })
+          }, 2000);
+          return false;
+        }
+        that.orbind(formId);
       } else {
         wx.showToast({
           icon: "none",
@@ -211,7 +255,7 @@ Page({
     }
   },
    /**********绑定手机************/
-  orbind() {
+  orbind(formId) {
     var that = this;
     if (that.data.manphone != that.data.phone) {
       wx.showToast({
@@ -224,6 +268,7 @@ Page({
       paramJson: JSON.stringify({
         onlyId: this.data.openid,
         userPhone: this.data.phone,
+        formId:formId,
       })
     }).then(res => {
       wx.hideLoading();
@@ -250,6 +295,7 @@ Page({
   },
    /**********判断手机号是不是会员，有没有绑定************/
   UserPhone() {
+  
     let that = this;
     Http.post('/user/judgeUserPhone', {
       userPhone: that.data.phone
@@ -285,9 +331,9 @@ Page({
             baseInfo: 1
           })
         } else {
-          var baseInfo;
+          var baseInfo = "";
           if (res.result.baseInfo) {
-            baseInfo = baseInfo;
+            baseInfo = res.result.baseInfo;
           } else {
             baseInfo = 0;
           }
@@ -295,9 +341,11 @@ Page({
             key: 'baseInfo',
             data: baseInfo,
           });
+          
           that.setData({
             baseInfo: baseInfo
           })
+         
         }
         var tongMember;
         if (res.result.tongMember) {
@@ -342,11 +390,11 @@ Page({
                   content: '当前门店不是您的会员店',
                   success: function (res) {
                     if (res.confirm) {
-                      wx.redirectTo({
+                      wx.switchTab({
                         url: '../../index/index',
                       })
                     } else if (res.cancel) {
-                      wx.redirectTo({
+                      wx.switchTab({
                         url: '../../index/index',
                       })
                     }
@@ -364,11 +412,11 @@ Page({
                 content: '当前门店不是通卡店',
                 success: function (res) {
                   if (res.confirm) {
-                    wx.redirectTo({
+                    wx.switchTab({
                       url: '../../index/index',
                     })
                   } else if (res.cancel) {
-                    wx.redirectTo({
+                    wx.switchTab({
                       url: '../../index/index',
                     })
                   }
@@ -377,15 +425,29 @@ Page({
             }
           }
         };
+    
+       
         if (that.data.baseInfo == 0 || !that.data.baseInfo) {
+          if (that.data.discountPrice == 0) {
           wx.navigateTo({
             url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page,
           })
+          }else{
+            wx.navigateTo({
+              url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId + '&ym=1',//跳转绑定信息页面带参数,
+            })
+          }
         } else {
           if (that.data.page == 1) {
-            wx.redirectTo({
-              url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page=' + this.data.page,
-            })
+            if (that.data.discountPrice==0){
+              wx.navigateTo({
+                url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page=' + this.data.page,
+              })
+            }else{
+              wx.navigateTo({
+                url: '../../index/detail/activity/activity?shopId=' + that.data.shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId + '&ym=1',//跳转活动详情页面
+              })
+            }
           } else if (that.data.page == 2) {
             wx.switchTab({
               url: '../../serve/serve',
@@ -398,13 +460,15 @@ Page({
           }
         }
       } else {
-        console.log(res);
+       
       }
     }, _ => {
       wx.hideLoading();
     });
-  }
-
+  },
+aaasss(){
+  this.UserPhone();
+}
 
 
 })

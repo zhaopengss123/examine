@@ -1,14 +1,17 @@
     <view class='head-cover'>
-<image src='http://ylbb-app-mobile01.oss-cn-beijing.aliyuncs.com/23289be3-58bd-405e-8ece-6e4a271fd95e.jpg'></image>
+<image wx:if='{{discountPrice==39.9}}' src='https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/activity-topimg.png'></image>
+<image wx:if='{{discountPrice==29.9}}' src='https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/activity-topimg1.jpg'></image>
 </view>
 <view class='header'>
   <view class='head-title'>“鱼人游”超值体验卡</view>
   <view class='head-detail'>服务包含：游泳+洗澡+抚触</view>
-  <view class='head-price'><view>¥39.9</view><view>¥198</view></view>
-  <view class='head-label'>2折</view>
+  <view class='head-price'><view>¥{{discountPrice}}</view><view>¥{{price}}</view></view>
+  <view class='head-label' bindtap='onShareAppMessage'>{{agio}}折</view>
 </view>
-
-
+<!-- 
+<form>
+    <button  open-type='share'>点击</button>
+</form> -->
 <view class='detail'>
   <view class='detail-title'>购买须知</view>
 
@@ -43,5 +46,23 @@
 
 <view class='footer'>
   <view class='btn-info'>免费预约，给宝宝最好的服务</view>
-  <view class='footer-btn' hover-class='active'>去预约时间</view>
+  <view class='footer-btn' bindtap='reservation' hover-class='active'>去预约时间</view>
+</view>
+<view class='showfx' wx-if="{{showx}}" >
+      <view class='showfxmain'>
+          <view class='showfxbg'></view>
+            <view class='showfxcontent'>
+                <view class='showfxtitle'>温馨提示</view>
+                <view class='showfxnr' style='color:red'>{{textshow1}}</view>
+                <view class='showfxnr'>{{textshow2}}</view>
+                <!-- <view class='showfxbtn'><button>取消</button><button>分享</button></view> -->
+                 <view class='showfxbtn'>
+                      <view class='fxbtn' bindtap='hidefx'>取消</view>
+                      <view class='fxbtn' bindtap='onclick'>
+                      分享
+                      <button open-type='share'  >点击</button>
+                      </view>
+                  </view>
+            </view>
+      </view>
 </view>

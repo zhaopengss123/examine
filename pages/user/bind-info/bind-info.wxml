@@ -13,7 +13,6 @@
       <view class='notSelect' wx:if="{{ !birthday }}">宝宝生日</view>
     </picker>
   </view>
-
   <view class='item'>
     <picker bindchange="relationshipChange" value="{{relationshipIndex}}" range="{{relationshipArray}}">
       <view class='select' wx:if="{{ relationshipArray[relationshipIndex] }}">{{ relationshipArray[relationshipIndex] }}</view>

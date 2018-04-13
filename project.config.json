@@ -11,6 +11,11 @@
 	"libVersion": "1.9.1",
 	"appid": "wx15bc903bd3ce9d4a",
 	"projectname": "%E9%B1%BC%E4%B9%90%E8%B4%9D%E8%B4%9D",
+	"svr": "",
+	"client": "",
+	"qcloudRoot": "",
+	"miniprogramRoot": "",
+	"pluginRoot": "",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -53,7 +58,7 @@
 					"id": 3,
 					"name": "绑定信息",
 					"pathName": "pages/user/bind-info/bind-info",
-					"query": "path=11111"
+					"query": "shopId= 741&page=1&discountPrice=741"
 				},
 				{
 					"id": -1,
@@ -98,7 +103,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 11,
 					"name": "服务详情",
 					"pathName": "pages/serve/serve-details/serve-details",
 					"query": ""
@@ -126,6 +131,12 @@
 					"name": "调试",
 					"pathName": "pages/demo/demo",
 					"query": ""
+				},
+				{
+					"id": 16,
+					"name": "选择服务",
+					"pathName": "pages/index/detail/appointment/appointment",
+					"query": "shopId=741"
 				}
 			]
 		}

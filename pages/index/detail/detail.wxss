@@ -44,11 +44,10 @@ page{
 }
 .head-name view{
   float: right;
-  color: #000;
+
   font-size: 26rpx;
   font-weight:normal;
   color:rgb(163, 163, 163);
-  
 }
 .head-name view.active{
   color: #fff;
@@ -126,23 +125,23 @@ page{
 .item-name{
   padding-top: 10rpx;
   padding-bottom: 20rpx;
-  color: #333;
-  font-size: 28rpx;
-  line-height: 28rpx;
+
+  font-size: 32rpx;
+  line-height: 32rpx;
+  color: #000;
 }
 .item-detail{
   width: 500rpx;
   padding-bottom: 10rpx;
   color: #999;
   font-size: 24rpx;
-  line-height: 24rpx;
+  line-height: 30rpx;
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
 }
 .item-price{
   padding-right: 26rpx;
-  color: #333;
   font-size: 36rpx;
   line-height: 36rpx;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAnCAYAAAAVW4iAAAAC4klEQVRIS72Xz0sUYRjHv8+bG0G/1AJjhejUrfBQd+lWlzBoBPOQpDtuq7YQllLhXAryIB7W2BncloKgfyAE6VCHoC5R1KUOBVGrRERICjs7O994ZVaW1NVtZ3qPMzzfz7zz/JZsNtsrIrcBfAdgtrS0vDUMo4yQjti2/RVAu9Yj+QlAenFxcc6yLC8MhjiO84TkGS0mIgTwjeQl0zTnQwHkcrm453kPAXQC2BGIrpDsaW1tnTMMw20EJNrYcZyjACZJnq0S+wHgRrFYfDAyMlL8V8gqQJ9MJnMgFotNA+itEvslIuOJRCLbMEAL2La9n+S0iFwAEAtEtV+uLy0t3RsdHV2uF7R2g4phPp8/5LruTZJJEVGB85dJTnmeN5lKpX7XA1kH0MYzMzN7YrFYmuQEgKaK40UkVygU0pZl+duFbAjQxvl8flexWBxXSl0lubsiqCFKqWv9/f0/twPZFKCNc7nc3nK5fJnkLQAViA7bR77vjyWTSZ39NU9NgLa0LGtnPB7vJpkBsC9QK4nI0+bmZsMwjJo+2RIQQJra2tr6lFJ3ABysfDLJZ57nXUylUl+CKrDuNtsCBCEcI9mtlLpLMh4olUVk3nXd9NDQ0MeN/tW2AcFNVHt7e6fv+3kAhwNBHVHvXNftGh4e/vw3pC6ANiYps7Ozp33fnwFwpOp3fRCRnoWFhTfVYVw3IBCUbDZ7Sik1RfJ4Vca/9n3/SjKZfLEW1luFWa33tm0f09EM4GSQ8SRZ0KUmkUg8X33WCEDbOo7TQVL7pKNKawFAl2marxoGBBF2nuTjSu0CUCI5Njg4ONUwYLMbKKXODQwMvGwIoH1A8r6InAjbB9FFUaR5YFnWukwWkTLJ9w1nsm3b0dUiy7Ka4vF4H8nwq2mk/SDSjqZ7cqlUGgcQfk+uTBW+70+ISLhTRaRzUa3JTo9Lpmmu1Ft9/89sGul0Hfl+EPmGE/mOFmyZkwB0Hx0Ie8v8AwgT9DfYYGcBAAAAAElFTkSuQmCC) no-repeat right center;
@@ -150,6 +149,8 @@ page{
   position: absolute;
   top: 48rpx;
   right: 10rpx;
+  color:#ff9000;
+  font-weight: bold;
 }
 
 

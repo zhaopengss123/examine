@@ -63,15 +63,15 @@ Page({
           openid: res.data
         })
         wx.getStorage({
-          key: 'isMember',
+          key: 'memberId',
           success: function (res) {
             if (res.data == 0) {
               that.setData({
-                isMember: ""
+                memberId: ""
               })
             } else {
               that.setData({
-                isMember: res.data
+                memberId: res.data
               })
             }
             that.postlistallfei();
@@ -163,7 +163,7 @@ Page({
   /**********全部**********/
   postlistallfei() {
     var that = this;
-    if (!that.data.isMember) {
+    if (!that.data.memberId) {
 
       wx.showLoading({
         title: '加载中...',
@@ -273,7 +273,7 @@ Page({
   postlistallfei1() {
     var that = this;
 
-    if (!that.data.isMember) {
+    if (!that.data.memberId) {
       wx.showLoading({
         title: '加载中...',
       })
@@ -338,7 +338,7 @@ Page({
   /**********已完成**********/
   postlistallfei2() {
     var that = this;
-    if (!that.data.isMember) {
+    if (!that.data.memberId) {
       wx.showLoading({
         title: '加载中...',
       })
@@ -411,6 +411,8 @@ Page({
     })
     Http.post('/reserve/reserveCancelFei', {
       reserveId: reserveId,
+      onlyId: this.data.openid,
+      formId: this.data.formId
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
@@ -465,7 +467,9 @@ Page({
     })
     Http.post('/reserve/reserveCancel', {
       reserveId: reserveId,
-      memberId: memberId
+      memberId: memberId,
+      onlyId: this.data.openid,
+      formId:this.data.formId
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
@@ -511,17 +515,24 @@ Page({
     });
 
   },
+  /*--------点击取消按钮-----------*/
   cancel(e) {
     let that = this;
     let reserveId = e.currentTarget.dataset.id;
-    if (that.data.isMember) {
+    let formId = e.detail.formId;
+
+
+    that.setData({
+      formId:formId
+    })
+    if (that.data.memberId) {
 
       wx.showModal({
         title: '尊敬的会员',
         content: '您确定要取消预约吗?',
         success: function (res) {
           if (res.confirm) {
-            that.reserveCancel(reserveId, that.data.isMember);
+            that.reserveCancel(reserveId, that.data.memberId);
           } else if (res.cancel) {
           }
         }

@@ -214,7 +214,7 @@ Page({
         }
         wx.setStorage({
           key: 'status',
-          data: status,
+          data: status
         });
 
         var potentialMember;

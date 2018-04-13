@@ -19,7 +19,32 @@ Page({
   onLoad: function (options) {
     var that = this;
     var shopId = options.shopId;
-    
+    let activityType = "0";
+    let discountPrice = 0;
+    let price = 0;
+    let activityId = 0;
+    let ym = 0;
+    if (options.ym) {
+      ym = 1;
+    }
+    if (options.discountPrice){
+      discountPrice = options.discountPrice;
+       price = options.price;
+       activityId = options.activityId;
+    }
+  
+ 
+    if (options.activityType){
+      activityType="1";
+    }
+    that.setData({
+      discountPrice: discountPrice,//活动价格
+      price: price,//原价
+      activityId: activityId,//活动id
+      shopId: shopId,//活动id
+      activityType: activityType,
+      ym: ym
+    })
     that.setData({
       shopId: shopId
     });
@@ -55,7 +80,7 @@ Page({
       key: 'memberId',
       success: function (res) {
         that.setData({
-          memberId: res.data
+          memberId:res.data+""
         })
         that.getweeks(shopId, res.data);
         if (that.data.memberId != 0) {
@@ -97,6 +122,7 @@ Page({
   onHide: function () {
   },
   onUnload: function () {
+  
   },
 
   onPullDownRefresh: function () {
@@ -200,7 +226,7 @@ Page({
     var rq = e.currentTarget.dataset.rq;
     var onlyId = that.data.openid;
     var paramJson;
-    if (that.data.memberId == 0) {
+    if (that.data.memberId == 0 ) {
       paramJson = JSON.stringify({
         storeId: that.data.shopId,
         onlyId: onlyId,
@@ -416,7 +442,8 @@ Page({
     }
   },
   /*********预约*************/
-  yabout() {
+  yabout(e) {
+    var formId = e.detail.formId;
     var that = this;
     var yyurl = "";
     var showwar = "";
@@ -428,17 +455,20 @@ Page({
         duration: 2000,
       })
     } else {
-      if (that.data.memberId == 0) {
+      if (that.data.memberId == 0) { //非会员预约
         yyurl = "/reserve/doReserveFei";
         paramJson = JSON.stringify({
           date: that.data.hours,
           hour: that.data.xhours,
+          formId: formId,
           minute: that.data.xminutes,
           onlyId: that.data.openid,
           storeId: that.data.shopId,
-          teacher: that.data.tid
+          teacher: that.data.tid,
+          activityId: that.data.activityId,
+          activityType: that.data.activityType
         })
-      } else {
+      } else {//会员预约
         yyurl = "/reserve/doReserve";
         paramJson = JSON.stringify({
           date: that.data.hours,
@@ -447,6 +477,7 @@ Page({
           onlyId: that.data.openid,
           storeId: that.data.shopId,
           teacher: that.data.tid,
+          formId: formId,
           memberId: that.data.memberId,
         })
       }
