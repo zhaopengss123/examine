@@ -43,9 +43,9 @@ Page({
       activityId = options.activityId;
     }
     that.setData({
-      discountPrice: options.discountPrice,
-      price: options.price,
-      activityId: options.activityId,
+      discountPrice: discountPrice,
+      price: price,
+      activityId: activityId,
     })
    
 
@@ -113,7 +113,7 @@ Page({
       })
       return false;
     }
-    let isMobile = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+    let isMobile = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/;
     if (isMobile.test(this.data.phone) && this.data.phone.length == 11) {
       wx.showLoading({
         title: '正在获取验证码',

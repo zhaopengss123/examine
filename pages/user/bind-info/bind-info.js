@@ -31,9 +31,9 @@ Page({
       this.setData({
         shopId: options.shopId,
         page: options.page,
-        discountPrice : options.discountPrice,
-        price : options.price,
-        activityId : options.activityId,
+        discountPrice : discountPrice,
+        price :price,
+        activityId : activityId,
       })
     } else {
       this.setData({
@@ -128,9 +128,7 @@ Page({
   },
 
   onUnload: function () {
-    wx.navigateBack({
-      delta: 1
-    })
+
   },
 
   onPullDownRefresh: function () {
