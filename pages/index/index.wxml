@@ -1,4 +1,5 @@
-<!-- 门店列表 -->
+
+
 <view class='list-box'>
   <view class='city'>
     <picker mode="region" bindchange="bindRegionChange" value="{{address}}">
@@ -6,19 +7,26 @@
       <view class='icon-slide'></view>
     </picker>
   </view>
+ 
  <view class='swiper'>
     <swiper indicator-dots="true" autoplay="true" interval="5000" duration="300"  indicator-active-color="#FFF" circular="true">
-      <block wx:for="{{swiperArray}}" wx:key="key">
+      <block >
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="178"/>
+          <image src="../../assets/images/banner2.jpg" class="slide-image" width="355" height="178"/>
+        </swiper-item>
+       
+        <swiper-item wx:if='{{openweb}}'>
+          <navigator url='/pages/index/addweb/addweb?weburl={{weburl}}'><image src="../../assets/images/banner4.jpg" class="slide-image" width="355" height="178"/></navigator>
         </swiper-item>
       </block>
     </swiper>
   </view>
+ 
   <view class='header'>
     <view class='head-title'>附近门店{{baseInfo}}{{tongk}}</view>
     <view class='head-desc'>为您精选的附近门店</view>
   </view>
+
   <view class='item-container'>
     <view class='no-data' hidden="{{storeItems.length || requestLoading}}">您的附近没有合适的门店</view>
     <view class='item' wx:for="{{storeItems}}" wx:key="id">

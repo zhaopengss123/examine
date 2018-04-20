@@ -158,7 +158,7 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-        console.log(res.result.userPhone);
+ 
         var userphone = res.result.userPhone;
         var phonenum ="";
         

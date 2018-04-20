@@ -12769,7 +12769,7 @@ const cityAddressItems = [
             isLeaf: true
           },
           {
-            "value": "451402",
+            "value": "500116",
             "label": "江州区",
             isLeaf: true
           }
@@ -13007,6 +13007,11 @@ const cityAddressItems = [
           {
             "value": "500115",
             "label": "长寿区",
+            isLeaf: true
+          },
+          {
+            "value": "500116",
+            "label": "开州区",
             isLeaf: true
           }
         ],

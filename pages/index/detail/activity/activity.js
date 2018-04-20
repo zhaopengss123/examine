@@ -162,7 +162,7 @@ Page({
       //console.log(res.target)
     }
     return {
-      path: '/pages/index/detail/detail?shopId=' + shopId,
+      path: '/pages/index/detail/detail?shopId=' + shopId +'&pagestatus=1',
       imageUrl: imageUrl,
       success: function (res) {
         // 转发成功

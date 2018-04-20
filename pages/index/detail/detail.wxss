@@ -244,6 +244,34 @@ page{
   padding-top: 15rpx;
    text-align: center;
 }
+.footer1{
+  width: 100%;
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background: #FF839A;
+  position: fixed;
+  bottom: 0;
+  z-index: 9;
+  transition: all .25s;
+}
+.footer1 view:nth-child(1){
+  background: #fff;
+  width: 25%;
+  float: left;
+  color: #FF839A;
+}
+.footer1 view:nth-child(2){
+  width: 75%;
+  float: left;
+}
+/* .footer1 view:nth-child(1) image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 10rpx;
+} */
+
 .foots{
   width: 100%; 
   overflow: hidden;

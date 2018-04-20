@@ -5,15 +5,12 @@ const cityAddress = require('./../../data/cityAddress.js');
 var addresslist = cityAddress.postList;
 Page({
   data: {
-    swiperArray: [
-      '../../assets/images/banner1.jpg',
-      '../../assets/images/banner2.jpg',
-      '../../assets/images/banner3.jpg',
-    ],
+
     pageNo: 1,
     pageSize: 10,
     storeItems: [],
-    address: ['', '定位中', '']
+    address: ['', '定位中', ''],
+    openweb:false,
   },
   onLoad: function () {
 
@@ -23,6 +20,8 @@ Page({
       key: 'shoplistdata',
       data: timestamp,
     })
+
+
   },
   onShow: function () {
     var that = this;
@@ -66,6 +65,36 @@ Page({
         district: null,
       });
       this.getStoreItems();
+      if (address.address_component.city=="北京市"){
+          this.setData({
+            openweb:true,
+            weburl:'http://wx.beibeiyue.com/activeThreebj/index.html?activityId=1'
+          })
+      };
+      if (address.address_component.city == "太原市") {
+        this.setData({
+          openweb: true,
+          weburl: 'http://wx.beibeiyue.com/activeThreety/index.html?activityId=4'
+        })
+      };
+      if (address.address_component.city == "天津市") {
+        this.setData({
+          openweb: true,
+          weburl: 'http://wx.beibeiyue.com/activeThreetj/index.html?activityId=5'
+        })
+      };
+      if (address.address_component.city == "郑州市") {
+        this.setData({
+          openweb: true,
+          weburl: 'http://wx.beibeiyue.com/activeThreezz/index.html?activityId=3'
+        })
+      };
+      if (address.address_component.city == "沈阳市") {
+        this.setData({
+          openweb: true,
+          weburl: 'http://wx.beibeiyue.com/activeThreesy/index.html?activityId=2'
+        })
+      };
     })
   },
 
@@ -294,5 +323,44 @@ Page({
     }, _ => {
       wx.hideLoading();
     });
+  },
+  dz(e){
+    let data = e.currentTarget.dataset.dz;
+    this.setData({
+      openweb: false,
+    });
+
+    if (data == "北京市") {
+      this.setData({
+        openweb: true,
+        weburl: 'http://wx.beibeiyue.com/activeThreebj/index.html?activityId=1'
+      })
+    };
+    if (data == "太原市") {
+      this.setData({
+        openweb: true,
+        weburl: 'http://wx.beibeiyue.com/activeThreety/index.html?activityId=4'
+      })
+    };
+    if (data == "天津市") {
+      this.setData({
+        openweb: true,
+        weburl: 'http://wx.beibeiyue.com/activeThreetj/index.html?activityId=5'
+      })
+    };
+    if (data == "郑州市") {
+      this.setData({
+        openweb: true,
+        weburl: 'http://wx.beibeiyue.com/activeThreezz/index.html?activityId=3'
+      })
+    };
+    if (data == "沈阳市") {
+      this.setData({
+        openweb: true,
+        weburl: 'http://wx.beibeiyue.com/activeThreesy/index.html?activityId=2'
+      })
+    };
+
+
   }
 })

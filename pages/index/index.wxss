@@ -64,7 +64,7 @@ swiper image{
   border-bottom: solid 0.5px #e4e4e4;
 }
 .item-image{
-  height: 420rpx;
+  height: 430rpx;
   overflow: hidden;
   position: relative;
   border-radius: 10rpx;
@@ -146,3 +146,14 @@ swiper image{
 .picker{
     color: #63686e;
 }
+.dzf{
+  width: 100%;
+  overflow: hidden;
+}
+.dzf view{
+  width: 20%;
+  float: left;
+  text-align: center;
+  border-right: solid 1px #ccc;
+  font-size: 30rpx;
+  }
