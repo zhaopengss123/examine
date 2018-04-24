@@ -119,7 +119,7 @@
 
 
   <!-- footer -->
-<view class='footer1' wx:if='{{pagestatus==0}}' hover-class='active'><view bindtap='backindex'>门店</view><view  bindtap='booking'>去预约游泳课</view></view>
-<view class='footer'  wx:else hover-class='active' bindtap='booking'>去预约游泳课</view>
+
+<view class='footer'   hover-class='active' bindtap='booking'>去预约游泳课</view>
 
 </view>

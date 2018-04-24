@@ -65,36 +65,7 @@ Page({
         district: null,
       });
       this.getStoreItems();
-      if (address.address_component.city=="北京市"){
-          this.setData({
-            openweb:true,
-            weburl:'http://wx.beibeiyue.com/activeThreebj/index.html?activityId=1'
-          })
-      };
-      if (address.address_component.city == "太原市") {
-        this.setData({
-          openweb: true,
-          weburl: 'http://wx.beibeiyue.com/activeThreety/index.html?activityId=4'
-        })
-      };
-      if (address.address_component.city == "天津市") {
-        this.setData({
-          openweb: true,
-          weburl: 'http://wx.beibeiyue.com/activeThreetj/index.html?activityId=5'
-        })
-      };
-      if (address.address_component.city == "郑州市") {
-        this.setData({
-          openweb: true,
-          weburl: 'http://wx.beibeiyue.com/activeThreezz/index.html?activityId=3'
-        })
-      };
-      if (address.address_component.city == "沈阳市") {
-        this.setData({
-          openweb: true,
-          weburl: 'http://wx.beibeiyue.com/activeThreesy/index.html?activityId=2'
-        })
-      };
+  
     })
   },
 
@@ -135,6 +106,7 @@ Page({
   },
   /*******************向后台发送数据获取门店列表************************ */
   getStoreItems(param) {
+
     var paramJson;
     if (this.data.district) {
       paramJson = JSON.stringify({

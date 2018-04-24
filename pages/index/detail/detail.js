@@ -7,21 +7,13 @@ Page({
     lngs: "116.29598",
     shopName: "加载中...",
     address: "加载中...",
-    pagestatus:0
+
   },
   onLoad: function (options) {
     var that = this;
     var ids = options.shopId; 
    
-    if (options.pagestatus){
-      that.setData({
-        pagestatus:1
-      })
-    }else{
-      that.setData({
-        pagestatus: 0
-      })
-    }
+ 
     that.getactivity(ids);
    /******获取缓存*****/
     wx.getStorage({

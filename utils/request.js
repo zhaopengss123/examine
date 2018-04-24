@@ -10,7 +10,8 @@
  * @author phuhoang 
  * @time 2018-01-16
  */
-const Domain = 'https://swx.beibeiyue.com/ylbb_weixin';
+//const Domain = 'https://swx.beibeiyue.com/ylbb_weixin';
+const Domain = 'http://192.168.1.205:8800';
 
 const Get = (url, param) => {
   return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ const Get = (url, param) => {
       fail(err) {
         reject(err);
       }
-    });0
+    });
   }) ;
 }
 
