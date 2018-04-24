@@ -76,7 +76,7 @@
 					"id": 6,
 					"name": "活动",
 					"pathName": "pages/index/detail/activity/activity",
-					"query": ""
+					"query": "shopId=741"
 				},
 				{
 					"id": 7,

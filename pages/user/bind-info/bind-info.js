@@ -242,42 +242,42 @@ Page({
       babyname: e.detail.value
     })
   },
-  branchpost() {
-    let that = this;
-    Http.post('/user/getUserInfo', {
-      onlyId: that.data.openid,
-    }).then(res => {
-      wx.hideLoading();
-      if (res.code == 1000) {
-        var userphone = res.result.userPhone + '';
-        Http.post('/user/judgeUserPhone', {
-          userPhone: userphone,
-        }).then(res => {
-          let birthday = that.data.birthday + '';
-          that.setData({
-            succ: res.result.potentialMember
-          })
+  // branchpost() {
+  //   let that = this;
+  //   Http.post('/user/getUserInfo', {
+  //     onlyId: that.data.openid,
+  //   }).then(res => {
+  //     wx.hideLoading();
+  //     if (res.code == 1000) {
+  //       var userphone = res.result.userPhone + '';
+  //       Http.post('/user/judgeUserPhone', {
+  //         userPhone: userphone,
+  //       }).then(res => {
+  //         let birthday = that.data.birthday + '';
+  //         that.setData({
+  //           succ: res.result.potentialMember
+  //         })
 
-          if (res.result.potentialMember == 0) {
+  //         if (res.result.potentialMember == 0) {
 
-            Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
-              typeStyle: 1,
-              phone: userphone,
-              spreadId: '10000002',
-              birthday: birthday,
-              babyName: that.data.babyname,
-            }).then(res => {
+  //           Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
+  //             typeStyle: 1,
+  //             phone: userphone,
+  //             spreadId: '10000002',
+  //             birthday: birthday,
+  //             babyName: that.data.babyname,
+  //           }).then(res => {
 
-            }, _ => {
+  //           }, _ => {
 
-            });
-          }
-        }, _ => {
-        });
-      } else {
-      }
-    }, _ => {
-      wx.hideLoading();
-    });
-  },
+  //           });
+  //         }
+  //       }, _ => {
+  //       });
+  //     } else {
+  //     }
+  //   }, _ => {
+  //     wx.hideLoading();
+  //   });
+  // },
 })

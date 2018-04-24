@@ -349,60 +349,61 @@ Page({
   activity_yry : function () {
     let shopId = this.data.shopId;
     let that = this;
-    wx.setStorage({
-      key: 'countryCardStatus',
-      data: that.data.countryCardStatus,
-    });
-    wx.getStorage({
-      key: 'countryCardStatus',
-      success: function (res) {
-        that.setData({
-          countryCardStatus: res.data,
-        });
-      }
-    })
-    wx.getStorage({
-      key: 'isMember',
-      success: function (res) {
-        if (res.data == 0) {    //监测用户是否是会员 //用户不是会员
-          wx.getStorage({  //判断用户是否绑定手机
-            key: 'status',
-            success: function (res) {
-              if (res.data == 0) { //用户没有绑定手机
+    // wx.setStorage({
+    //   key: 'countryCardStatus',
+    //   data: that.data.countryCardStatus,
+    // });
+    // wx.getStorage({
+    //   key: 'countryCardStatus',
+    //   success: function (res) {
+    //     that.setData({
+    //       countryCardStatus: res.data,
+    //     });
+    //   }
+    // })
+    // wx.getStorage({
+    //   key: 'isMember',
+    //   success: function (res) {
+    //     if (res.data == 0) {    //监测用户是否是会员 //用户不是会员
+    //       wx.getStorage({  //判断用户是否绑定手机
+    //         key: 'status',
+    //         success: function (res) {
+    //           // if (res.data == 0) { //用户没有绑定手机
+    //           //   wx.navigateTo({
+    //           //     url: '../../user/bind-phone/bind-phone?shopId=' + shopId + '&page=1' + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId, //跳转到绑定手机页面
+    //           //   })
+    //           // } else {  //用户绑定手机
+    //           //   wx.getStorage({
+    //           //     key: 'baseInfo',
+    //           //     success: function (res) {
+    //           //       if (res.data == 0 || !res.data) { //是否填写过信息
+    //           //         wx.navigateTo({
+    //           //           url: '../../user/bind-info/bind-info?shopId=' + shopId + '&page=1' + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转到绑定信息页面
+    //           //         })
+    //           //       } else {
+    //           //         wx.navigateTo({
+    //           //           url: './activity/activity?shopId=' + shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转活动详情页面
+    //           //         })
+    //           //       }
+    //           //     },
+    //           //     fail: function () {
+    //           //       that.getcode();
+    //           //     }
+    //           //   })
 
-                wx.navigateTo({
-                  url: '../../user/bind-phone/bind-phone?shopId=' + shopId + '&page=1' + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId, //跳转到绑定手机页面
-                })
-              } else {  //用户绑定手机
-                wx.getStorage({
-                  key: 'baseInfo',
-                  success: function (res) {
-                    if (res.data == 0 || !res.data) { //是否填写过信息
-                      wx.navigateTo({
-                        url: '../../user/bind-info/bind-info?shopId=' + shopId + '&page=1' + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转到绑定信息页面
-                      })
-                    } else {
-                      wx.navigateTo({
-                        url: './activity/activity?shopId=' + shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转活动详情页面
-                      })
-                    }
-                  },
-                  fail: function () {
-                    that.getcode();
+    //           // }
 
-                  }
-                })
-
-              }
-
-            }
-          })
-        } else {
-          wx.navigateTo({
-            url: './activity/activity?shopId=' + shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转活动详情页面
-          })
-        }
-      }
+    //         }
+    //       })
+    //     } else {
+    //       wx.navigateTo({
+    //         url: './activity/activity?shopId=' + shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId,//跳转活动详情页面
+    //       })
+    //     }
+    //   }
+    // })
+    wx.navigateTo({
+      url: './activity/activity?shopId=' + shopId,//跳转活动详情页面
     })
   },
 

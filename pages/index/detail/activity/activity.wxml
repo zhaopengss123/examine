@@ -8,10 +8,22 @@
   <view class='head-price'><view>¥{{discountPrice}}</view><view>¥{{price}}</view></view>
   <view class='head-label' bindtap='onShareAppMessage'>{{agio}}折</view>
 </view>
-<!-- 
-<form>
-    <button  open-type='share'>点击</button>
-</form> -->
+
+    <view class='head-box'>
+
+      <view class='head-name'>
+        <text>1111111111</text>
+        <view>111111111111111</view>
+      </view>
+
+      <view class='head-address'>
+        <text>111111111111</text>
+        <view hover-class='active' bindtap='mapclick'>导航</view>
+      </view>
+
+    </view>
+    <view class='backindex' bindtap='backindex'>住的离这远？看看其他门店</view>
+
 <view class='detail'>
   <view class='detail-title'>购买须知</view>
 

@@ -40,8 +40,8 @@
     <view class='activity-title'>门店活动</view>
     <view class='activity-content'>
       <view class='activity-item' bindtap='activity_yry'>
-          <view class='item-name'>“鱼人游”超值体验卡</view>
-          <view class='item-detail'>服务包含：游泳+洗澡+抚触</view>
+          <view class='item-name'>百城千店，五一欢乐游超值体验卡</view>
+          <view class='item-detail'>百城千店，五一欢乐游</view>
           <view class='item-price'>￥{{discountPrice}}</view>
       
       </view>

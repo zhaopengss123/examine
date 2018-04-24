@@ -197,3 +197,75 @@
   z-index: 5;
   opacity: 0;
 }
+
+/* 门店信息 */
+.head-box{
+  padding: 0 30rpx;
+  border-bottom:  solid 0.5px #e4e4e4;
+}
+.head-name{
+  padding: 33rpx 0 25rpx;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  font-weight: bold;
+}
+.head-name view{
+  float: right;
+
+  font-size: 26rpx;
+  font-weight:normal;
+  color:rgb(163, 163, 163);
+}
+.head-name view.active{
+  color: #fff;
+  background: #FF839A;
+}
+.head-address{
+  padding-bottom: 30rpx;
+  color: rgb(163, 163, 163);
+  font-size: 26rpx;
+  overflow: hidden;
+}
+.head-card{
+  width:132rpx;
+  height:40rpx;
+  color: #fff;
+  font-size: 21rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background: #ff839a;
+  border-radius: 4rpx;
+  position: absolute;
+  top: 26rpx;
+  right: 15rpx;
+  z-index: 100;
+}
+
+
+.head-address text{
+  display: block;
+  width: 560rpx;
+  float: left;
+
+}
+.head-address view{
+
+
+    float: right;
+  height: 32rpx;
+  padding: 0 8rpx;
+  color: #FF839A;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  transition: all .2s;
+  border-radius: 4rpx;
+}
+.backindex{
+  width: 100%;
+  text-align: center;
+  font-size: 26rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: rgba(0, 0, 255, 0.8);
+  border-bottom: solid 20rpx rgb(240, 240, 240); 
+}

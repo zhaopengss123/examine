@@ -157,3 +157,56 @@ swiper image{
   border-right: solid 1px #ccc;
   font-size: 30rpx;
   }
+  /* 活动 */
+ .item-title text{
+  display: inline-block;
+  width: 110rpx;
+  height: 36rpx;
+  font-size:22rpx;
+  line-height: 36rpx;
+  text-indent: 15rpx;
+  color: #fff;
+  font-weight: normal;
+  margin-left: 18rpx;
+} 
+.parent-offspring{
+  background: url('https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/parent-offspring.png') no-repeat center center;
+  background-size:100% 100%; 
+}
+
+
+.flagship{
+  background: url('https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/flagship.png') no-repeat center center;
+  background-size:100% 100%; 
+}
+
+  .activity{
+  width: 690rpx;
+  height: 60rpx;
+  background: #FFFBF2;
+  margin: 0 auto;
+  margin-top: 26rpx;
+}
+.activity-icon{
+  width: 34rpx;
+  height: 34rpx;
+  background: #FBE9E2;
+  border:solid 1rpx #FF7664;
+  border-radius: 10rpx;
+  color: #FB6280;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 34rpx;
+  float: left;
+  margin-top: 13rpx;
+  margin-left: 20rpx;
+}
+.activity-text{
+  width: auto;
+  float: left;
+  font-size: 26rpx;
+  color: #FF7C6E;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-left: 18rpx;
+}

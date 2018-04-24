@@ -17,44 +17,49 @@ Page({
    */
   onLoad: function (options) {
     let that= this;
-    let discountPrice = options.discountPrice;
-    let price = options.price;
-    let activityId = options.activityId;
     let shopId = options.shopId;
-    let agio = ((discountPrice/price )*10).toFixed(1);
-    let ym = 0;
-    if (options.ym){
-      ym = 1;
-    }
-    that.setData({
-      discountPrice: discountPrice,//活动价格
-      price: price,//原价
-      activityId: activityId,//活动id
-      shopId: shopId,//活动id
-      agio:agio,
-      ym:ym
-    })
-
+    //查看门店活动
+    that.getactivity(shopId);
     /******获取缓存*****/
-    wx.getStorage({
-      key: 'memberId',
-      success: function (res) {
-        that.setData({
-          memberId: res.data
-        });
-      }
-    })
     wx.getStorage({
       key: 'openid',
       success: function (res) {
         that.setData({
           openid: res.data
         });
+
+
+        wx.getStorage({
+          key: 'memberId',
+          success: function (res) {
+            that.setData({
+              memberId: res.data
+            });
+          }
+        })
+        wx.getStorage({
+          key: 'storeId',
+          success: function (res) {
+            that.setData({
+              storeId: res.data
+            });
+          }
+        })
+        wx.getStorage({
+          key: 'tongMember',
+          success: function (res) {
+            that.setData({
+              tongMember: res.data
+            });
+          }
+        });
+
+      },
+      fail: function () {
+        that.getcode();
       }
-    })
-
+    });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -171,6 +176,166 @@ Page({
         // 转发失败
       }
     }
-  }
+  },
+  getactivity(storeId) {
+    let that = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    Http.post('/shop/getShopPrice', {
+
+      storeId: storeId,
+
+    }).then(res => {
+      wx.hideLoading();
+      if (res.code == 1000) {
+        let agio = ((res.result.discountPrice / res.result.price) * 10).toFixed(1);
+        that.setData({
+          discountPrice: res.result.discountPrice,//活动价格
+          inActivity: res.result.inActivity, //门店是否有活动
+          price: res.result.price, //活动原价
+          activityId: res.result.activityId, //活动id
+          agio: agio
+        });
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+  },
+/*******************回到首页*************************/
+  backindex:function(){
+    wx.switchTab({
+      url: '../../index',
+    })
+  },
+
+/*******************获取用户状态*************************/
+  getcode() {
+    let that = this;
+    wx.login({
+      success(res) {
+        that.getuserstatus(res.code);
+      }
+    });
+  },
+  getuserstatus(code) {
+    Http.post('/user/judgeUserStatus', {
+      code: code
+    }).then(res => {
+
+      if (res.code == 1000) {
+        let openid = res.result.openid;
+
+        var openid;
+        if (res.result.openid) {
+          openid = res.result.openid;
+        } else {
+          openid = 0;
+        }
+        wx.setStorage({
+          key: 'openid',
+          data: openid,
+        });
+
+        var status;
+        if (res.result.status) {
+          status = res.result.status;
+        } else {
+          status = 0;
+        }
+        wx.setStorage({
+          key: 'status',
+          data: status
+        });
+
+        var potentialMember;
+        if (res.result.potentialMember) {
+          potentialMember = res.result.potentialMember;
+        } else {
+          potentialMember = 0;
+        }
+        wx.setStorage({
+          key: 'potentialMember',
+          data: potentialMember,
+        });
+
+        var isMember;
+        if (res.result.isMember) {
+          isMember = res.result.isMember;
+        } else {
+          isMember = 0;
+        }
+        wx.setStorage({
+          key: 'isMember',
+          data: isMember,
+        });
+
+
+        var tongMember;
+        if (res.result.tongMember) {
+          tongMember = res.result.tongMember;
+        } else {
+          tongMember = 0;
+        }
+        wx.setStorage({
+          key: 'tongMember',
+          data: tongMember,
+        });
+
+        var memberId;
+        if (res.result.memberId) {
+          memberId = res.result.memberId;
+        } else {
+          memberId = 0;
+        }
+        wx.setStorage({
+          key: 'memberId',
+          data: memberId,
+        });
+
+        if (res.result.memberId) {
+          wx.setStorage({
+            key: 'baseInfo',
+            data: 1,
+          });
+        } else {
+          var baseInfo;
+          if (res.result.baseInfo) {
+            baseInfo = res.result.baseInfo;
+          } else {
+            baseInfo = 0;
+          }
+          wx.setStorage({
+            key: 'baseInfo',
+            data: baseInfo,
+          });
+        }
+        var storeId;
+        if (res.result.storeId) {
+          storeId = res.result.storeId;
+        } else {
+          storeId = 0;
+        }
+        wx.setStorage({
+          key: 'storeId',
+          data: storeId,
+        });
+
+
+
+        this.setData({
+          memberId: memberId,
+          storeId: storeId,
+          tongMember: tongMember,
+          openid: openid,
+        });
+
+
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+  }, 
+
 
 })
