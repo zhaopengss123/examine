@@ -30,9 +30,6 @@ Page({
       })
     };
 
-
-
-
     let activityType = "0";
     let discountPrice = 0;
     let price = 0;
@@ -86,7 +83,7 @@ Page({
           that.setData({
             countryCardStatus: res.data,
           });
-
+          console.log(that.data.countryCardStatus);
         },
         fail: function () {
           wx.showToast({
@@ -277,6 +274,7 @@ Page({
           key: 'status',
           data: 1,
         });
+        //判断手机号码状态
         that.UserPhone();
       } else {
         wx.showToast({
@@ -379,12 +377,37 @@ Page({
           key: 'storeId',
           data: storeId,
         });
+
+
+
         if (this.data.page == 1) {
-
-          if (tongMember != 0) {
-            if (memberId != 0) {
-              if (that.data.shopId != storeId) {
-
+          //判断是不是通卡会员
+          if (tongMember != 0) {    //如果是通卡会员
+            if (!that.data.countryCardStatus) { //如果当前门店不是通卡店
+              wx.showModal({
+                title: '提示',
+                content: '当前门店不是通卡店',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.switchTab({
+                      url: '../../index/index',
+                    })
+                  } else if (res.cancel) {
+                    wx.switchTab({
+                      url: '../../index/index',
+                    })
+                  }
+                }
+              })
+            } else {
+              wx.navigateTo({
+                url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId,
+              })
+            }
+          } else {  //如果不是通卡会员
+       
+            if (memberId != 0) {  //如果是会员
+              if (that.data.shopId != storeId) {  //如果当前门店id和会员所属门店不同
                 wx.showModal({
                   title: '提示',
                   content: '当前门店不是您的会员店',
@@ -401,28 +424,12 @@ Page({
                   }
                 })
 
-              } else {
+              }else{
+                wx.navigateTo({
+                  url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId,
+                })
               }
-            } else {
-            }
-          } else {
-            if (!that.data.countryCardStatus) {
-              wx.showModal({
-                title: '提示',
-                content: '当前门店不是通卡店',
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.switchTab({
-                      url: '../../index/index',
-                    })
-                  } else if (res.cancel) {
-                    wx.switchTab({
-                      url: '../../index/index',
-                    })
-                  }
-                }
-              })
-            }
+            } 
           }
         };
     
@@ -461,9 +468,7 @@ Page({
       wx.hideLoading();
     });
   },
-aaasss(){
-  this.UserPhone();
-}
+
 
 
 })

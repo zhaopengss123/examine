@@ -297,8 +297,10 @@ Page({
         that.setData({
           countryCardStatus: res.data,
         });    
+        
       }
     })
+    
     wx.getStorage({
       key: 'isMember',
       success: function (res) {
@@ -320,9 +322,38 @@ Page({
                             url: '../../user/bind-info/bind-info?shopId=' + shopId + '&page=1',//跳转到绑定信息页面
                           })
                         }else{
-                        wx.navigateTo({
-                            url: './appointment/appointment?shopId=' + shopId + '&page=1',//跳转预约页面
-                          })
+                            //非会员预约
+
+                        wx.showLoading({
+                          title: '加载中...',
+                        });
+
+                        Http.post('/user/getUserInfo', {
+                          onlyId: that.data.openid,
+                        }).then(res => {
+                          let userphone = res.result.userPhone;
+                          Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+                           phone: userphone,
+                           birthday:'2018-03-11',
+                           shopId:that.data.shopId,
+                           spreadId:'18',
+                        }).then(res => {
+                          wx.hideLoading();
+                          if(res.code==1000){
+                              console.log('预约成功');
+                          }else if(res.code==1025){
+                              console.log('一天内不能重复预约哦~');
+                          }
+                        }, _ => {
+                          wx.hideLoading();
+                        });
+                        }, _ => {
+                         
+                        });
+
+
+                       
+
                         }
                     },
                     fail: function () {

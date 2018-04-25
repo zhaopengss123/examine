@@ -180,7 +180,8 @@ Page({
 
     var relationship = this.data.relationshipArray[this.data.relationshipIndex];
     var birthday = this.data.birthday;
-    thta.branchpost();
+    that.branchpost(); //往客多多推送信息
+    //erp接口 
     Http.post('/user/saveUserBaseInfo', {
       paramJson: JSON.stringify({
         onlyId: this.data.openid,
@@ -243,9 +244,6 @@ Page({
           that.setData({
             succ: res.result.potentialMember
           })
-
-          if (res.result.potentialMember == 0) {
-
             // Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
             Http.post('http://192.168.1.123:8090/manager/register', {
               typeStyle: 1,
@@ -258,7 +256,7 @@ Page({
             }, _ => {
 
             });
-          }
+         
         }, _ => {
         });
       } else {

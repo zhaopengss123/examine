@@ -18,4 +18,4 @@
   </form>
 
 
-<view class='tip' bindtap='aaasss' >*若您输入的手机号未注册，将会进入注册流程</view>
+<view class='tip' >*若您输入的手机号未注册，将会进入注册流程</view>

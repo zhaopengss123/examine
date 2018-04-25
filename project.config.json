@@ -34,7 +34,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
@@ -52,7 +52,7 @@
 					"id": 2,
 					"name": "绑定手机",
 					"pathName": "pages/user/bind-phone/bind-phone",
-					"query": "shopId=741"
+					"query": "shopId=741&page=1"
 				},
 				{
 					"id": 3,
@@ -76,7 +76,7 @@
 					"id": 6,
 					"name": "活动",
 					"pathName": "pages/index/detail/activity/activity",
-					"query": "shopId=1332"
+					"query": "shopId=741"
 				},
 				{
 					"id": 7,

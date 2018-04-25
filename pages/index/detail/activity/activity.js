@@ -153,15 +153,21 @@ Page({
 
     //判断是不是会员
     if (that.data.memberId==0){
-            wx.showLoading({
-              title: '加载中...',
-            })
-            Http.post('/shop/isReservation', {
+      wx.showLoading({
+        title: '加载中...',
+      });
 
-              onlyId: that.data.openid,
-              activityId: that.data.activityId
-
-            }).then(res => {
+      Http.post('/user/getUserInfo', {
+        onlyId: that.data.openid,
+      }).then(res => {
+        let userphone = res.result.userPhone;
+        Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+          phone: userphone,
+          birthday: '2018-03-11',
+          shopId: that.data.shopId,
+          activityId:'5',
+          spreadId: '17',
+        }).then(res => {
               wx.hideLoading();
            //判断参没参加过   
                 if(res.result==0){
@@ -184,11 +190,11 @@ Page({
     
                 };
 
-
-             
             }, _ => {
               wx.hideLoading();
             });
+
+      })
     }else{
       that.setData({
         showx:true,
