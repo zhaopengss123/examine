@@ -39,7 +39,7 @@
           <text>{{item.distance}}</text>
         </view>
       <view class='activity' wx:if="{{item.isActivity==1}}">
-          <view class='activity-icon'>特</view>
+          <view class='activity-icon'>券</view>
           <view class='activity-text'>百城千店，五一欢乐游</view>
         </view>
 

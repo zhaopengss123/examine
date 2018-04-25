@@ -78,7 +78,7 @@ Page({
       }
     });
 
-
+//设置门店是否是通卡店
     if (that.data.page == 1) {
       wx.getStorage({
         key: 'countryCardStatus',
@@ -428,26 +428,17 @@ Page({
     
        
         if (that.data.baseInfo == 0 || !that.data.baseInfo) {
-          if (that.data.discountPrice == 0) {
+   
           wx.navigateTo({
             url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page,
           })
-          }else{
-            wx.navigateTo({
-              url: '../bind-info/bind-info?shopId=' + this.data.shopId + '&page=' + this.data.page + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId + '&ym=1',//跳转绑定信息页面带参数,
-            })
-          }
+       
         } else {
           if (that.data.page == 1) {
-            if (that.data.discountPrice==0){
               wx.navigateTo({
-                url: '../../index/detail/appointment/appointment?shopId=' + this.data.shopId + '&page=' + this.data.page,
+                url: '../../index/detail/detail?shopId=' + this.data.shopId ,
               })
-            }else{
-              wx.navigateTo({
-                url: '../../index/detail/activity/activity?shopId=' + that.data.shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId + '&ym=1',//跳转活动详情页面
-              })
-            }
+       
           } else if (that.data.page == 2) {
             wx.switchTab({
               url: '../../serve/serve',
@@ -456,6 +447,10 @@ Page({
           } else if (that.data.page == 3) {
             wx.switchTab({
               url: '../user',
+            })
+          } else if (that.data.page == 4){
+            wx.navigateTo({
+              url: '../../index/detail/activity/activity?shopId=' + this.data.shopId,
             })
           }
         }

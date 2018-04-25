@@ -21,7 +21,7 @@
     </view>
 
     <view class='head-box'>
-
+    
       <view class='head-name'>
         <text>{{shopName}}</text>
         <view>{{distance}}</view>

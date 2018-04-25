@@ -16,24 +16,11 @@ Page({
         userInfo: userInfo
       })
     });
-    let activityType = "0";
-    let discountPrice = 0;
-    let price = 0;
-    let activityId = 0;
-   
-    if (options.discountPrice) {
-      discountPrice = options.discountPrice;
-      price = options.price;
-      activityId = options.activityId;
-    }
-
+    //设置门店id和来源
     if (options.shopId) {
       this.setData({
         shopId: options.shopId,
         page: options.page,
-        discountPrice : discountPrice,
-        price :price,
-        activityId : activityId,
       })
     } else {
       this.setData({
@@ -193,6 +180,7 @@ Page({
 
     var relationship = this.data.relationshipArray[this.data.relationshipIndex];
     var birthday = this.data.birthday;
+    thta.branchpost();
     Http.post('/user/saveUserBaseInfo', {
       paramJson: JSON.stringify({
         onlyId: this.data.openid,
@@ -209,18 +197,11 @@ Page({
         });
 
         if (that.data.shopId && that.data.page == "1") {
-          if (that.data.discountPrice == 0) {
+         
             wx.navigateTo({
-            url: '../../index/detail/appointment/appointment?shopId=' + that.data.shopId + '&page' + that.data.page,
+            url: '../../index/detail/detail?shopId=' + that.data.shopId ,
           })
-          }else{
-            wx.navigateTo({
-              url: '../../index/detail/activity/activity?shopId=' + that.data.shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId+'&ym=1',//跳转活动详情页面
-            })
-
-
-
-          }
+      
         } else if (that.data.page == "2") {
           wx.switchTab({
             url: '../../serve/serve',
@@ -229,55 +210,61 @@ Page({
           wx.switchTab({
             url: '../user',
           })
+        } else if (that.data.page == "4"){
+          wx.navigateTo({
+            url: '../../index/detail/activity/activity?shopId=' + this.data.shopId,
+          })
         }
       } else {
       }
     }, _ => {
       wx.hideLoading();
     });
-    that.branchpost();
+  
   },
   babyname(e) {
     this.setData({
       babyname: e.detail.value
     })
   },
-  // branchpost() {
-  //   let that = this;
-  //   Http.post('/user/getUserInfo', {
-  //     onlyId: that.data.openid,
-  //   }).then(res => {
-  //     wx.hideLoading();
-  //     if (res.code == 1000) {
-  //       var userphone = res.result.userPhone + '';
-  //       Http.post('/user/judgeUserPhone', {
-  //         userPhone: userphone,
-  //       }).then(res => {
-  //         let birthday = that.data.birthday + '';
-  //         that.setData({
-  //           succ: res.result.potentialMember
-  //         })
+  //非会员录入信息
+  branchpost() {
+    let that = this;
+    Http.post('/user/getUserInfo', {
+      onlyId: that.data.openid,
+    }).then(res => {
+      wx.hideLoading();
+      if (res.code == 1000) {
+        var userphone = res.result.userPhone + '';
+        Http.post('/user/judgeUserPhone', {
+          userPhone: userphone,
+        }).then(res => {
+          let birthday = that.data.birthday + '';
+          that.setData({
+            succ: res.result.potentialMember
+          })
 
-  //         if (res.result.potentialMember == 0) {
+          if (res.result.potentialMember == 0) {
 
-  //           Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
-  //             typeStyle: 1,
-  //             phone: userphone,
-  //             spreadId: '10000002',
-  //             birthday: birthday,
-  //             babyName: that.data.babyname,
-  //           }).then(res => {
+            // Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
+            Http.post('http://192.168.1.123:8090/manager/register', {
+              typeStyle: 1,
+              phone: userphone,
+              spreadId: '10000002',
+              birthday: birthday,
+              babyName: that.data.babyname,
+            }).then(res => {
 
-  //           }, _ => {
+            }, _ => {
 
-  //           });
-  //         }
-  //       }, _ => {
-  //       });
-  //     } else {
-  //     }
-  //   }, _ => {
-  //     wx.hideLoading();
-  //   });
-  // },
+            });
+          }
+        }, _ => {
+        });
+      } else {
+      }
+    }, _ => {
+      wx.hideLoading();
+    });
+  },
 })

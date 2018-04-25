@@ -18,6 +18,9 @@ Page({
   onLoad: function (options) {
     let that= this;
     let shopId = options.shopId;
+    that.setData({
+      shopId:shopId
+    })
     //查看门店活动
     that.getactivity(shopId);
     /******获取缓存*****/
@@ -27,8 +30,22 @@ Page({
         that.setData({
           openid: res.data
         });
-
-
+        wx.getStorage({
+          key: 'status',
+          success: function (res) {
+            that.setData({
+              status: res.data
+            });
+          }
+        })
+        wx.getStorage({
+          key: 'baseInfo',
+          success: function (res) {
+            that.setData({
+              baseInfo: res.data
+            });
+          }
+        })
         wx.getStorage({
           key: 'memberId',
           success: function (res) {
@@ -59,6 +76,15 @@ Page({
         that.getcode();
       }
     });
+    User.getAddress(address => {
+      this.setData({
+        lat: address.location.lat,
+        lon: address.location.lng,
+      });
+
+      this.shopcontent();
+    });
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -109,6 +135,23 @@ Page({
   },
   reservation:function(){
     let that = this;
+    
+            if(that.data.status==0){
+              wx.navigateTo({
+                url: '../../../user/bind-phone/bind-phone?shopId=' + that.data.shopId + '&page=4', //跳转到绑定手机页面
+              })    
+            return false;
+            }
+
+            if (that.data.baseInfo == 0) {
+              wx.navigateTo({
+                url: '../../../user/bind-info/bind-info?shopId=' + that.data.shopId + '&page=4', //跳转到绑定手机页面
+              })
+              return false;
+            }
+
+
+    //判断是不是会员
     if (that.data.memberId==0){
             wx.showLoading({
               title: '加载中...',
@@ -120,16 +163,22 @@ Page({
 
             }).then(res => {
               wx.hideLoading();
+           //判断参没参加过   
                 if(res.result==0){
-                    wx.navigateTo({
-                      url: '../appointment/appointment?shopId=' + that.data.shopId + '&discountPrice=' + that.data.discountPrice + '&price=' + that.data.price + '&activityId=' + that.data.activityId +'&activityType=1'
-                    });
+                  //预约成功
+                      that.setData({
+                        showx: true,
+                        showtit:'温馨提示',
+                        textshow1: '您已经参加过“5.1欢乐游”的活动咯~',
+                        textshow2: '您可以将活动分享给朋友，好东西给好朋友',
+                      });
                   
                 }else{
 
                   that.setData({
                     showx: true,
-                    textshow1: '您已经参加过“鱼人游”的活动咯~',
+                    showtit: '温馨提示',
+                    textshow1: '您已经参加过“5.1欢乐游”的活动咯~',
                     textshow2: '您可以将活动分享给朋友，好东西给好朋友',
                   });
     
@@ -197,11 +246,61 @@ Page({
           activityId: res.result.activityId, //活动id
           agio: agio
         });
+
       }
     }, _ => {
       wx.hideLoading();
     });
   },
+shopcontent(){
+  wx.showLoading({
+    title: '加载中...',
+  })
+  Http.post('/shop/getShopDetail', {
+    paramJson: JSON.stringify({
+      id: this.data.shopId,
+      lon: this.data.lon,
+      lat: this.data.lat,
+    })
+  }).then(res => {
+    wx.hideLoading();
+    if (res.code == 1000) {
+      let storeItem = res.result;
+      if (storeItem.distance > 1000) {
+        storeItem.distance = (storeItem.distance / 1000).toFixed(1) + 'km';
+      } else {
+        storeItem.distance = storeItem.distance + 'm';
+      }
+      this.setData({
+        storeItem: storeItem,
+        lats: storeItem.lat,
+        lons:storeItem.lng
+      });
+    } else {
+    }
+  }, _ => {
+    wx.hideLoading();
+  });
+},
+/************导航功能*************/
+mapclick() {
+  const _this = this.data;
+  wx.getLocation({
+    type: 'gcj02',
+    success: function (res) {
+      var latitude = res.latitude
+      var longitude = res.longitude;
+      wx.openLocation({
+        latitude: Number(_this.lats),
+        longitude: Number(_this.lons),
+        name: _this.shopName,
+        address: _this.address,
+        scale: 28
+      })
+    }
+  })
+},
+
 /*******************回到首页*************************/
   backindex:function(){
     wx.switchTab({
@@ -281,7 +380,7 @@ Page({
           key: 'tongMember',
           data: tongMember,
         });
-
+        var baseInfo;
         var memberId;
         if (res.result.memberId) {
           memberId = res.result.memberId;
@@ -299,7 +398,7 @@ Page({
             data: 1,
           });
         } else {
-          var baseInfo;
+          
           if (res.result.baseInfo) {
             baseInfo = res.result.baseInfo;
           } else {
@@ -328,8 +427,9 @@ Page({
           storeId: storeId,
           tongMember: tongMember,
           openid: openid,
+          baseInfo: baseInfo
         });
-
+      
 
       }
     }, _ => {
