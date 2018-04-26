@@ -160,11 +160,11 @@ swiper image{
   /* 活动 */
  .item-title text{
   display: inline-block;
-  width: 110rpx;
-  height: 36rpx;
+  width: 101rpx;
+  height: 32rpx;
   font-size:22rpx;
-  line-height: 36rpx;
-  text-indent: 15rpx;
+  line-height: 32rpx;
+  text-indent: 10rpx;
   color: #fff;
   font-weight: normal;
   margin-left: 18rpx;

@@ -100,7 +100,7 @@ page{
 .activity{
   margin-bottom: 20rpx;
   background: #fff;
-  padding: 0 30rpx;
+  
 }
 .activity-title{
   padding: 40rpx 0 32rpx;
@@ -108,12 +108,34 @@ page{
   font-size: 32rpx;
   border-bottom: solid 1px rgb(232, 232, 232);
 }
+.activity-content{
+  overflow: hidden;
+  position: relative;
+  padding: 0 30rpx;
+  border: solid 1rpx  rgb(232, 232, 232);
+  border-left: none;
+   border-right: none;
+}
 .activity-item{
   position: relative;
   padding: 10rpx 0;
+  float: left;
+  width: 560rpx;
+  margin-left: 100rpx;
 }
-.activity-content .activity-item:not(:first-child){
+/* .activity-content .activity-item:not(:first-child){
   border-top: dashed 1px rgb(232, 232, 232);
+} */
+.activity-img{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  top: 20rpx;
+}
+.activity-img image{
+  width: 80rpx;
+  height: 80rpx;
+display: block;
 }
 .activity-item navigator{
   padding: 10rpx;
@@ -126,12 +148,13 @@ page{
   padding-top: 10rpx;
   padding-bottom: 20rpx;
 
-  font-size: 32rpx;
+  font-size: 28rpx;
   line-height: 32rpx;
   color: #000;
+ 
 }
 .item-detail{
-  width: 500rpx;
+
   padding-bottom: 10rpx;
   color: #999;
   font-size: 24rpx;
@@ -140,7 +163,7 @@ page{
   white-space:nowrap;
   text-overflow:ellipsis;
 }
-.item-price{
+/* .item-price{
   padding-right: 26rpx;
   font-size: 36rpx;
   line-height: 36rpx;
@@ -151,20 +174,70 @@ page{
   right: 10rpx;
   color:#ff9000;
   font-weight: bold;
+} */
+
+/* .item-price{
+  font-size: 36rpx;
+  line-height: 36rpx;
+  position: absolute;
+  top: 48rpx;
+  right: 10rpx;
+  color:#ff9000;
+  font-weight: bold;
+} */
+.item-price{
+  font-size: 36rpx;
+  line-height: 36rpx;
+  position: absolute;
+  top: 0;
+  right: -20rpx;
+  color:#ff9000;
+  font-weight: bold;
+
+  width: 200rpx;
+  height: 122rpx;
+  text-align: center;
 }
+.price_main{
+  width: 100%;
+  height: 100%;
+}
+.price_top {
+  height:61rpx;
+  line-height: 61rpx;
+  font-size: 34rpx;
+  font-weight: normal;
+}
+.price_top text{
+  height:36rpx;
+font-size:24rpx;
+line-height:46rpx;
+text-decoration:line-through;
+color:#63686e;
+font-weight: normal;
+margin-left: 10rpx;
 
-
+}
+.price_bottom{
+  width: 200rpx;
+  height: 50rpx;
+  background: #ff9000;
+  color: #fff;
+  margin: 0 auto;
+  line-height: 50rpx;
+  font-weight: normal;
+  font-size: 24rpx;
+  border-radius: 5px;
+}
 /* -------------------- 详情 -------------------- */
 .storeinfo{
  background: #fff;
   padding:0 30rpx;
  
   border-top:solid 0.5px #e4e4e4;
+  clear: both;
 }
-.storeinfo-content{
- 
 
-}
 .storeinfo-title{
   padding: 40rpx 0 32rpx;
   font-size: 32rpx;

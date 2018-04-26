@@ -40,7 +40,7 @@
 					"id": 0,
 					"name": "详情",
 					"pathName": "pages/index/detail/detail",
-					"query": "shopId=741"
+					"query": "shopId=1213"
 				},
 				{
 					"id": 1,
@@ -52,7 +52,7 @@
 					"id": 2,
 					"name": "绑定手机",
 					"pathName": "pages/user/bind-phone/bind-phone",
-					"query": "shopId=741&page=1"
+					"query": "shopId=741&page=4"
 				},
 				{
 					"id": 3,
@@ -76,7 +76,7 @@
 					"id": 6,
 					"name": "活动",
 					"pathName": "pages/index/detail/activity/activity",
-					"query": "shopId=741"
+					"query": "shopId=1213"
 				},
 				{
 					"id": 7,

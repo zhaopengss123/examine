@@ -173,6 +173,7 @@
   margin-top: 80rpx;
 }
 .fxbtn{
+  font-size: 30rpx;
   width: 299rpx;
   height: 100rpx;
   float: left;

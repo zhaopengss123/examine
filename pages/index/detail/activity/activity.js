@@ -17,10 +17,21 @@ Page({
    */
   onLoad: function (options) {
     let that= this;
-    let shopId = options.shopId;
-    that.setData({
-      shopId:shopId
-    })
+    let shopId = 0;
+ 
+    if (options.shopId) {
+      this.setData({
+        shopId: options.shopId
+      })
+      shopId = options.shopId;
+    } else {
+      var scene = decodeURIComponent(options.scene);
+      this.setData({
+        shopId: scene
+      })
+      shopId = scene;
+    }
+
     //查看门店活动
     that.getactivity(shopId);
     /******获取缓存*****/
@@ -90,6 +101,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+ 
   },
 
   /**
@@ -135,7 +147,7 @@ Page({
   },
   reservation:function(){
     let that = this;
-    
+
             if(that.data.status==0){
               wx.navigateTo({
                 url: '../../../user/bind-phone/bind-phone?shopId=' + that.data.shopId + '&page=4', //跳转到绑定手机页面
@@ -161,38 +173,54 @@ Page({
         onlyId: that.data.openid,
       }).then(res => {
         let userphone = res.result.userPhone;
-        Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
-          phone: userphone,
-          birthday: '2018-03-11',
-          shopId: that.data.shopId,
-          activityId:'5',
-          spreadId: '17',
+
+
+        Http.post('/user/getBabyInfoByPhone', {
+          userPhone: userphone,
         }).then(res => {
-              wx.hideLoading();
-           //判断参没参加过   
-                if(res.result==0){
-                  //预约成功
-                      that.setData({
-                        showx: true,
-                        showtit:'温馨提示',
-                        textshow1: '您已经参加过“5.1欢乐游”的活动咯~',
-                        textshow2: '您可以将活动分享给朋友，好东西给好朋友',
+          let birthday = res.result.birthday;
+                     //推送到客多多
+                  Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+                    phone: userphone,
+                    birthday: birthday,
+                    shopId: that.data.shopId,
+                    activityId:'5',
+                    spreadId: '17',
+                  }).then(res => {
+                        wx.hideLoading();
+                     //判断参没参加过   
+                          if(res.code==1000){
+                            //预约成功
+                                  that.setData({
+                                  showx: true,
+                                  showtit:'报名成功！',
+                                  textshow1: '请保持手机通畅，稍后门店会联系您',
+                                  textshow2: '您可以将活动分享给朋友，好东西给好朋友',
+                                });
+                          }else if(res.code==1020){
+
+                            that.setData({
+                              showx: true,
+                              showtit: '温馨提示',
+                              textshow1: '您已经参加过“5.1欢乐游”的活动咯~',
+                              textshow2: '您可以将活动分享给朋友，好东西给好朋友',
+                            });
+
+                          }else{
+                            wx.showModal({
+                              title: '提示',
+                              content: '系统错误',
+                            })
+                          }
+
+                      }, _ => {
+                        wx.hideLoading();
                       });
-                  
-                }else{
+        }, _ => {
+          wx.hideLoading();
+        });
 
-                  that.setData({
-                    showx: true,
-                    showtit: '温馨提示',
-                    textshow1: '您已经参加过“5.1欢乐游”的活动咯~',
-                    textshow2: '您可以将活动分享给朋友，好东西给好朋友',
-                  });
-    
-                };
-
-            }, _ => {
-              wx.hideLoading();
-            });
+ 
 
       })
     }else{
@@ -222,7 +250,7 @@ Page({
       //console.log(res.target)
     }
     return {
-      path: '/pages/index/detail/detail?shopId=' + shopId +'&pagestatus=1',
+      path: '/pages/index/detail/activity/activity?shopId=' + shopId,
       imageUrl: imageUrl,
       success: function (res) {
         // 转发成功
@@ -305,7 +333,13 @@ mapclick() {
       })
     }
   })
+  return false;
 },
+details () {
+  wx.navigateTo({
+    url: '../detail?shopId='+this.data.shopId,
+  })
+  },
 
 /*******************回到首页*************************/
   backindex:function(){
@@ -433,7 +467,8 @@ mapclick() {
           storeId: storeId,
           tongMember: tongMember,
           openid: openid,
-          baseInfo: baseInfo
+          baseInfo: baseInfo,
+          status:status 
         });
       
 

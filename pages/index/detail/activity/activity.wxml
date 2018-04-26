@@ -11,8 +11,8 @@
   <view class='head-label' bindtap='onShareAppMessage'>{{agio}}折</view>
 </view>
 
-    <view class='head-box'>
-    <navigator url='../detail?shopId={{storeItem.id}}'>
+    <view class='head-box' catchtap='details'>
+   
       <view class='head-name'>
         <text>{{storeItem.programShopName}}</text>
         <view>{{storeItem.distance}}</view>
@@ -20,9 +20,9 @@
 
       <view class='head-address'>
         <text>{{storeItem.address}}</text>
-        <view hover-class='active' bindtap='mapclick'>导航</view>
+        <view hover-class='active' catchtap='mapclick'>导航</view>
       </view>
-</navigator>
+
     </view>
     <view class='backindex' bindtap='backindex'>住的离这远？看看其他门店</view>
 

@@ -225,18 +225,18 @@ Page({
     if (that.data.codeInput) {
       if (that.data.codeInput == that.data.verificationCode) {
 
-        if(that.data.status==1){
-          wx.showToast({
-            icon: "none",
-            title: '您不能重复绑定手机',
-          })
-          setTimeout(function () {
-            wx.switchTab({
-              url: '../../index/index',
-            })
-          }, 2000);
-          return false;
-        }
+        // if(that.data.status==1){
+        //   wx.showToast({
+        //     icon: "none",
+        //     title: '您不能重复绑定手机',
+        //   })
+        //   setTimeout(function () {
+        //     wx.switchTab({
+        //       url: '../../index/index',
+        //     })
+        //   }, 2000);
+        //   return false;
+        // }
         that.orbind(formId);
       } else {
         wx.showToast({
@@ -300,16 +300,17 @@ Page({
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {
-        var potentialMember;
-        if (res.result.potentialMember) {
-          potentialMember = res.result.potentialMember;
-        } else {
-          potentialMember = 1;
-        }
-        wx.setStorage({
-          key: 'potentialMember',
-          data: potentialMember,
-        });
+        //判断是否是潜在会员
+        // var potentialMember;
+        // if (res.result.potentialMember) {
+        //   potentialMember = res.result.potentialMember;
+        // } else {
+        //   potentialMember = 0;
+        // }
+        // wx.setStorage({
+        //   key: 'potentialMember',
+        //   data: potentialMember,
+        // });
         var isMember;
         if (res.result.isMember) {
           isMember = res.result.isMember;
@@ -433,7 +434,7 @@ Page({
           }
         };
     
-       
+       //如果该手机号没有绑定信息
         if (that.data.baseInfo == 0 || !that.data.baseInfo) {
    
           wx.navigateTo({

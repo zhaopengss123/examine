@@ -332,21 +332,43 @@ Page({
                           onlyId: that.data.openid,
                         }).then(res => {
                           let userphone = res.result.userPhone;
-                          Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
-                           phone: userphone,
-                           birthday:'2018-03-11',
-                           shopId:that.data.shopId,
-                           spreadId:'18',
-                        }).then(res => {
-                          wx.hideLoading();
-                          if(res.code==1000){
-                              console.log('预约成功');
-                          }else if(res.code==1025){
-                              console.log('一天内不能重复预约哦~');
-                          }
-                        }, _ => {
-                          wx.hideLoading();
-                        });
+                          
+                            Http.post('/user/getBabyInfoByPhone', {
+                              userPhone: userphone, 
+                          }).then(res => {
+                            let birthday = res.result.birthday;
+                            //客多多推送 
+                                Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+                                phone: userphone,
+                                birthday: birthday,
+                                shopId:that.data.shopId,
+                                spreadId:'18',
+                              }).then(res => {
+                                wx.hideLoading();
+                                if(res.code==1000){
+                                  wx.showModal({
+                                    title: '温馨提示',
+                                    content: '请保持手机通畅，稍后门店会联系您',
+                                  })
+                                }else if(res.code==1022){
+                                  wx.showModal({
+                                    title: '温馨提示',
+                                    content: '每天只能预约一次哦~',
+                                  })
+                                }else{
+                                  wx.showModal({
+                                    title: '提示',
+                                    content: '系统错误',
+                                  })
+                                }
+                              }, _ => {
+                                wx.hideLoading();
+                              });
+                          }, _ => {
+                            wx.hideLoading();
+                          });
+
+
                         }, _ => {
                          
                         });
