@@ -224,19 +224,19 @@ Page({
     var formId = e.detail.formId; //获取formid
     if (that.data.codeInput) {
       if (that.data.codeInput == that.data.verificationCode) {
-
-        // if(that.data.status==1){
-        //   wx.showToast({
-        //     icon: "none",
-        //     title: '您不能重复绑定手机',
-        //   })
-        //   setTimeout(function () {
-        //     wx.switchTab({
-        //       url: '../../index/index',
-        //     })
-        //   }, 2000);
-        //   return false;
-        // }
+        console.log(that.data.status);
+        if(that.data.status==1){
+          wx.showToast({
+            icon: "none",
+            title: '您不能重复绑定手机',
+          })
+          setTimeout(function () {
+            wx.switchTab({
+              url: '../../index/index',
+            })
+          }, 2000);
+          return false;
+        }
         that.orbind(formId);
       } else {
         wx.showToast({
@@ -274,6 +274,9 @@ Page({
           key: 'status',
           data: 1,
         });
+        that.setData({
+          status:1
+        })
         //判断手机号码状态
         that.UserPhone();
       } else {

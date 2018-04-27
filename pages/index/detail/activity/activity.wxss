@@ -39,11 +39,12 @@
   float: left;
 }
 .head-price view:first-child{
-  font-size: 36rpx;
+  font-size: 46rpx;
   line-height: 36rpx;
   margin-right: 26rpx;
-  color: #ff9000;
+  color: #f63;
   font-weight: bold;
+  height: 50rpx;
 }
 .head-price view:last-child{
   height: 36rpx;
@@ -59,7 +60,7 @@
   font-size: 22rpx;
   line-height: 44rpx;
   border-radius: 8rpx;
-  background: #ff9000;
+  background: #f63;
   position: absolute;
   top: 40rpx;
   right: 45rpx;
@@ -98,7 +99,7 @@
 }
 .btn-info{
   height: 100rpx;
-  color: #63686e;
+  color: RGBA(153, 153, 153, 1);
   font-size: 26rpx;
   line-height: 100rpx;
   text-indent: 70rpx;
@@ -128,11 +129,13 @@
   top: 0;
   left: 0;
   z-index: 100;
+  float:left; 
 }
 .showfxmain{
   width: 100%;
   height: 100%;
   position: relative;
+
 }
 .showfxbg{
   width: 100%;
@@ -141,40 +144,44 @@
   opacity: 0.5;
 }
 .showfxcontent{
-  width: 600rpx;
-  height: 400rpx;
+  width: 504rpx;
+  height: 394rpx;
   background: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -250rpx;
-  margin-left: -300rpx;
+  margin-top: -197rpx;
+  margin-left: -252rpx;
   z-index: 10;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
 }
 .showfxtitle{
   width: 100%;
-  height: 100rpx;
-  font-size: 36rpx;
+  color:#333;
+  font-size: 40rpx;
   text-align: center;
-  line-height: 100rpx;
+  margin-top: 80rpx;
+  font-weight: bold;
+  margin-bottom: 33rpx;
 }
 .showfxnr{
   width: 100%;
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 26rpx;
+  font-size: 24rpx;
   text-align: center;
+  color: #999999;
+  margin-bottom: 14rpx;
 }
 .showfxbtn{
-  width: 600rpx;
+  width: 504rpx;
   height:100rpx;
   overflow: hidden;
-  margin-top: 80rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .fxbtn{
   font-size: 30rpx;
-  width: 299rpx;
+  width: 50%;
   height: 100rpx;
   float: left;
   background: none;
@@ -182,12 +189,13 @@
   text-align: center;
   line-height: 100rpx;
   border-top: solid 1rpx #ccc;
-  border-right: solid 1px #ccc;
+
 }
-.fxbtn:nth-child(2){
-  border-right: none;
-  width: 300rpx;
+.fxbtn:nth-child(2){  
   position: relative;
+  background: #ED7C8F;
+  color: #fff;
+  border-radius:0 0 20rpx;
 }
 .fxbtn:nth-child(2) button{
   width: 100%;
@@ -265,8 +273,25 @@
   width: 100%;
   text-align: center;
   font-size: 26rpx;
-  height: 100rpx;
-  line-height: 100rpx;
-  color: rgba(0, 0, 255, 0.8);
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #FF839A;
   border-bottom: solid 20rpx rgb(240, 240, 240); 
+}
+.image_ico{
+  width: 152rpx;
+  height: 119rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  margin-left: -76rpx;
+   margin-top: -265rpx;
+}
+.content_main{
+  width: 100%;
+  height: 100%;
+  position: relative;
+    overflow: hidden;
+
 }

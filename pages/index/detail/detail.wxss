@@ -111,7 +111,7 @@ page{
 .activity-content{
   overflow: hidden;
   position: relative;
-  padding: 0 30rpx;
+  padding: 20rpx 30rpx;
   border: solid 1rpx  rgb(232, 232, 232);
   border-left: none;
    border-right: none;
@@ -120,21 +120,21 @@ page{
   position: relative;
   padding: 10rpx 0;
   float: left;
-  width: 560rpx;
-  margin-left: 100rpx;
+  width: 520rpx;
+  margin-left: 140rpx;
 }
 /* .activity-content .activity-item:not(:first-child){
   border-top: dashed 1px rgb(232, 232, 232);
 } */
 .activity-img{
-  width: 80rpx;
-  height: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
   position: absolute;
   top: 20rpx;
 }
 .activity-img image{
-  width: 80rpx;
-  height: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
 display: block;
 }
 .activity-item navigator{
@@ -172,7 +172,7 @@ display: block;
   position: absolute;
   top: 48rpx;
   right: 10rpx;
-  color:#ff9000;
+  color:#f63;
   font-weight: bold;
 } */
 
@@ -182,7 +182,7 @@ display: block;
   position: absolute;
   top: 48rpx;
   right: 10rpx;
-  color:#ff9000;
+  color:#f63;
   font-weight: bold;
 } */
 .item-price{
@@ -190,8 +190,8 @@ display: block;
   line-height: 36rpx;
   position: absolute;
   top: 0;
-  right: -20rpx;
-  color:#ff9000;
+  right: -30rpx;
+  color:#f63;
   font-weight: bold;
 
   width: 200rpx;
@@ -207,23 +207,24 @@ display: block;
   line-height: 61rpx;
   font-size: 34rpx;
   font-weight: normal;
+  text-align: right;
 }
 .price_top text{
   height:36rpx;
 font-size:24rpx;
 line-height:46rpx;
 text-decoration:line-through;
-color:#63686e;
+color:#999;
 font-weight: normal;
 margin-left: 10rpx;
 
 }
 .price_bottom{
-  width: 200rpx;
+  width: 150rpx;
   height: 50rpx;
-  background: #ff9000;
+  background: #f63;
   color: #fff;
-  margin: 0 auto;
+  float: right;
   line-height: 50rpx;
   font-weight: normal;
   font-size: 24rpx;

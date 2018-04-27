@@ -10,6 +10,7 @@ Page({
     showx:false,
     textshow1:'',
     textshow2:'',
+    inActivity:'3',
   },
 
   /**
@@ -226,6 +227,7 @@ Page({
     }else{
       that.setData({
         showx:true,
+        showtit: '温馨提示',
         textshow1: '该活动仅针对首次体验非会员用户',
         textshow2: '您可以将活动分享给朋友，好东西给好朋友',
       });
@@ -243,13 +245,14 @@ Page({
     });
   },
   onShareAppMessage: function (res) {
-    let imageUrl = "https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/covercover.jpg";
+    let imageUrl = "https://ylbb-wxapp.oss-cn-beijing.aliyuncs.com/store/51activity_fx.jpg";
     let shopId = this.data.shopId;
     if (res.from === 'button') {
       // 来自页面内转发按钮
       //console.log(res.target)
     }
     return {
+      title:'百城千店庆五一，超值游泳体验卡，限时特惠啦~',
       path: '/pages/index/detail/activity/activity?shopId=' + shopId,
       imageUrl: imageUrl,
       success: function (res) {
@@ -280,7 +283,11 @@ Page({
           activityId: res.result.activityId, //活动id
           agio: agio
         });
-
+      
+      }else{
+        that.setData({
+          inActivity: 0, //门店是否有活动
+        });
       }
     }, _ => {
       wx.hideLoading();

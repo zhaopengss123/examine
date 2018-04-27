@@ -7,6 +7,7 @@ Page({
     lngs: "116.29598",
     shopName: "加载中...",
     address: "加载中...",
+    books_yy:true
 
   },
   onLoad: function (options) {
@@ -93,6 +94,24 @@ Page({
             price: res.result.price, //活动原价
             activityId: res.result.activityId, //活动id
           });
+          wx.getStorage({  //判断是不是会员
+            key: 'isMember',
+            success: function (res) {
+              if(res.data!=1){
+                wx.getStorage({  //判断绑没绑定手机
+                  key: 'status',
+                  success: function (res) {
+                      if(res.data==1){
+                        that.setData({
+                          books_yy: false
+                        })
+                      }
+                  }
+                })
+              }
+            }
+            })
+
       }
     }, _ => {
       wx.hideLoading();

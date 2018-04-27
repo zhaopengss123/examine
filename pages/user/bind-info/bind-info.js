@@ -197,6 +197,9 @@ Page({
           data: 1,
         });
 
+      that.setData({
+        baseInfo:1
+      })
         if (that.data.shopId && that.data.page == "1") {
          
             wx.navigateTo({
