@@ -87,8 +87,9 @@ swiper image{
 .item-title > view{
   font-size: 36rpx;
   line-height: 36rpx;
+
   font-weight: bold;
-  overflow: hidden;
+  
 }
 .item-address{
   height: 30rpx;
@@ -169,6 +170,7 @@ swiper image{
   color: #fff;
   font-weight: normal;
   margin-left: 18rpx;
+  vertical-align:top
 
 } 
 .parent-offspring{
