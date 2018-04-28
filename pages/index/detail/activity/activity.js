@@ -181,7 +181,9 @@ Page({
         }).then(res => {
           let birthday = res.result.birthday;
                      //推送到客多多
-                  Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+          //http://101.200.177.83:7988/kb/customerDetail/weChatWithNoVerifyNum           
+          //http://sale.beibeiyue.com/kb/customerDetail/weChatWithNoVerifyNum
+          Http.post('http://sale.beibeiyue.com/kb/customerDetail/weChatWithNoVerifyNum', {
                     phone: userphone,
                     birthday: birthday,
                     shopId: that.data.shopId,
@@ -271,7 +273,7 @@ Page({
     Http.post('/shop/getShopPrice', {
 
       storeId: storeId,
-
+      activityId:5
     }).then(res => {
       wx.hideLoading();
       if (res.code == 1000) {

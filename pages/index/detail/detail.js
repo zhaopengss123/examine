@@ -84,6 +84,7 @@ Page({
     Http.post('/shop/getShopPrice', {
      
         storeId: storeId,
+        activityId:5
      
     }).then(res => {
       wx.hideLoading();
@@ -357,7 +358,7 @@ Page({
                           }).then(res => {
                             let birthday = res.result.birthday;
                             //客多多推送 
-                                Http.post('http://192.168.1.123:8090/customerDetail/weChatWithNoVerifyNum', {
+                            Http.post('http://sale.beibeiyue.com/kb/customerDetail/weChatWithNoVerifyNum', {
                                 phone: userphone,
                                 birthday: birthday,
                                 shopId:that.data.shopId,

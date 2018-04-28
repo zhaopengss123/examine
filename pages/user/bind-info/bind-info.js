@@ -247,8 +247,8 @@ Page({
           that.setData({
             succ: res.result.potentialMember
           })
-            // Http.post('http://kedd.beibeiyue.com/kb/manager/register', {
-            Http.post('http://192.168.1.123:8090/manager/register', {
+          Http.post('http://sale.beibeiyue.com/kb/manager/register', {
+
               typeStyle: 1,
               phone: userphone,
               spreadId: '10000002',
